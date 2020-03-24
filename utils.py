@@ -14,27 +14,33 @@ def values(series):
     return series.value_counts(dropna=False).sort_index()
 
 
-def make_matrix(cp, subgroup=slice(None), threshold=4):
+def make_matrix(cp, threshold=4):
     """Make a confusion matrix.
 
     cp: DataFrame
-    subgroup: Boolean Series, default is all rows
     threshold: default is 4
 
     returns: DataFrame containing the confusion matrix
     """
+    # recode the decile scores
     a = np.where(cp['decile_score'] > threshold,
                  'Positive',
                  'Negative')
     high_risk = pd.Series(a, name='Predicted')
 
+    # recode the recidivism outcomes
     a = np.where(cp['two_year_recid'] == 1,
                  'Condition',
                  'No Condition')
     new_charge_2 = pd.Series(a, name='Actual')
 
-    matrix = pd.crosstab(high_risk[subgroup], new_charge_2[subgroup])
-    matrix.sort_index(axis=0, ascending=False, inplace=True)
+    # cross tabulate
+    matrix = pd.crosstab(high_risk, new_charge_2)
+
+    # make sure all four elements are present
+    index = ['Positive', 'Negative']
+    columns = ['Condition', 'No Condition']
+    matrix = matrix.reindex(index=index, columns=columns, fill_value=0)
 
     return matrix
 
@@ -42,6 +48,8 @@ def make_matrix(cp, subgroup=slice(None), threshold=4):
 def percent(x, y):
     """Compute the percentage `x/(x+y)*100`.
     """
+    if x+y == 0:
+        return np.nan
     return x / (x+y) * 100
 
 
@@ -99,7 +107,7 @@ def compute_metrics(m, name=''):
     ppv, npv = predictive_value(m)
     prev = prevalence(m)
 
-    index = ['FP rate', 'FN rate', 'PPV', 'NPV', 'Prevalence']
+    index = ['FPR', 'FNR', 'PPV', 'NPV', 'Prevalence']
     df = pd.DataFrame(index=index, columns=['Percent'])
     df.Percent = fpr, fnr, ppv, npv, prev
     df.index.name = name
@@ -237,17 +245,79 @@ def plot_cer_model(pred_pv):
              title='Predictive value, constant error rates')
 
 
-def make_roc(cp, group):
+from scipy.interpolate import interp1d
+
+def interpolate(series, value, **options):
+    """Evaluate a function at a value.
+
+    series: Series
+    value: number
+    options: passed to interp1d (default is linear interp)
+
+    returns: number
     """
+    interp = interp1d(series.index, series.values, **options)
+    return interp(value)
+
+
+def crossing(series, value, **options):
+    """Find where a function crosses a value.
+
+    series: Series
+    value: number
+    options: passed to interp1d (default is linear interp)
+
+    returns: number
     """
-    thresholds = range(1, 10)
-    roc = pd.DataFrame(index=thresholds,
-                   columns=['sens', 'spec'])
+    interp = interp1d(series.values, series.index, **options)
+    return interp(value)
 
-    for threshold in thresholds:
-        matrix = make_matrix(cp, group, threshold)
-        roc.loc[threshold] = sens_spec(matrix)
 
-    roc['fpr'] = 100 - roc['spec']
+def sweep_threshold(cp):
+    """Sweep a range of threshold and compute accuracy metrics.
 
-    return roc
+    cp: DataFrame of COMPAS data
+
+    returns: DataFrame with one row for each threshold and
+             one column for each metric
+    """
+    index = range(0, 11)
+    columns = ['FPR', 'FNR', 'PPV', 'NPV', 'Prevalence']
+    table = pd.DataFrame(index=index, columns=columns, dtype=float)
+
+    for threshold in index:
+        m = make_matrix(cp, threshold)
+        metrics = compute_metrics(m)
+        table.loc[threshold] = metrics['Percent']
+
+    return table
+
+
+def plot_roc(table, **options):
+    """Plot the ROC curve.
+
+    table: DataFrame of metrics as a function of
+           classification threshold
+    options: passed to plot
+    """
+    plt.plot([0,100], [0,100], ':', color='gray')
+    sens = 100-table['FNR']
+    plt.plot(table['FPR'], sens, **options)
+    decorate(xlabel='FPR',
+             ylabel='Sensitivity (1-FNR)',
+             title='ROC curve')
+
+
+from scipy.integrate import simps
+
+def compute_auc(table):
+    """Compute the area under the ROC curve.
+
+    Uses the trapezoid rule, so
+    """
+    y = 100-table['FNR']
+    x = table['FPR']
+    y = y.sort_index(ascending=False) / 100
+    x = x.sort_index(ascending=False) / 100
+    return simps(y.values, x.values)
+    
