@@ -28,7 +28,7 @@ These three notebooks are intended to support a module in a data science class t
 
 I used these notebooks for a module of my [Data Science class at Olin College](https://sites.google.com/site/olinds20/).
 
-Over the course of three class sessions, I [presented these slides]() a led a discussion with students.  This happened in Spring 2020 when classes were run remotely, so the discussions were not as effective as they could have been.  For next time I hope to develop a richer set of discussion questions.
+Over the course of three class sessions, I [presented these slides](https://github.com/AllenDowney/RecidivismCaseStudy/raw/master/Recidivism%20Case%20Study.pdf) and led a discussion with students.  This happened in Spring 2020 when classes were run remotely, so the discussions were not as effective as they could have been.  For next time I hope to develop a richer set of discussion questions.
 
 ### Additional notebooks
 
