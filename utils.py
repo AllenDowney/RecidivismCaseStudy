@@ -1,3 +1,10 @@
+"""
+Part of a [Recidivism Case Study](https://allendowney.github.io/RecidivismCaseStudy/)
+
+by [Allen Downey](https://allendowney.com)
+
+[Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+"""
 
 import pandas as pd
 import numpy as np
