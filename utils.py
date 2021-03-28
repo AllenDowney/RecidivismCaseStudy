@@ -127,19 +127,23 @@ def calibration_curve(df):
 
 def decorate(**options):
     """Decorate the current axes.
-
+    
     Call decorate with keyword arguments like
     decorate(title='Title',
              xlabel='x',
              ylabel='y')
-
+             
     The keyword arguments can be any of the axis properties
     https://matplotlib.org/api/axes_api.html
     """
-    plt.gca().set(**options)
+    ax = plt.gca()
+    ax.set(**options)
+    
+    handles, labels = ax.get_legend_handles_labels()
+    if handles:
+        ax.legend(handles, labels)
+
     plt.tight_layout()
-
-
 
 def constant_predictive_value(ppv, npv, prev):
     """Make a confusion matrix with given metrics.
