@@ -1,13 +1,23 @@
 name: RecidivismCaseStudy
 
 dependencies:
+<<<<<<< HEAD
   - python
+=======
+  - python>=3.6
+>>>>>>> ba8045c93772e3fe876d3fbdef25114e94523b5a
   - jupyter
-  - jupyterlab
   - numpy
   - matplotlib
-  - seaborn
   - pandas
   - scipy
+<<<<<<< HEAD
   - scikit-learn
   - pip
+=======
+  - sympy
+
+
+
+
+>>>>>>> ba8045c93772e3fe876d3fbdef25114e94523b5a
