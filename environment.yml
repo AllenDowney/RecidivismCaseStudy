@@ -1,21 +1,13 @@
 name: RecidivismCaseStudy
 
 dependencies:
-  - python=3.7
+  - python
   - jupyter
   - jupyterlab
   - numpy
   - matplotlib
   - seaborn
   - pandas
-  - sympy
-  - xlrd
-  - pytables
   - scipy
   - scikit-learn
   - pip
-  - pip:
-    - empiricaldist
-
-
-
