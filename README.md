@@ -1,6 +1,7 @@
 # Recidivism Case Study
 
-This case study is based on two articles that were published in 2016:
+This case study is about classification and algorithmic fairness.
+It is based on two articles that were published in 2016:
 
 * "[Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)", by Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner, and published by [ProPublica](https://www.propublica.org).
 
@@ -14,25 +15,29 @@ In response, the Washington Post article shows that COMPAS has the same predicti
 
 The purpose of this case study is to understand these conflicting claims, to learn about classification algorithms and the metrics we use to evaluate them, and to think about fairness and the ethics of data science.
 
-### The notebooks
+If you are working through [the *Elements of Data Science* curriculum](https://allendowney.github.io/ElementsOfDataScience), you should be ready to start this
+case study when you have completed Notebook 6, which covers basic Pandas, and the [Political Alignment Case Study](https://allendowney.github.io/PoliticalAlignmentCaseStudy), which introduces cross-tabulation and some of the other tools we'll use.
+
+
+## The notebooks
 
 * [In the first notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/01_classification.ipynb) I replicate the analysis from the ProPublica article and define the basic metrics we use to evaluate classification algorithms, including error rates and predictive values.
 
-* [In the second notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/02_calibration.ipynb) I replicate the analysis from the WaPo article and define the calibration curve, the ROC curve, and a related metric, concordance. 
+* [In the second notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/02_calibration.ipynb) I replicate the analysis from the WaPo article and define the calibration curve, the ROC curve, and a related metric, concordance.
 
 * [In the third notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/03_fairness.ipynb) I use the same methods to evaluate the performance of COMPAS for male and female defendants, and lay out the fundamental conflict between two definitions of fairness.
 
 These three notebooks are intended to support a module in a data science class that engages students in the context and ethical challenges of machine learning.
 
-### Slides
+## Slides
 
 I used these notebooks for a module of my [Data Science class at Olin College](https://sites.google.com/site/olinds20/).
 
-Over the course of three class sessions, I [presented these slides](https://github.com/AllenDowney/RecidivismCaseStudy/raw/master/Recidivism%20Case%20Study.pdf) and led a discussion with students.  This happened in Spring 2020 when classes were run remotely, so the discussions were not as effective as they could have been.  For next time I hope to develop a richer set of discussion questions.
+Over the course of three class sessions, I [presented these slides](https://github.com/AllenDowney/RecidivismCaseStudy/raw/master/Recidivism%20Case%20Study.pdf) and led a discussion with students.
 
-### Additional notebooks
+## Additional notebooks
 
-This repository contains three additional notebooks with additional explorations that you might be interested in.  They are not essential to understand the issues, and they are less complete than the first three notebook.
+This repository contains three additional notebooks with additional explorations that you might be interested in.  They are not essential to understand the issues, and they are less complete than the first three notebooks.
 
 * [The fourth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/04_matrix.ipynb) proves what I asserted in the second notebook: if you are given prevalence and error rates, you can compute predictive values; and if you are given prevalence and predictive values, you can compute error rates.
 
@@ -40,8 +45,6 @@ This repository contains three additional notebooks with additional explorations
 
 * [The sixth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/06_error.ipynb) explores what I call "the other calibration curve", the probability of being classified high risk as a function of the probability of recidivism.
 
-I include these notebook in part to resist the temptation to hide my development process.  I worked on this case study on and off over several years.  I explored a lot of things and took a lot of wrong turns.  It took me a long time to find the story, get it organized, and strike a balance between two conflicting goals: maintaining the scientific detachment that lets us tackle difficult topics while keeping sight of the context, the people, and the human consequences.
+I include these notebook in part to resist the temptation to hide my development process.  I worked on this case study on and off over several years.  I explored a lot of things and took a lot of wrong turns.  It took me a long time to find the story, get it organized, and strike a balance between two conflicting goals: maintaining the scientific detachment that lets us tackle difficult topics while also keeping sight of the context, the people, and the human consequences.
 
 I hope these materials will be engaging and informative for readers, and useful for teaching and learning the ethical practice of data science.
-
-
