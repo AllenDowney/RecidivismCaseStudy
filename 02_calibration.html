@@ -208,11 +208,6 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#review">
-   Review
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
    Data
   </a>
@@ -229,7 +224,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-wapo-response">
-   The WaPo response
+   The WaPo Response
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -239,12 +234,12 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matrices-and-metrics">
-   Matrices and metrics
+   Matrices and Metrics
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-would-it-take">
-   What would it take?
+   What Would It Take?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -276,15 +271,17 @@
                 
   <div class="section" id="calibration">
 <h1>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="review">
-<h2>Review<a class="headerlink" href="#review" title="Permalink to this headline">¶</a></h2>
 <p>This is the second in a series of notebooks that make up a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">case study on classification and algorithmic fairness</a>.
 This case study is part of the <a class="reference external" href="https://allendowney.github.io/ElementsOfDataScience/"><em>Elements of Data Science</em></a> curriculum.</p>
-<p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/01_classification.ipynb">In the previous notebook</a> we replicated the analysis reported in
-“<a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a>”, by Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner, published by <a class="reference external" href="https://www.propublica.org">ProPublica</a> in May 2016.</p>
-<p>After the ProPublica article, the Washington Post published a response by Sam Corbett-Davies, Emma Pierson, Avi Feller and Sharad Goel: “<a class="reference external" href="https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/">A computer program used for bail and sentencing decisions was labeled biased against blacks. It’s actually not that clear.</a>”.</p>
-<p>I strongly encourage you to read both of those articles before you go on.  In this notebook, I explain some of the arguments presented in the Washington Post (WaPo) article, and we will replicate their analysis.</p>
-<div class="cell docutils container">
+<p>In the previous chapter, we replicated the analysis reported in
+“Machine Bias”, by Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner, published by ProPublica in May 2016.</p>
+<p>After the ProPublica article, the Washington Post published a response by Sam Corbett-Davies, Emma Pierson, Avi Feller and Sharad Goel: “A computer program used for bail and sentencing decisions was labeled biased against blacks. It’s actually not that clear.”.</p>
+<p>I encourage you to read both of those articles before you go on.  In this chapter, I explain some of the arguments presented in the Washington Post (WaPo) article, and we will replicate their analysis.</p>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>The authors of “Machine Bias” published their data and analysis in <a class="reference external" href="https://github.com/propublica/compas-analysis">this repository</a>.
+The terms of use for the data <a class="reference external" href="https://www.propublica.org/datastore/terms">are here</a>.  In compliance with those terms, I am not redistributing the data.  The following cell downloads the data file we’ll use directly from their repository.</p>
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -293,12 +290,7 @@ This case study is part of the <a class="reference external" href="https://allen
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="data">
-<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
-<p>The authors of “Machine Bias” published their data and analysis in <a class="reference external" href="https://github.com/propublica/compas-analysis">this repository</a>.
-The terms of use for the data <a class="reference external" href="https://www.propublica.org/datastore/terms">are here</a>.  In compliance with those terms, I am not redistributing the data.  The following cell downloads the data file we’ll use directly from their repository.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
 
@@ -316,7 +308,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 <p>The following cell reads the data file:</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;compas-scores-two-years.csv&#39;</span><span class="p">)</span>
 <span class="n">cp</span><span class="o">.</span><span class="n">shape</span>
@@ -343,7 +335,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <div class="section" id="code">
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
 <p>The functions from the previous notebook are in a file called <code class="docutils literal notranslate"><span class="pre">utils.py</span></code>; the following cell downloads it if you don’t already have it:</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/&#39;</span> <span class="o">+</span>
          <span class="s1">&#39;master/utils.py&#39;</span><span class="p">)</span>
@@ -351,22 +343,33 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 </div>
+<div class="cell tag_remove-print docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">error_rates</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="the-wapo-response">
-<h2>The WaPo response<a class="headerlink" href="#the-wapo-response" title="Permalink to this headline">¶</a></h2>
+<h2>The WaPo Response<a class="headerlink" href="#the-wapo-response" title="Permalink to this headline">¶</a></h2>
 <p>The Washington Post article summarizes the ProPublica article and the response from Northpointe, the company that makes COMPAS, like this:</p>
 <ul class="simple">
 <li><p>ProPublica claims that COMPAS is unfair because “among defendants who ultimately did not reoffend, blacks were more than twice as likely as whites to be classified as medium or high risk.”</p></li>
 <li><p>Northpointe claims that COMPAS is fair because “scores mean essentially the same thing regardless of the defendant’s race. For example, among defendants who scored a seven on the COMPAS scale, 60 percent of white defendants reoffended, which is nearly identical to the 61 percent of black defendants who reoffended.”</p></li>
 </ul>
 <p>So ProPublica and Northpointe are invoking different definitions of “fair”.</p>
-<p>In the previous notebook we explored the first definition by computing error rates (false positive and false negative) for white and black defendants.</p>
-<p>In this notebook, we’ll explore the second definition, which is called “calibration”.</p>
+<p>In the previous chapter we explored the first definition by computing error rates (false positive and false negative) for white and black defendants.
+In this chapter, we’ll explore the second definition, which is called “calibration”.</p>
 </div>
 <div class="section" id="id1">
 <h2>Calibration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>The WaPo article includes this figure, which shows “white and black defendants with the same risk score are roughly equally likely to reoffend.”</p>
-<img width=70%, src='https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/calibration1.png'><p>To understand this figure, let’s start by replicating it.</p>
+<p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/calibration1.png" /></p>
+<p>To understand this figure, let’s start by replicating it.</p>
 <p>The following function groups defendants by risk score and computes the fraction in each group that were charged with another crime within two years.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -386,9 +389,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>The following figure shows this calibration curve for all defendants and for white and black defendants separately.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
-
-<span class="n">cal_all</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cal_all</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">cal_all</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> 
               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
               <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All defendants&#39;</span><span class="p">)</span>
@@ -408,7 +409,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02_calibration_18_0.png" src="_images/02_calibration_18_0.png" />
+<img alt="_images/02_calibration_20_0.png" src="_images/02_calibration_20_0.png" />
 </div>
 </div>
 <p>This figure shows that people with higher risk scores are more likely to be charged with a new crime within two years.  In that sense COMPAS works as intended.</p>
@@ -421,13 +422,11 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>To see why, let’s go back to the confusion matrix.</p>
 </div>
 <div class="section" id="matrices-and-metrics">
-<h2>Matrices and metrics<a class="headerlink" href="#matrices-and-metrics" title="Permalink to this headline">¶</a></h2>
-<p>In the previous notebook, we computed confusion matrices for white and black defendants.  Here they are again:</p>
+<h2>Matrices and Metrics<a class="headerlink" href="#matrices-and-metrics" title="Permalink to this headline">¶</a></h2>
+<p>In the previous chapter, we computed confusion matrices for white and black defendants.  Here they are again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
-
-<span class="n">matrix_white</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">white</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_white</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">white</span><span class="p">])</span>
 <span class="n">matrix_white</span>
 </pre></div>
 </div>
@@ -528,9 +527,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>And here are the metrics we computed from the confusion matrices:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
-
-<span class="n">metrics_white</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">matrix_white</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metrics_white</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">matrix_white</span><span class="p">,</span> 
                                 <span class="s1">&#39;White defendants&#39;</span><span class="p">)</span>
 <span class="n">metrics_white</span>
 </pre></div>
@@ -656,11 +653,11 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <li><p>Among people in the <em>high risk group</em>, black defendants are more likely to be charged with another crime (63% vs 59%).</p></li>
 <li><p>Among people in the <em>low risk group</em>, black defendants are less likely to “survive” two years without another charge (65% vs 71%).</p></li>
 </ul>
-<p>It seems like we should be able to fix these problems, but it turns out that we can’t.</p>
-<p>We’ll see why in the next section.</p>
+<p>It seems like we should be able to fix these problems, but it turns out that we can’t.
+We’ll see why in the next section.</p>
 </div>
 <div class="section" id="what-would-it-take">
-<h2>What would it take?<a class="headerlink" href="#what-would-it-take" title="Permalink to this headline">¶</a></h2>
+<h2>What Would It Take?<a class="headerlink" href="#what-would-it-take" title="Permalink to this headline">¶</a></h2>
 <p>Suppose we want to fix COMPAS so that predictive values are the same for black and white defendants.  We could do that by using different thresholds for the two groups.</p>
 <p>In this section, we’ll figure out what it would take to re-calibrate COMPAS; then we’ll see what effect that would have on predictive values.</p>
 <p>The following function loops through possible thresholds, makes the confusion matrix with each threshold, and computes accuracy metrics.</p>
@@ -692,7 +689,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_all</span> <span class="o">=</span> <span class="n">sweep_threshold</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
-<span class="n">table_all</span>
+<span class="n">table_all</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -763,54 +760,6 @@ The terms of use for the data <a class="reference external" href="https://www.pr
       <td>68.796510</td>
       <td>45.065151</td>
     </tr>
-    <tr>
-      <th>5</th>
-      <td>23.391370</td>
-      <td>47.431560</td>
-      <td>64.833080</td>
-      <td>66.317169</td>
-      <td>45.065151</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>16.250315</td>
-      <td>58.443556</td>
-      <td>67.719298</td>
-      <td>63.594558</td>
-      <td>45.065151</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>10.143830</td>
-      <td>69.209474</td>
-      <td>71.347113</td>
-      <td>61.280330</td>
-      <td>45.065151</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>6.056018</td>
-      <td>79.975392</td>
-      <td>73.063973</td>
-      <td>58.880278</td>
-      <td>45.065151</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2.195307</td>
-      <td>90.895109</td>
-      <td>77.284595</td>
-      <td>56.741326</td>
-      <td>45.065151</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>0.000000</td>
-      <td>100.000000</td>
-      <td>NaN</td>
-      <td>54.934849</td>
-      <td>45.065151</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -828,7 +777,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02_calibration_34_0.png" src="_images/02_calibration_34_0.png" />
+<img alt="_images/02_calibration_36_0.png" src="_images/02_calibration_36_0.png" />
 </div>
 </div>
 <p>When the threshold is low, almost everyone is in the high risk group; in that case:</p>
@@ -854,7 +803,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02_calibration_36_0.png" src="_images/02_calibration_36_0.png" />
+<img alt="_images/02_calibration_38_0.png" src="_images/02_calibration_38_0.png" />
 </div>
 </div>
 <p>When the threshold is too low, PPV is low.  When the threshold is too high, NPV is low.</p>
@@ -862,13 +811,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_white</span> <span class="o">=</span> <span class="n">sweep_threshold</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">white</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_black</span> <span class="o">=</span> <span class="n">sweep_threshold</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">black</span><span class="p">])</span>
+<span class="n">table_black</span> <span class="o">=</span> <span class="n">sweep_threshold</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">black</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -914,9 +857,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>We can use <code class="docutils literal notranslate"><span class="pre">crossing</span></code> to calibrate the test for white defendants; that is, we can compute the threshold that would make the error rates for white defendants the same as for the general population.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">error_rates</span>
-
-<span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span> <span class="o">=</span> <span class="n">error_rates</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -946,8 +887,8 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 </div>
-<p>With a threshold near 3.2, white defendants would have the same error rates as the general population.</p>
-<p>Now let’s do the same computation for black defendants.</p>
+<p>With a threshold near 3.2, white defendants would have the same error rates as the general population.
+Now let’s do the same computation for black defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crossing</span><span class="p">(</span><span class="n">table_black</span><span class="p">[</span><span class="s1">&#39;FPR&#39;</span><span class="p">],</span> <span class="n">fpr</span><span class="p">)</span>
@@ -972,9 +913,9 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 </div>
-<p>To get the same error rates for black and white defendants, we would need different thresholds: about 5.1 compared to 3.2.</p>
-<p>At those levels, the predictive values are substantially different.</p>
-<p>Here’s PPV for each group with different thresholds:</p>
+<p>To get the same error rates for black and white defendants, we would need different thresholds: about 5.1 compared to 3.2.
+At those levels, the predictive values are substantially different.
+Here’s PPV for each group with different thresholds:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interpolate</span><span class="p">(</span><span class="n">table_white</span><span class="p">[</span><span class="s1">&#39;PPV&#39;</span><span class="p">],</span> <span class="mf">3.2</span><span class="p">)</span>
@@ -1044,7 +985,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 <div class="section" id="roc">
 <h2>ROC<a class="headerlink" href="#roc" title="Permalink to this headline">¶</a></h2>
-<p>In the previous section I plotted various metrics as as function of threshold.  Another common and useful way to visualize these results is to plot sensitivity (which is the complement of FNR) versus FPR.  For historical reasons, the result is called a <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">receiver operating characteristic (ROC) curve</a>.</p>
+<p>In the previous section I plotted various metrics as as function of threshold.  Another common and useful way to visualize these results is to plot sensitivity (which is the complement of FNR) versus FPR.  For historical reasons, the result is called a receiver operating characteristic (ROC) curve (see <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a>).</p>
 <p>The following function plots the ROC curve:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1073,7 +1014,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02_calibration_62_0.png" src="_images/02_calibration_62_0.png" />
+<img alt="_images/02_calibration_63_0.png" src="_images/02_calibration_63_0.png" />
 </div>
 </div>
 <p>The green line is the ROC curve.  The gray dotted line shows the identity line for comparison.</p>
@@ -1082,8 +1023,8 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <li><p>When FPR is low, sensitivity is low.</p></li>
 <li><p>In order to get more sensitivity, we have to accept a higher FPR.</p></li>
 </ul>
-<p>The ROC curve tells us how much sensitivity we get for a given FPR or, the other way around, how much FPR we have to accept to achieve a given sensitivity.</p>
-<p>The following figure shows the ROC curves for white and black defendants.</p>
+<p>The ROC curve tells us how much sensitivity we get for a given FPR or, the other way around, how much FPR we have to accept to achieve a given sensitivity.
+The following figure shows the ROC curves for white and black defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_roc</span><span class="p">(</span><span class="n">table_white</span><span class="p">)</span>
@@ -1092,17 +1033,17 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02_calibration_64_0.png" src="_images/02_calibration_64_0.png" />
+<img alt="_images/02_calibration_65_0.png" src="_images/02_calibration_65_0.png" />
 </div>
 </div>
-<p>The ROC curves are similar for the two groups, which shows that we can achieve nearly the same error rates (FPR and FNR) for the two groups, as we did in the previous section.</p>
-<p>It also shows that the test has nearly the same “concordance” for both groups, which I explain in the next section.</p>
+<p>The ROC curves are similar for the two groups, which shows that we can achieve nearly the same error rates (FPR and FNR) for the two groups, as we did in the previous section.
+It also shows that the test has nearly the same “concordance” for both groups, which I explain in the next section.</p>
 </div>
 <div class="section" id="auc">
 <h2>AUC<a class="headerlink" href="#auc" title="Permalink to this headline">¶</a></h2>
 <p>The authors of the ProPublica article published a supplementary article,
-<a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm"><em>How We Analyzed the COMPAS Recidivism Algorithm</em></a>, which describes their analysis in more detail.</p>
-<p>As another metric of accuracy, they estimate <a class="reference external" href="https://cran.r-project.org/web/packages/survival/vignettes/concordance.pdf">concordance</a>, which they describe like this:</p>
+“How We Analyzed the COMPAS Recidivism Algorithm”, which describes their analysis in more detail (see <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>).</p>
+<p>As another metric of accuracy, they estimate <strong>concordance</strong>, which they describe like this:</p>
 <blockquote>
 <div><p>Overall, [COMPAS has] a concordance score of 63.6 percent.  That means for any randomly selected pair of defendants in the sample, the COMPAS system can accurately rank their recidivism risk 63.6 percent of the time (e.g. if one person of the pair recidivates, that pair will count as a successful match if that person also had a higher score). In its study, Northpointe reported a slightly higher concordance: 68 percent.</p>
 </div></blockquote>
@@ -1110,17 +1051,14 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <blockquote>
 <div><p>[These estimates] are lower than what Northpointe describes as a threshold for reliability. “A rule of thumb according to several recent articles is that AUCs of .70 or above typically indicate satisfactory predictive accuracy, and measures between .60 and .70 suggest low to moderate predictive accuracy,” the company says in its study.</p>
 </div></blockquote>
-<p>There are several ways to compute concordance, but one of the simplest is to compute the area under the ROC curve.  If you would like to know why this works, <a class="reference external" href="https://stats.stackexchange.com/questions/180638/how-to-derive-the-probabilistic-interpretation-of-the-auc">you might find this discussion helpful</a>.</p>
-<p>Since we’ve already computed the ROC, we can use <a class="reference external" href="https://en.wikipedia.org/wiki/Simpson%27s_rule">Simpson’s rule</a> to estimate the area under the curve.</p>
+<p>There are several ways to compute concordance, but one of the simplest is to compute the area under the ROC curve.  If you would like to know why this works, you might find this discussion helpful: <a class="reference external" href="https://stats.stackexchange.com/questions/180638/how-to-derive-the-probabilistic-interpretation-of-the-auc">https://stats.stackexchange.com/questions/180638/how-to-derive-the-probabilistic-interpretation-of-the-auc</a>.</p>
+<p>Since we’ve already computed the ROC, we can use Simpson’s rule to estimate the area under the curve (see <a class="reference external" href="https://en.wikipedia.org/wiki/Simpsons_rule">https://en.wikipedia.org/wiki/Simpsons_rule</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simps</span>
 
 <span class="k">def</span> <span class="nf">compute_auc</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the area under the ROC curve.</span>
-<span class="sd">    </span>
-<span class="sd">    Uses the trapezoid rule, so </span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Compute the area under the ROC curve.&quot;&quot;&quot;</span>
     <span class="n">y</span> <span class="o">=</span> <span class="mi">100</span><span class="o">-</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;FNR&#39;</span><span class="p">]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;FPR&#39;</span><span class="p">]</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span>
@@ -1168,15 +1106,15 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 </div>
 </div>
-<p>Different ways of computing concordance handle ties differently, which is probably why we, ProPublica, and Northpointe get somewhat different estimates.</p>
-<p>But qualitatively they all tell the same story; as a binary classifier, COMPAS is only moderately accurate.  However, it seems to be equally accurate, by this metric, for white and black defendants.</p>
+<p>Different ways of computing concordance handle ties differently, which is probably why we, ProPublica, and Northpointe get somewhat different estimates.
+But qualitatively they all tell the same story; as a binary classifier, COMPAS is only moderately accurate.  However, it seems to be equally accurate, by this metric, for white and black defendants.</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<p>In this notebook, we replicated the analysis reported in the WaPo article and confirmed two of the arguments they presented:</p>
+<p>In this chapter, we replicated the analysis reported in the WaPo article and confirmed two of the arguments they presented:</p>
 <ol class="simple">
 <li><p>COMPAS is calibrated in the sense that white and black defendants with the same risk score have almost the same probability of being charged with another crime.  This implies that it has roughly the same predictive value for both groups.</p></li>
-<li><p>It is mathematically impossible for COMPAS to have the same predictive values for both groups and the same error rates at the same time.</p></li>
+<li><p>It is impossible for COMPAS to have the same predictive values for both groups and the same error rates at the same time.</p></li>
 </ol>
 <p>And we showed:</p>
 <ul class="simple">

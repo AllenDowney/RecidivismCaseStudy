@@ -208,11 +208,6 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#machine-bias">
    Machine Bias
   </a>
@@ -229,7 +224,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-bias">
-   Data bias
+   Data Bias
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -244,22 +239,22 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#predictive-value">
-   Predictive value
+   Predictive Value
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sensitivity-and-specificity">
-   Sensitivity and specificity
+   Sensitivity and Specificity
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#false-positive-and-negative-rates">
-   False positive and negative rates
+   False Positive and Negative Rates
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#all-metrics">
-   All metrics
+   All Metrics
   </a>
  </li>
 </ul>
@@ -276,44 +271,34 @@
                 
   <div class="section" id="classification">
 <h1>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This is the first in a series of notebooks that make up a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">case study on classification and algorithmic fairness</a>.
 This case study is part of the <a class="reference external" href="https://allendowney.github.io/ElementsOfDataScience/"><em>Elements of Data Science</em></a> curriculum.</p>
-<p>This case study is related to “<a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a>”, an article published by ProPublica in 2015.  The article explores the use of predictive algorithms in the criminal justice system.  The arguments presented in the article are statistical; specifically they are related to binary classification.</p>
-<p>The goal of these notebooks is to replicate the analysis reported in the article and to  review ways to evaluate binary classification algorithms.</p>
+<p>This case study is related to “Machine Bias”, an article published by ProPublica in 2016 (see <a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>).  The article explores the use of predictive algorithms in the criminal justice system.  The arguments presented in the article are statistical; specifically, they are related to binary classification.</p>
+<p>The goal of this case study is to replicate the analysis reported in the article and to  review ways to evaluate binary classification algorithms.</p>
 <ul class="simple">
-<li><p>In this notebook, we start with the confusion matrix and the metrics that are derived from it, including accuracy, sensitivity, specificity, predictive value, false positive rate, and false negative rate.</p></li>
-<li><p>In the next notebook, I review the arguments made in a response article published in the Washington Post.  I compute and interpret calibration curves, and explore the trade-offs between predictive value and error rates.</p></li>
-<li><p>In the third notebook, I apply the same analysis to evaluate the performance of classification for male and female defendants.</p></li>
+<li><p>In this chapter, we start with the confusion matrix and the metrics that are derived from it, including accuracy, sensitivity, specificity, predictive value, false positive rate, and false negative rate.</p></li>
+<li><p>In the next chapter, I review the arguments made in a response article published in the Washington Post.  I compute and interpret calibration curves, and explore the trade-offs between predictive value and error rates.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
+<ul class="simple">
+<li><p>In the third chapter, I apply the same analysis to evaluate the performance of classification for male and female defendants.</p></li>
+</ul>
 <div class="section" id="machine-bias">
 <h2>Machine Bias<a class="headerlink" href="#machine-bias" title="Permalink to this headline">¶</a></h2>
 <p>We will start by replicating the analysis reported in
-“<a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a>”, by Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner, and published by <a class="reference external" href="https://www.propublica.org">ProPublica</a> in May 2016.</p>
-<p>This article is about a statistical tool called COMPAS which is used in the criminal justice systems of some states to inform decisions about which defendants should be released on bail before trial, how long convicted defendants should be imprisoned, and whether prisoners should be released on probation.</p>
+“[Machine Bias]”, by Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner, and published by ProPublica in May 2016.</p>
+<p>This article is about a statistical tool called COMPAS which is used in the criminal justice systems of some states to inform decisions about which defendants should be released on bail before trial, how long convicted defendants should be imprisoned, and whether prisoners should be released on probation (see <a class="reference external" href="https://en.wikipedia.org/wiki/COMPAS_(software)">https://en.wikipedia.org/wiki/COMPAS_(software)</a>).</p>
 <p>COMPAS uses information about defendants to generate a “risk score” which is intended to quantify the risk that the defendant would commit another crime if released.</p>
 <p>The authors of the ProPublica article used public data to assess the accuracy of those risk scores.  They explain:</p>
 <blockquote>
 <div><p>We obtained the risk scores assigned to more than 7,000 people arrested in Broward County, Florida, in 2013 and 2014 and checked to see how many were charged with new crimes over the next two years, the same benchmark used by the creators of the algorithm.</p>
 </div></blockquote>
-<p><a class="reference external" href="https://github.com/propublica/compas-analysis/blob/master/Compas%20Analysis.ipynb">In their notebook</a>, they explain in more detail:</p>
+<p>In their notebook (see <a class="reference external" href="https://github.com/propublica/compas-analysis/blob/master/Compas%20Analysis.ipynb">https://github.com/propublica/compas-analysis/blob/master/Compas%20Analysis.ipynb</a>), they explain in more detail:</p>
 <blockquote>
 <div><p>We filtered the underlying data from Broward county to include only those rows representing people who had either recidivated in two years, or had at least two years outside of a correctional facility.</p>
 <p>[…]</p>
 <p>Next, we sought to determine if a person had been charged with a new crime subsequent to the crime for which they were COMPAS screened. We did not count traffic tickets and some municipal ordinance violations as recidivism. We did not count as recidivists people who were arrested for failing to appear at their court hearings, or people who were later charged with a crime that occurred prior to their COMPAS screening.</p>
 </div></blockquote>
-<p>If you are not familiar with the word “recidivism”, it means “<a class="reference external" href="https://www.merriam-webster.com/dictionary/recidivism">a tendency to relapse into a previous condition or mode of behavior, especially relapse into criminal behavior</a>”.</p>
+<p>If you are not familiar with the word “recidivism”, it means “a tendency to relapse into a previous condition or mode of behavior, especially relapse into criminal behavior (<a class="reference external" href="https://www.merriam-webster.com/dictionary/recidivism">https://www.merriam-webster.com/dictionary/recidivism</a>)”.</p>
 <p>In this context, a person is a “recidivist” if they are <em>charged</em> with another crime within two years of release.  However, note that there is a big difference between <em>committing</em> another crime and being <em>charged</em> with another crime.  We will come back to this issue.</p>
 <p>The authors of the ProPublica article use this data to evaluate how well COMPAS predicts the risk that a defendant will be charged with another crime within two years of their release.</p>
 <p>Among their findings, they report:</p>
@@ -332,30 +317,15 @@ For now, I will follow the convention of the original article, but I will revisi
 </div>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
-<p>The authors of “Machine Bias” published their data and analysis in <a class="reference external" href="https://github.com/propublica/compas-analysis">this repository</a>.
-The terms of use for the data <a class="reference external" href="https://www.propublica.org/datastore/terms">are here</a>.  In compliance with those terms, I am not redistributing the data.
-The following cell downloads the data file we’ll use directly from their repository.</p>
+<p>The authors of “Machine Bias” published their data and analysis at <a class="reference external" href="https://github.com/propublica/compas-analysis">https://github.com/propublica/compas-analysis</a>.</p>
+<p>We can use Pandas to read the data file and make a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
-        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Downloaded &#39;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
-
-<span class="n">download</span><span class="p">(</span><span class="s1">&#39;https://github.com/propublica/compas-analysis/raw/master/&#39;</span> <span class="o">+</span>
-         <span class="s1">&#39;compas-scores-two-years.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following cell reads the data file and displays the number of rows and columns.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;compas-scores-two-years.csv&#39;</span><span class="p">)</span>
+<span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;compas-scores-two-years.csv&#39;</span><span class="p">)</span>
 <span class="n">cp</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -366,41 +336,14 @@ The following cell downloads the data file we’ll use directly from their repos
 </div>
 </div>
 </div>
-<p>The dataset includes 7214 rows, one for each defendant, and 53 columns.  Here are the names of the columns.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;id&#39;, &#39;name&#39;, &#39;first&#39;, &#39;last&#39;, &#39;compas_screening_date&#39;, &#39;sex&#39;, &#39;dob&#39;,
-       &#39;age&#39;, &#39;age_cat&#39;, &#39;race&#39;, &#39;juv_fel_count&#39;, &#39;decile_score&#39;,
-       &#39;juv_misd_count&#39;, &#39;juv_other_count&#39;, &#39;priors_count&#39;,
-       &#39;days_b_screening_arrest&#39;, &#39;c_jail_in&#39;, &#39;c_jail_out&#39;, &#39;c_case_number&#39;,
-       &#39;c_offense_date&#39;, &#39;c_arrest_date&#39;, &#39;c_days_from_compas&#39;,
-       &#39;c_charge_degree&#39;, &#39;c_charge_desc&#39;, &#39;is_recid&#39;, &#39;r_case_number&#39;,
-       &#39;r_charge_degree&#39;, &#39;r_days_from_arrest&#39;, &#39;r_offense_date&#39;,
-       &#39;r_charge_desc&#39;, &#39;r_jail_in&#39;, &#39;r_jail_out&#39;, &#39;violent_recid&#39;,
-       &#39;is_violent_recid&#39;, &#39;vr_case_number&#39;, &#39;vr_charge_degree&#39;,
-       &#39;vr_offense_date&#39;, &#39;vr_charge_desc&#39;, &#39;type_of_assessment&#39;,
-       &#39;decile_score.1&#39;, &#39;score_text&#39;, &#39;screening_date&#39;,
-       &#39;v_type_of_assessment&#39;, &#39;v_decile_score&#39;, &#39;v_score_text&#39;,
-       &#39;v_screening_date&#39;, &#39;in_custody&#39;, &#39;out_custody&#39;, &#39;priors_count.1&#39;,
-       &#39;start&#39;, &#39;end&#39;, &#39;event&#39;, &#39;two_year_recid&#39;],
-      dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<p>I have not found documentation for the columns in this dataset; we have to infer what they mean based on the column names and how they are used in the original analysis.</p>
+<p>The dataset includes 7214 rows, one for each defendant, and 53 columns.</p>
 </div>
 <div class="section" id="the-confusion-matrix">
 <h2>The Confusion Matrix<a class="headerlink" href="#the-confusion-matrix" title="Permalink to this headline">¶</a></h2>
-<p>The authors of “Machine Bias” describe their analysis in more detail in <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">this article</a>.  It includes this table, which summarizes many of the results they report:</p>
-<img width="100%" src='https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/machine_bias_table.png'>
+<p>The authors of “Machine Bias” describe their analysis in a supplemental article at <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>.  It includes this table, which summarizes many of the results they report:</p>
+<p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/machine_bias_table.png" /></p>
 <p>The table summarizes results for all defendants and two subgroups: defendants classified as white (“Caucasian” in the original dataset) and black (“African-American”).</p>
-<p>For each group, the summary includes a <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix</a> and a number of metrics, including</p>
+<p>For each group, the summary includes a confusion matrix (see <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">https://en.wikipedia.org/wiki/Confusion_matrix</a>) and a number of metrics, including</p>
 <ul class="simple">
 <li><p>FP rate: false positive rate</p></li>
 <li><p>FN rate: false negative rate</p></li>
@@ -410,8 +353,8 @@ The following cell downloads the data file we’ll use directly from their repos
 <li><p>LR-: negative likelihood ratio</p></li>
 </ul>
 <p>I will explain what these metrics mean and how to compute them, and we’ll replicate the results in this table.</p>
-<p>But first let’s examine the data and compute some recoded variables.</p>
-<p>The following function displays the values in a Series and the number of times each value appears.</p>
+<p>But first let’s examine the data and compute some recoded variables.
+The following function displays the values in a Series and the number of times each value appears.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
@@ -426,7 +369,7 @@ The following cell downloads the data file we’ll use directly from their repos
 </div>
 </div>
 </div>
-<p>Here are the values of <code class="docutils literal notranslate"><span class="pre">decile_score</span></code> which is the output of the COMPAS algorithm.  <code class="docutils literal notranslate"><span class="pre">1</span></code> is the lowest risk category; <code class="docutils literal notranslate"><span class="pre">10</span></code> is the highest.</p>
+<p>Here are the values of <code class="docutils literal notranslate"><span class="pre">decile_score</span></code>, which is the output of the COMPAS algorithm.  <code class="docutils literal notranslate"><span class="pre">1</span></code> is the lowest risk category; <code class="docutils literal notranslate"><span class="pre">10</span></code> is the highest.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;decile_score&#39;</span><span class="p">])</span>
@@ -450,9 +393,9 @@ Name: decile_score, dtype: int64
 </div>
 </div>
 <p>It’s important to note that COMPAS is not a binary classifier; that is, it does not predict that a defendant will or will not recidivate.  Rather, it gives each defendant a score that is intended to reflect the risk that they will recidivate.</p>
-<p>In order to evaluate the performance of COMPAS, the authors of the ProPublica article chose a threshold, <code class="docutils literal notranslate"><span class="pre">4</span></code>, and define decile scores at or below the threshold to be “low risk”, and scores above the threshold to be “high risk”.</p>
-<p>Their choice of the threshold is arbitrary.  Later, we will see what happens with other choices, but we’ll start by replicating the original analysis.</p>
-<p><code class="docutils literal notranslate"><span class="pre">high_risk</span></code> is a Boolean Series that’s <code class="docutils literal notranslate"><span class="pre">True</span></code> for respondents with a decile score greater than 4.</p>
+<p>In order to evaluate the performance of COMPAS, the authors of the ProPublica article chose a threshold, <code class="docutils literal notranslate"><span class="pre">4</span></code>, and define decile scores at or below the threshold to be “low risk”, and scores above the threshold to be “high risk”.
+Their choice of the threshold is arbitrary.  Later, we will see what happens with other choices, but we’ll start by replicating the original analysis.</p>
+<p>I’ll create a Boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code> called <code class="docutils literal notranslate"><span class="pre">high_risk</span></code> that’s <code class="docutils literal notranslate"><span class="pre">True</span></code> for respondents with a decile score greater than 4.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">high_risk</span> <span class="o">=</span> <span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span>
@@ -484,7 +427,7 @@ Name: two_year_recid, dtype: int64
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">new_charge_2</span></code> is a Boolean Series that is <code class="docutils literal notranslate"><span class="pre">True</span></code> for defendants who were charged with another crime within two years.</p>
+<p>I’ll create another <code class="docutils literal notranslate"><span class="pre">Series</span></code>, called <code class="docutils literal notranslate"><span class="pre">new_charge_2</span></code>, that is <code class="docutils literal notranslate"><span class="pre">True</span></code> for defendants who were charged with another crime within two years.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_charge_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
@@ -551,7 +494,7 @@ Name: NewCharge2, dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>This table is called a <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix</a> or error matrix.  Reading from left to right and top to bottom, the elements of the matrix show the number of respondents who were:</p>
+<p>This table is called a <strong>confusion matrix</strong> or error matrix.  Reading from left to right and top to bottom, the elements of the matrix show the number of respondents who were:</p>
 <ul class="simple">
 <li><p>Classified as low risk and not charged with a new crime: there were 2681 <strong>true negatives</strong>; that is, cases where the test was negative (not high risk) and the prediction turned out to be correct (no new charge).</p></li>
 <li><p>High risk and not charged: there were 1282 <strong>false positives</strong>, cases where the test was positive and the prediction was incorrect.</p></li>
@@ -559,8 +502,8 @@ Name: NewCharge2, dtype: int64
 <li><p>High risk and charged: there were 2035 <strong>true positives</strong>, cases where the test was positive and the prediction was correct.</p></li>
 </ul>
 <p>The values in this matrix are consistent with the values in the ProPublica article, so we can confirm that we are reading the data and replicating their analysis correctly.</p>
-<p>Before we go on, I’ll also check the confusion matrices for white and black defendants.</p>
-<p>Here are the values of <code class="docutils literal notranslate"><span class="pre">race</span></code>:</p>
+<p>I’ll also check the confusion matrices for white and black defendants.
+Here are the values of <code class="docutils literal notranslate"><span class="pre">race</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">])</span>
@@ -713,11 +656,11 @@ Name: black, dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>All of these results are consistent with the ProPublica article.</p>
-<p>However, before we go on, I want to address an important issue with this dataset: data bias.</p>
+<p>All of these results are consistent with the ProPublica article.
+However, before we go on, I want to address an important issue with this dataset: data bias.</p>
 </div>
 <div class="section" id="data-bias">
-<h2>Data bias<a class="headerlink" href="#data-bias" title="Permalink to this headline">¶</a></h2>
+<h2>Data Bias<a class="headerlink" href="#data-bias" title="Permalink to this headline">¶</a></h2>
 <p>Systems like COMPAS are trying to predict whether a defendant will <em>commit</em> another crime if released.  But the dataset reports whether a defendant was <em>charged</em> with another crime.</p>
 <p>Not everyone who commits a crime gets charged (not even close).  The probability of getting charged for a particular crime depends on the type of crime and location; the presence of witnesses and their willingness to work with police; the decisions of police about where to patrol, what crimes to investigate, and who to arrest; and decisions of prosecutors about who to charge.</p>
 <p>It is likely that every one of these factors depends on the race of the defendant.  In this dataset, the prevalence of <em>new charges</em> is higher for black defendants, but that doesn’t necessarily mean that the prevalence of <em>new crimes</em> is higher.</p>
@@ -729,7 +672,7 @@ Name: black, dtype: int64
 <p>In the previous section I arranged the confusion matrix to be consistent with the ProPublica article, to make it easy to check for consistency.</p>
 <p>In general, there are many possible ways to arrange a confusion matrix: you can put the predictions along the columns and the actual conditions along the rows, or the other way around, and you can sort the rows and columns in either order.</p>
 <p>There is no universal standard arrangement, but the one that seems to be most common is the one on the <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">confusion matrix Wikipedia page</a>, which looks like this:</p>
-<img width=400, src='https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/confusion_matrix1.png'>
+<p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/confusion_matrix1.png" /></p>
 <p>In this arrangement:</p>
 <ul class="simple">
 <li><p>The predictions are down the rows.</p></li>
@@ -744,7 +687,7 @@ Name: black, dtype: int64
 <li><p>“Condition negative” means they were not charged (survived).</p></li>
 </ul>
 <p>The following function makes a confusion matrix with this arrangement:</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Make a confusion matrix.</span>
@@ -773,7 +716,7 @@ Name: black, dtype: int64
 </div>
 </div>
 <p>Here are the confusion matrices for white defendants, black defendants, and all defendants.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_white</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">white</span><span class="p">])</span>
 <span class="n">matrix_white</span>
@@ -823,7 +766,7 @@ Name: black, dtype: int64
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_black</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">black</span><span class="p">])</span>
 <span class="n">matrix_black</span>
@@ -873,7 +816,7 @@ Name: black, dtype: int64
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">matrix_all</span>
@@ -926,9 +869,9 @@ Name: black, dtype: int64
 </div>
 <div class="section" id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
-<p>Based on these results, how accurate is COMPAS as a binary classifier?  Well, it turns out that there are a <em>lot</em> of ways to answer that question.</p>
-<p>One of the simplest ones is overall <strong>accuracy</strong>, which is the fraction (or percentage) of correct predictions.</p>
-<p>To compute accuracy, it is convenient to extract from the confusion matrix the number of true positives, false positives, false negatives, and true negatives.</p>
+<p>Based on these results, how accurate is COMPAS as a binary classifier?  Well, it turns out that there are a <em>lot</em> of ways to answer that question.
+One of the simplest is overall <strong>accuracy</strong>, which is the fraction (or percentage) of correct predictions.
+To compute accuracy, it is convenient to extract from the confusion matrix the number of true positives, false positives, false negatives, and true negatives.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tn</span> <span class="o">=</span> <span class="n">matrix_all</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -936,9 +879,9 @@ Name: black, dtype: int64
 </div>
 </div>
 </div>
-<p>The number of true predictions is <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">+</span> <span class="pre">tn</span></code>.</p>
-<p>The number of false predictions is <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">+</span> <span class="pre">fn</span></code>.</p>
-<p>So we can compute the fraction of true predictions like this:</p>
+<p>The number of true predictions is <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">+</span> <span class="pre">tn</span></code>.
+The number of false predictions is <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">+</span> <span class="pre">fn</span></code>.
+So we can compute the fraction of true predictions like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">percent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -965,7 +908,7 @@ Name: black, dtype: int64
 <p>But it is often important to make these distinctions, because the benefits of true predictions and true negatives might be different, and the costs of false positives and false negatives might be different.</p>
 </div>
 <div class="section" id="predictive-value">
-<h2>Predictive value<a class="headerlink" href="#predictive-value" title="Permalink to this headline">¶</a></h2>
+<h2>Predictive Value<a class="headerlink" href="#predictive-value" title="Permalink to this headline">¶</a></h2>
 <p>One way to make these distinctions is to compute the “predictive value” of positive and negative tests.</p>
 <ul class="simple">
 <li><p><strong>Positive predictive value (PPV)</strong> is the fraction of positive tests that are correct.</p></li>
@@ -1005,7 +948,7 @@ Name: black, dtype: int64
 <p>Among all defendants, a positive test is correct about 61% of the time; a negative test result is correct about 69% of the time.</p>
 </div>
 <div class="section" id="sensitivity-and-specificity">
-<h2>Sensitivity and specificity<a class="headerlink" href="#sensitivity-and-specificity" title="Permalink to this headline">¶</a></h2>
+<h2>Sensitivity and Specificity<a class="headerlink" href="#sensitivity-and-specificity" title="Permalink to this headline">¶</a></h2>
 <p>Another way to characterize the accuracy of a test is to compute</p>
 <ul class="simple">
 <li><p><strong>Sensitivity</strong>, which is the probability of predicting correctly when the condition is present, and</p></li>
@@ -1049,8 +992,9 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 <li><p>About 63% of the recidivists were classified as high risk.</p></li>
 <li><p>About 68% of the non-recidivists were classified as low risk.</p></li>
 </ul>
-<p>It can be hard to keep all of these metrics straight, especially when you are learning about them for the first time.  The following diagram <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">from Wikipedia</a> might help:</p>
-<img width=800, src='https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/confusion_matrix2.png'><p>PPV and sensitivity are similar in the sense that they both have true positives in the numerator.  The difference is the denominator:</p>
+<p>It can be hard to keep all of these metrics straight, especially when you are learning about them for the first time.  The following diagram might help (from <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">https://en.wikipedia.org/wiki/Confusion_matrix</a>):</p>
+<p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/confusion_matrix2.png" /></p>
+<p>PPV and sensitivity are similar in the sense that they both have true positives in the numerator.  The difference is the denominator:</p>
 <ul class="simple">
 <li><p>PPV is the ratio of true positives to all positive tests.  So it answers the question, “Of all positive tests, how many are correct?”</p></li>
 <li><p>Sensitivity is the ratio of true positives to all positive conditions.  So it answers the question “Of all positive conditions, how many are detected?”</p></li>
@@ -1062,7 +1006,7 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 </ul>
 </div>
 <div class="section" id="false-positive-and-negative-rates">
-<h2>False positive and negative rates<a class="headerlink" href="#false-positive-and-negative-rates" title="Permalink to this headline">¶</a></h2>
+<h2>False Positive and Negative Rates<a class="headerlink" href="#false-positive-and-negative-rates" title="Permalink to this headline">¶</a></h2>
 <p>The ProPublica article reports PPV and NPV, but instead of sensitivity and specificity, it reports their complements:</p>
 <ul class="simple">
 <li><p><strong>False positive rate</strong>, which is the ratio of false positives to all negative conditions.  It answers, “Of all negative conditions, how many are misclassified?”</p></li>
@@ -1142,10 +1086,10 @@ In general, I prefer sensitivity and specificity over FPN and FNR because</p>
 </ol>
 <p>It is only a convention that the first is called the “false discovery rate” and the second is called “false positive rate”.  I suspect I am not the only one that gets them confused.</p>
 <p>So, here’s my recommendation: if you have the choice, generally use PPV, NPV, sensitivity and specificity, and avoid the other metrics.
-However, since the ProPublica article uses FPR and FNR, I will too.</p>
-<p>They also report LR+ and LR-, but those are combinations of other metrics and not relevant to the current discussion, so I will ignore them.</p>
-<p>However, there is one other metric that I think is relevant and not included in the ProPublica tables: prevalence, which is the fraction of all cases where the condition is positive.  In the example, it’s the fraction of defendants who recidivate.</p>
-<p>The following function computes prevalence:</p>
+However, since the ProPublica article uses FPR and FNR, I will too.
+They also report LR+ and LR-, but those are combinations of other metrics and not relevant to the current discussion, so I will ignore them.</p>
+<p>However, there is one other metric that I think is relevant and not included in the ProPublica tables: prevalence, which is the fraction of all cases where the condition is positive.  In the example, it’s the fraction of defendants who recidivate.
+The following function computes <strong>prevalence</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prevalence</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -1177,7 +1121,7 @@ However, since the ProPublica article uses FPR and FNR, I will too.</p>
 <p>About 45% of the defendants in this dataset were charged with another crime within two years of their release.</p>
 </div>
 <div class="section" id="all-metrics">
-<h2>All metrics<a class="headerlink" href="#all-metrics" title="Permalink to this headline">¶</a></h2>
+<h2>All Metrics<a class="headerlink" href="#all-metrics" title="Permalink to this headline">¶</a></h2>
 <p>The following function takes a confusion matrix, computes all the metrics, and puts them in a DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1260,7 +1204,7 @@ However, since the ProPublica article uses FPR and FNR, I will too.</p>
 </div></div></div>
 </div>
 <p>Comparing these results to the table from ProPublica, it looks like our analysis agrees with theirs.</p>
-<img src='https://raw.githubusercontent.com/AllenDowney/ElementsOfDataScience/master/machine_bias_table.png'>
+<p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/ElementsOfDataScience/master/machine_bias_table.png" /></p>
 <p>Here are the same metrics for black defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1412,8 +1356,8 @@ However, since the ProPublica article uses FPR and FNR, I will too.</p>
 <li><p>Of all people who <em>will</em> recidivate, white defendants are more likely to be classified as low risk, and more likely to be released.</p></li>
 </ul>
 <p>This seems clearly unfair.</p>
-<p>However, it turns out that “fair” is complicated.  After the ProPublica article, the Washington Post published a response by Sam Corbett-Davies, Emma Pierson, Avi Feller and Sharad Goel: “<a class="reference external" href="https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/">A computer program used for bail and sentencing decisions was labeled biased against blacks. It’s actually not that clear.</a>”.</p>
-<p>I encourage you to read that article, and then run <a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/02_calibration.ipynb">the next notebook</a>, where I will unpack their arguments and replicate their analysis.</p>
+<p>However, it turns out that “fair” is complicated.  After the ProPublica article, the Washington Post published a response by Sam Corbett-Davies, Emma Pierson, Avi Feller and Sharad Goel: “A computer program used for bail and sentencing decisions was labeled biased against blacks. It’s actually not that clear,” at <a class="reference external" href="https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas">https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas</a>.</p>
+<p>I encourage you to read that article, and then read the next chapter, where I will unpack their arguments and replicate their analysis.</p>
 </div>
 </div>
 
