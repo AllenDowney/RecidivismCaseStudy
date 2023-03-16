@@ -15,8 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # don't run on windows-latest; it can't handle Unicode
-        os: [ubuntu-latest, macos-latest]  
+        os: [ubuntu-latest, macos-latest, windows-latest]  
         python-version: [3.8]
 
     steps:
