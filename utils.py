@@ -10,6 +10,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+from scipy.integrate import simpson
+from scipy.interpolate import interp1d
+
 
 def values(series):
     """Count the values and sort.
@@ -260,9 +263,6 @@ def plot_cer_model(pred_pv):
     )
 
 
-from scipy.interpolate import interp1d
-
-
 def interpolate(series, value, **options):
     """Evaluate a function at a value.
 
@@ -322,16 +322,10 @@ def plot_roc(table, **options):
     decorate(xlabel="FPR", ylabel="Sensitivity (1-FNR)", title="ROC curve")
 
 
-from scipy.integrate import simps
-
-
 def compute_auc(table):
-    """Compute the area under the ROC curve.
-
-    Uses the trapezoid rule, so
-    """
-    y = 100 - table["FNR"]
-    x = table["FPR"]
+    """Compute the area under the ROC curve."""
+    y = 100-table['FNR']
+    x = table['FPR']
     y = y.sort_index(ascending=False) / 100
     x = x.sort_index(ascending=False) / 100
-    return simps(y.values, x.values)
+    return simpson(y=y.values, x=x.values)

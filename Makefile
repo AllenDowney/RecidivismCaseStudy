@@ -25,4 +25,6 @@ format:
 	black --config pyproject.toml code
 
 tests:
+	# don't run notebook 7 because scikit-learn
+	# is not in requirements.txt
 	pytest --nbmake 0[1-6]*.ipynb
