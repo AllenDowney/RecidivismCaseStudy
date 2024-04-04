@@ -13,6 +13,12 @@ import matplotlib.pyplot as plt
 from scipy.integrate import simpson
 from scipy.interpolate import interp1d
 
+# Make the figures smaller to save some screen real estate.
+# The figures generated for the book have DPI 400, so scaling
+# them by a factor of 4 restores them to the size in the notebooks.
+plt.rcParams['figure.dpi'] = 75
+plt.rcParams['figure.figsize'] = [6, 3.5]
+
 
 def values(series):
     """Count the values and sort.
