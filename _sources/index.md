@@ -21,11 +21,11 @@ case study when you have completed Notebook 6, which covers basic Pandas, and th
 
 ## The notebooks
 
-* [In the first notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/01_classification.ipynb) I replicate the analysis from the ProPublica article and define the basic metrics we use to evaluate classification algorithms, including error rates and predictive values.
+* [In the first notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/01_classification.ipynb) I replicate the analysis from the ProPublica article and define the basic metrics we use to evaluate classification algorithms, including error rates and predictive values.
 
-* [In the second notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/02_calibration.ipynb) I replicate the analysis from the WaPo article and define the calibration curve, the ROC curve, and a related metric, concordance.
+* [In the second notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/02_calibration.ipynb) I replicate the analysis from the WaPo article and define the calibration curve, the ROC curve, and a related metric, concordance.
 
-* [In the third notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/03_fairness.ipynb) I use the same methods to evaluate the performance of COMPAS for male and female defendants, and lay out the fundamental conflict between two definitions of fairness.
+* [In the third notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/03_fairness.ipynb) I use the same methods to evaluate the performance of COMPAS for male and female defendants, and lay out the fundamental conflict between two definitions of fairness.
 
 These three notebooks are intended to support a module in a data science class that engages students in the context and ethical challenges of machine learning.
 
@@ -33,18 +33,18 @@ These three notebooks are intended to support a module in a data science class t
 
 I used these notebooks for a module of my [Data Science class at Olin College](https://sites.google.com/site/olinds20/).
 
-Over the course of three class sessions, I [presented these slides](https://github.com/AllenDowney/RecidivismCaseStudy/raw/master/Recidivism%20Case%20Study.pdf) and led a discussion with students.
+Over the course of three class sessions, I [presented these slides](https://github.com/AllenDowney/RecidivismCaseStudy/raw/v1/Recidivism%20Case%20Study.pdf) and led a discussion with students.
 
 ## Additional notebooks
 
-This repository contains three additional notebooks with additional explorations that you might be interested in.  They are not essential to understand the issues, and they are less complete than the first three notebooks.
+This repository contains three notebooks with additional explorations that you might be interested in.  They are not essential to understand the issues, and they are less complete than the first three notebooks.
 
-* [The fourth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/04_matrix.ipynb) proves what I asserted in the second notebook: if you are given prevalence and error rates, you can compute predictive values; and if you are given prevalence and predictive values, you can compute error rates.
+* [The fourth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/04_matrix.ipynb) proves what I asserted in the second notebook: if you are given prevalence and error rates, you can compute predictive values; and if you are given prevalence and predictive values, you can compute error rates.
 
-* [The fifth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/05_subgroups.ipynb) demonstrates that the challenge of defining fairness between groups gets harder as we consider more groups, and identifies the groups with the highest and lowest errors and predictive values.
+* [The fifth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/05_subgroups.ipynb) demonstrates that the challenge of defining fairness between groups gets harder as we consider more groups, and identifies the groups with the highest and lowest errors and predictive values.
 
-* [The sixth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/master/06_error.ipynb) explores what I call "the other calibration curve", the probability of being classified high risk as a function of the probability of recidivism.
+* [The sixth notebook](https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/06_error.ipynb) explores what I call "the other calibration curve", the probability of being classified high risk as a function of the probability of recidivism.
 
-I include these notebook in part to resist the temptation to hide my development process.  I worked on this case study on and off over several years.  I explored a lot of things and took a lot of wrong turns.  It took me a long time to find the story, get it organized, and strike a balance between two conflicting goals: maintaining the scientific detachment that lets us tackle difficult topics while also keeping sight of the context, the people, and the human consequences.
+I include these notebooks in part to resist the temptation to hide my development process. I worked on this case study on and off over several years. I explored a lot of things and took a lot of wrong turns. It took me a long time to find the story, get it organized, and strike a balance between two conflicting goals: maintaining the scientific detachment that lets us tackle difficult topics while also keeping sight of the context, the people, and the human consequences.
 
 I hope these materials will be engaging and informative for readers, and useful for teaching and learning the ethical practice of data science.

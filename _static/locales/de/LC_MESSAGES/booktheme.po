@@ -8,68 +8,68 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "By"
-msgstr "Durch"
-
-msgid "repository"
-msgstr "Repository"
-
-msgid "Fullscreen mode"
-msgstr "Vollbildmodus"
-
-msgid "Contents"
-msgstr "Inhalt"
-
-msgid "Download source file"
-msgstr "Quelldatei herunterladen"
-
-msgid "Edit this page"
-msgstr "Bearbeite diese Seite"
-
-msgid "Last updated on"
-msgstr "Zuletzt aktualisiert am"
-
-msgid "Print to PDF"
-msgstr "In PDF drucken"
-
-msgid "suggest edit"
-msgstr "vorschlagen zu bearbeiten"
-
-msgid "Download this page"
-msgstr "Laden Sie diese Seite herunter"
-
-msgid "Toggle navigation"
-msgstr "Navigation umschalten"
-
-msgid "By the"
-msgstr "Bis zum"
-
-msgid "Sphinx Book Theme"
-msgstr "Sphinx-Buch-Thema"
-
-msgid "previous page"
-msgstr "vorherige Seite"
-
-msgid "Source repository"
-msgstr "Quell-Repository"
-
-msgid "open issue"
-msgstr "offenes Thema"
-
-msgid "Download notebook file"
-msgstr "Notebook-Datei herunterladen"
-
-msgid "Copyright"
-msgstr "Urheberrechte ©"
-
 msgid "Theme by the"
 msgstr "Thema von der"
 
 msgid "Open an issue"
 msgstr "Öffnen Sie ein Problem"
 
+msgid "Contents"
+msgstr "Inhalt"
+
+msgid "Download notebook file"
+msgstr "Notebook-Datei herunterladen"
+
+msgid "Sphinx Book Theme"
+msgstr "Sphinx-Buch-Thema"
+
+msgid "Fullscreen mode"
+msgstr "Vollbildmodus"
+
+msgid "Edit this page"
+msgstr "Bearbeite diese Seite"
+
+msgid "By"
+msgstr "Durch"
+
+msgid "Copyright"
+msgstr "Urheberrechte ©"
+
+msgid "Source repository"
+msgstr "Quell-Repository"
+
+msgid "previous page"
+msgstr "vorherige Seite"
+
 msgid "next page"
 msgstr "Nächste Seite"
 
+msgid "Toggle navigation"
+msgstr "Navigation umschalten"
+
+msgid "repository"
+msgstr "Repository"
+
+msgid "suggest edit"
+msgstr "vorschlagen zu bearbeiten"
+
+msgid "open issue"
+msgstr "offenes Thema"
+
 msgid "Launch"
 msgstr "Starten"
+
+msgid "Print to PDF"
+msgstr "In PDF drucken"
+
+msgid "By the"
+msgstr "Bis zum"
+
+msgid "Last updated on"
+msgstr "Zuletzt aktualisiert am"
+
+msgid "Download source file"
+msgstr "Quelldatei herunterladen"
+
+msgid "Download this page"
+msgstr "Laden Sie diese Seite herunter"

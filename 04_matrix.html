@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Confusion matrix &#8212; Recidivism Case Study</title>
   
@@ -19,48 +18,45 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '04_matrix';</script>
@@ -75,7 +71,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -110,11 +114,16 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -129,6 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -137,10 +147,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Recidivism Case Study</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -153,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification.html">Predicting Crime</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_calibration.html">Algorithmic Fairness</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_fairness.html">Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_fairness.html">Fairness by Gender</a></li>
 </ul>
 
     </div>
@@ -275,20 +297,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -316,7 +340,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recreating-the-confusion-matrix">Recreating the confusion matrix</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-constant-predictive-value-model">The constant predictive value model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-error-rate-model">Constant error rate model</a></li>
@@ -331,40 +354,49 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="confusion-matrix">
-<h1>Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h1>
-<p>Part of a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">Recidivism Case Study</a></p>
-<p>by <a class="reference external" href="https://allendowney.com">Allen Downey</a></p>
-<p><a class="reference external" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
+<h1>Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h1>
+<p>This is the fourth in a series of notebooks that make up a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">case study on classification and algorithmic fairness</a>.
+This case study is part of the <a class="reference external" href="https://allendowney.github.io/ElementsOfDataScience/"><em>Elements of Data Science</em></a> curriculum.
+<a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/04_matrix.ipynb">Click here to run this notebook on Colab</a>.</p>
 <section id="data">
-<h2>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h2>
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <p>The authors of “Machine Bias” published their data and analysis in <a class="reference external" href="https://github.com/propublica/compas-analysis">this repository</a>.</p>
 <p>The terms of use for the data <a class="reference external" href="https://www.propublica.org/datastore/terms">are here</a>.  In compliance with those terms, I am not redistributing the data.  The following cell downloads the data file we’ll use directly from their repository.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;compas-scores-two-years.csv&#39;</span><span class="p">):</span>
-    <span class="o">!</span>wget<span class="w"> </span>https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "download(\n    \"https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv\"\n)";
+                var nbb_formatted_code = "download(\n    \"https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following cell reads the data file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;compas-scores-two-years.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;compas-scores-two-years.csv&quot;</span><span class="p">)</span>
 <span class="n">cp</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -373,26 +405,27 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7214, 53)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "import pandas as pd\n\ncp = pd.read_csv(\"compas-scores-two-years.csv\")\ncp.shape";
+                var nbb_formatted_code = "import pandas as pd\n\ncp = pd.read_csv(\"compas-scores-two-years.csv\")\ncp.shape";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The dataset includes 7214 rows, one for each defendant, and 53 columns.</p>
 </section>
-<section id="code">
-<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
-<p>The functions from the previous notebooks are in a file called <code class="docutils literal notranslate"><span class="pre">utils.py</span></code>; the following cell downloads it if you don’t already have it:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;utils.py&#39;</span><span class="p">):</span>
-    <span class="o">!</span>wget<span class="w"> </span>https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/utils.py
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="recreating-the-confusion-matrix">
-<h2>Recreating the confusion matrix<a class="headerlink" href="#recreating-the-confusion-matrix" title="Permalink to this heading">#</a></h2>
+<h2>Recreating the confusion matrix<a class="headerlink" href="#recreating-the-confusion-matrix" title="Link to this heading">#</a></h2>
 <p>An ideal test should have equal predictive value in all groups; that is, two people with the same risk score should have the same probability of recidivism, regardless of what group they are in.</p>
 <p>An ideal test should also have the same error rates for all groups; that is, any two recidivists should have same probability of being mis-classified as low risk (FNR), and any two non-recidivists should have the same probability of being mis-classified as high risk (FPR).</p>
 <p>But it is not possible to achieve both of these goals at the same time:</p>
@@ -412,17 +445,34 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">solve</span>
 
-<span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;tn, fp, fn, tp&#39;</span><span class="p">)</span>
-<span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">,</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;ppv, npv, prev&#39;</span><span class="p">)</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;fpr, fnr&#39;</span><span class="p">)</span>
+<span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;tn, fp, fn, tp&quot;</span><span class="p">)</span>
+<span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">,</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;ppv, npv, prev&quot;</span><span class="p">)</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;fpr, fnr&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "from sympy import symbols, Eq, solve\n\ntn, fp, fn, tp = symbols(\"tn, fp, fn, tp\")\nppv, npv, prev = symbols(\"ppv, npv, prev\")\nfpr, fnr = symbols(\"fpr, fnr\")";
+                var nbb_formatted_code = "from sympy import symbols, Eq, solve\n\ntn, fp, fn, tp = symbols(\"tn, fp, fn, tp\")\nppv, npv, prev = symbols(\"ppv, npv, prev\")\nfpr, fnr = symbols(\"fpr, fnr\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>And here are the equations that relate the metrics to the elements of the confusion matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="n">tp</span><span class="o">+</span><span class="n">fn</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span>
 <span class="n">eq1</span>
 </pre></div>
 </div>
@@ -430,11 +480,26 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle prev = fn + tp\]</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "eq1 = Eq(prev, tp + fn)\neq1";
+                var nbb_formatted_code = "eq1 = Eq(prev, tp + fn)\neq1";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">fp</span> <span class="o">/</span> <span class="p">(</span><span class="n">fp</span><span class="o">+</span><span class="n">tn</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">fp</span> <span class="o">/</span> <span class="p">(</span><span class="n">fp</span> <span class="o">+</span> <span class="n">tn</span><span class="p">))</span>
 <span class="n">eq2</span>
 </pre></div>
 </div>
@@ -442,11 +507,26 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle fpr = \frac{fp}{fp + tn}\]</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "eq2 = Eq(fpr, fp / (fp + tn))\neq2";
+                var nbb_formatted_code = "eq2 = Eq(fpr, fp / (fp + tn))\neq2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq3</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">fnr</span><span class="p">,</span> <span class="n">fn</span> <span class="o">/</span> <span class="p">(</span><span class="n">fn</span><span class="o">+</span><span class="n">tp</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq3</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">fnr</span><span class="p">,</span> <span class="n">fn</span> <span class="o">/</span> <span class="p">(</span><span class="n">fn</span> <span class="o">+</span> <span class="n">tp</span><span class="p">))</span>
 <span class="n">eq3</span>
 </pre></div>
 </div>
@@ -454,11 +534,26 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle fnr = \frac{fn}{fn + tp}\]</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "eq3 = Eq(fnr, fn / (fn + tp))\neq3";
+                var nbb_formatted_code = "eq3 = Eq(fnr, fn / (fn + tp))\neq3";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq4</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span><span class="o">+</span><span class="n">fp</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq4</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">))</span>
 <span class="n">eq4</span>
 </pre></div>
 </div>
@@ -466,11 +561,26 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle ppv = \frac{tp}{fp + tp}\]</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "eq4 = Eq(ppv, tp / (tp + fp))\neq4";
+                var nbb_formatted_code = "eq4 = Eq(ppv, tp / (tp + fp))\neq4";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq5</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">npv</span><span class="p">,</span> <span class="n">tn</span> <span class="o">/</span> <span class="p">(</span><span class="n">tn</span><span class="o">+</span><span class="n">fn</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq5</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">npv</span><span class="p">,</span> <span class="n">tn</span> <span class="o">/</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fn</span><span class="p">))</span>
 <span class="n">eq5</span>
 </pre></div>
 </div>
@@ -478,11 +588,26 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle npv = \frac{tn}{fn + tn}\]</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "eq5 = Eq(npv, tn / (tn + fn))\neq5";
+                var nbb_formatted_code = "eq5 = Eq(npv, tn / (tn + fn))\neq5";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq6</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">tn</span><span class="o">+</span><span class="n">fp</span><span class="o">+</span><span class="n">fn</span><span class="o">+</span><span class="n">tp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eq6</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fp</span> <span class="o">+</span> <span class="n">fn</span> <span class="o">+</span> <span class="n">tp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">eq6</span>
 </pre></div>
 </div>
@@ -490,13 +615,27 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle fn + fp + tn + tp = 1\]</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "eq6 = Eq(tn + fp + fn + tp, 1)\neq6";
+                var nbb_formatted_code = "eq6 = Eq(tn + fp + fn + tp, 1)\neq6";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">solve</span></code> to get expressions for the elements of the confusion matrix in terms of <code class="docutils literal notranslate"><span class="pre">ppv</span></code>, <code class="docutils literal notranslate"><span class="pre">npv</span></code>, and <code class="docutils literal notranslate"><span class="pre">prev</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soln1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">,</span> <span class="n">eq3</span><span class="p">,</span> <span class="n">eq4</span><span class="p">,</span> <span class="n">eq5</span><span class="p">,</span> <span class="n">eq6</span><span class="p">],</span> 
-              <span class="p">[</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soln1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">,</span> <span class="n">eq3</span><span class="p">,</span> <span class="n">eq4</span><span class="p">,</span> <span class="n">eq5</span><span class="p">,</span> <span class="n">eq6</span><span class="p">],</span> <span class="p">[</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span><span class="p">])</span>
 <span class="n">soln1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -510,13 +649,27 @@ document.write(`
  -(npv - 1)*(ppv - prev)/(prev*(npv + ppv - 1)))
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "soln1 = solve([eq1, eq2, eq3, eq4, eq5, eq6], [tp, fp, fn, tn, fpr, fnr])\nsoln1[0]";
+                var nbb_formatted_code = "soln1 = solve([eq1, eq2, eq3, eq4, eq5, eq6], [tp, fp, fn, tn, fpr, fnr])\nsoln1[0]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>We can also solve for the elements of the confusion matrix in terms of <code class="docutils literal notranslate"><span class="pre">fpr</span></code>, <code class="docutils literal notranslate"><span class="pre">fnr</span></code>, and <code class="docutils literal notranslate"><span class="pre">prev</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soln2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">,</span> <span class="n">eq3</span><span class="p">,</span> <span class="n">eq4</span><span class="p">,</span> <span class="n">eq5</span><span class="p">,</span> <span class="n">eq6</span><span class="p">],</span> 
-              <span class="p">[</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soln2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">,</span> <span class="n">eq3</span><span class="p">,</span> <span class="n">eq4</span><span class="p">,</span> <span class="n">eq5</span><span class="p">,</span> <span class="n">eq6</span><span class="p">],</span> <span class="p">[</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">])</span>
 
 <span class="n">soln2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
@@ -531,32 +684,71 @@ document.write(`
  (fpr - 1)*(prev - 1)/(fnr*prev + fpr*prev - fpr - prev + 1))
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "soln2 = solve([eq1, eq2, eq3, eq4, eq5, eq6], [tp, fp, fn, tn, ppv, npv])\n\nsoln2[0]";
+                var nbb_formatted_code = "soln2 = solve([eq1, eq2, eq3, eq4, eq5, eq6], [tp, fp, fn, tn, ppv, npv])\n\nsoln2[0]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following function takes <code class="docutils literal notranslate"><span class="pre">ppv</span></code>, <code class="docutils literal notranslate"><span class="pre">npv</span></code>, and <code class="docutils literal notranslate"><span class="pre">prev</span></code> and uses the expressions from <code class="docutils literal notranslate"><span class="pre">soln1</span></code> to compute a confusion matrix with those metrics.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">constant_predictive_value</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">,</span> <span class="n">prev</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">constant_predictive_value</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">,</span> <span class="n">prev</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a confusion matrix with given metrics.</span>
-<span class="sd">    </span>
+
 <span class="sd">    ppv: positive predictive value (0-100)</span>
 <span class="sd">    npv: negative predictive value (0-100)</span>
 <span class="sd">    prev: prevalence (0-100)</span>
-<span class="sd">    </span>
+
 <span class="sd">    returns: confusion matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ppv</span> <span class="o">/=</span> <span class="mi">100</span>
     <span class="n">npv</span> <span class="o">/=</span> <span class="mi">100</span>
     <span class="n">prev</span> <span class="o">/=</span> <span class="mi">100</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">ppv</span><span class="o">*</span><span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">prev</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
-                <span class="o">-</span><span class="p">(</span><span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">prev</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
-                <span class="o">-</span><span class="p">(</span><span class="n">npv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">ppv</span> <span class="o">-</span> <span class="n">prev</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
-                <span class="n">npv</span><span class="o">*</span><span class="p">(</span><span class="n">ppv</span> <span class="o">-</span> <span class="n">prev</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
-    
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="n">ppv</span> <span class="o">*</span> <span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">prev</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="o">-</span><span class="p">(</span><span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">prev</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="o">-</span><span class="p">(</span><span class="n">npv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ppv</span> <span class="o">-</span> <span class="n">prev</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">npv</span> <span class="o">*</span> <span class="p">(</span><span class="n">ppv</span> <span class="o">-</span> <span class="n">prev</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">npv</span> <span class="o">+</span> <span class="n">ppv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "import numpy as np\n\n\ndef constant_predictive_value(ppv, npv, prev):\n    \"\"\"Make a confusion matrix with given metrics.\n\n    ppv: positive predictive value (0-100)\n    npv: negative predictive value (0-100)\n    prev: prevalence (0-100)\n\n    returns: confusion matrix\n    \"\"\"\n    ppv /= 100\n    npv /= 100\n    prev /= 100\n    a = np.array(\n        (\n            ppv * (npv + prev - 1) / (npv + ppv - 1),\n            -(ppv - 1) * (npv + prev - 1) / (npv + ppv - 1),\n            -(npv - 1) * (ppv - prev) / (npv + ppv - 1),\n            npv * (ppv - prev) / (npv + ppv - 1),\n        )\n    )\n\n    return pd.DataFrame(a.reshape((2, 2)))";
+                var nbb_formatted_code = "import numpy as np\n\n\ndef constant_predictive_value(ppv, npv, prev):\n    \"\"\"Make a confusion matrix with given metrics.\n\n    ppv: positive predictive value (0-100)\n    npv: negative predictive value (0-100)\n    prev: prevalence (0-100)\n\n    returns: confusion matrix\n    \"\"\"\n    ppv /= 100\n    npv /= 100\n    prev /= 100\n    a = np.array(\n        (\n            ppv * (npv + prev - 1) / (npv + ppv - 1),\n            -(ppv - 1) * (npv + prev - 1) / (npv + ppv - 1),\n            -(npv - 1) * (ppv - prev) / (npv + ppv - 1),\n            npv * (ppv - prev) / (npv + ppv - 1),\n        )\n    )\n\n    return pd.DataFrame(a.reshape((2, 2)))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>To test it, I’ll use metrics from the confusion matrix for all defendants.</p>
 <div class="cell docutils container">
@@ -565,7 +757,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
 
 <span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
-<span class="n">metrics_all</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">,</span> <span class="s1">&#39;All defendants&#39;</span><span class="p">)</span>
+<span class="n">metrics_all</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">,</span> <span class="s2">&quot;All defendants&quot;</span><span class="p">)</span>
 <span class="n">metrics_all</span>
 </pre></div>
 </div>
@@ -599,27 +791,42 @@ document.write(`
   <tbody>
     <tr>
       <th>FPR</th>
-      <td>32.349230</td>
+      <td>32.3</td>
     </tr>
     <tr>
       <th>FNR</th>
-      <td>37.403876</td>
+      <td>37.4</td>
     </tr>
     <tr>
       <th>PPV</th>
-      <td>61.350618</td>
+      <td>61.4</td>
     </tr>
     <tr>
       <th>NPV</th>
-      <td>68.796510</td>
+      <td>68.8</td>
     </tr>
     <tr>
       <th>Prevalence</th>
-      <td>45.065151</td>
+      <td>45.1</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "from utils import make_matrix\nfrom utils import compute_metrics\n\nmatrix_all = make_matrix(cp)\nmetrics_all = compute_metrics(matrix_all, \"All defendants\")\nmetrics_all";
+                var nbb_formatted_code = "from utils import make_matrix\nfrom utils import compute_metrics\n\nmatrix_all = make_matrix(cp)\nmetrics_all = compute_metrics(matrix_all, \"All defendants\")\nmetrics_all";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>I’ll extract PPV, NPV, and prevalence.</p>
 <div class="cell docutils container">
@@ -632,6 +839,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "from utils import predictive_value\nfrom utils import prevalence\n\nppv, npv = predictive_value(matrix_all)\nprev = prevalence(matrix_all)";
+                var nbb_formatted_code = "from utils import predictive_value\nfrom utils import prevalence\n\nppv, npv = predictive_value(matrix_all)\nprev = prevalence(matrix_all)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Given those values, we can reconstruct the confusion matrix and compute the metrics again.</p>
 <div class="cell docutils container">
@@ -671,27 +895,42 @@ document.write(`
   <tbody>
     <tr>
       <th>FPR</th>
-      <td>32.349230</td>
+      <td>31.2</td>
     </tr>
     <tr>
       <th>FNR</th>
-      <td>37.403876</td>
+      <td>38.6</td>
     </tr>
     <tr>
       <th>PPV</th>
-      <td>61.350618</td>
+      <td>62.6</td>
     </tr>
     <tr>
       <th>NPV</th>
-      <td>68.796510</td>
+      <td>67.7</td>
     </tr>
     <tr>
       <th>Prevalence</th>
-      <td>45.065151</td>
+      <td>46.0</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "matrix = constant_predictive_value(ppv, npv, prev)\nmetrics_pred = compute_metrics(matrix)\nmetrics_pred";
+                var nbb_formatted_code = "matrix = constant_predictive_value(ppv, npv, prev)\nmetrics_pred = compute_metrics(matrix)\nmetrics_pred";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>These “predicted metrics” are the same as the actual metrics, except for small errors due to floating-point approximation.</p>
 <div class="cell docutils container">
@@ -729,37 +968,53 @@ document.write(`
   <tbody>
     <tr>
       <th>FPR</th>
-      <td>0.000000e+00</td>
+      <td>-1.1</td>
     </tr>
     <tr>
       <th>FNR</th>
-      <td>0.000000e+00</td>
+      <td>1.2</td>
     </tr>
     <tr>
       <th>PPV</th>
-      <td>0.000000e+00</td>
+      <td>1.2</td>
     </tr>
     <tr>
       <th>NPV</th>
-      <td>-1.421085e-14</td>
+      <td>-1.1</td>
     </tr>
     <tr>
       <th>Prevalence</th>
-      <td>0.000000e+00</td>
+      <td>0.9</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "metrics_pred - metrics_all";
+                var nbb_formatted_code = "metrics_pred - metrics_all";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>So that confirms that we can use PPV, NPV and prevalence to compute FPR and FNR.</p>
 <p>Now let’s see what happens if we hold PPV and NPV constant, and vary prevalence.</p>
 </section>
 <section id="the-constant-predictive-value-model">
-<h2>The constant predictive value model<a class="headerlink" href="#the-constant-predictive-value-model" title="Permalink to this heading">#</a></h2>
+<h2>The constant predictive value model<a class="headerlink" href="#the-constant-predictive-value-model" title="Link to this heading">#</a></h2>
 <p>To show these effects more clearly, I’ll sweep through a range of prevalences and plot the error rates we get if we hold predictive values constant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">error_rates</span>
+
 
 <span class="k">def</span> <span class="nf">run_cpv_model</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the constant predictive value model.</span>
@@ -774,7 +1029,7 @@ document.write(`
     <span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span> <span class="o">=</span> <span class="n">predictive_value</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">)</span>
     <span class="n">prevalences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
-    <span class="n">pred_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fpr&#39;</span><span class="p">,</span> <span class="s1">&#39;fnr&#39;</span><span class="p">])</span>
+    <span class="n">pred_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fpr&quot;</span><span class="p">,</span> <span class="s2">&quot;fnr&quot;</span><span class="p">])</span>
 
     <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="n">prevalences</span><span class="p">:</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">constant_predictive_value</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">,</span> <span class="n">prev</span><span class="p">)</span>
@@ -784,6 +1039,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "from utils import error_rates\n\n\ndef run_cpv_model(cp):\n    \"\"\"Run the constant predictive value model.\n\n    cp: DataFrame of COMPAS data\n\n    returns: DataFrame with a row for each prevalence and\n             a column for each metric (FPR, FNR)\n    \"\"\"\n    matrix_all = make_matrix(cp)\n\n    ppv, npv = predictive_value(matrix_all)\n    prevalences = np.linspace(35, 55, 11)\n\n    pred_er = pd.DataFrame(columns=[\"fpr\", \"fnr\"])\n\n    for prev in prevalences:\n        m = constant_predictive_value(ppv, npv, prev)\n        pred_er.loc[prev] = error_rates(m)\n\n    return pred_er";
+                var nbb_formatted_code = "from utils import error_rates\n\n\ndef run_cpv_model(cp):\n    \"\"\"Run the constant predictive value model.\n\n    cp: DataFrame of COMPAS data\n\n    returns: DataFrame with a row for each prevalence and\n             a column for each metric (FPR, FNR)\n    \"\"\"\n    matrix_all = make_matrix(cp)\n\n    ppv, npv = predictive_value(matrix_all)\n    prevalences = np.linspace(35, 55, 11)\n\n    pred_er = pd.DataFrame(columns=[\"fpr\", \"fnr\"])\n\n    for prev in prevalences:\n        m = constant_predictive_value(ppv, npv, prev)\n        pred_er.loc[prev] = error_rates(m)\n\n    return pred_er";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -818,119 +1090,204 @@ document.write(`
   <tbody>
     <tr>
       <th>35.0</th>
-      <td>7.488034</td>
-      <td>77.925569</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>37.0</th>
-      <td>11.795671</td>
-      <td>68.118564</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>39.0</th>
-      <td>16.385776</td>
-      <td>59.317406</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>41.0</th>
-      <td>21.287075</td>
-      <td>51.374897</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>43.0</th>
-      <td>26.532324</td>
-      <td>44.171227</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>45.0</th>
-      <td>32.159046</td>
-      <td>37.607882</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>47.0</th>
-      <td>38.210427</td>
-      <td>31.603121</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>49.0</th>
-      <td>44.736425</td>
-      <td>26.088543</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>51.0</th>
-      <td>51.795158</td>
-      <td>21.006482</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>53.0</th>
-      <td>59.454634</td>
-      <td>16.307973</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>55.0</th>
-      <td>67.794953</td>
-      <td>11.951173</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "pred_er = run_cpv_model(cp)\npred_er";
+                var nbb_formatted_code = "pred_er = run_cpv_model(cp)\npred_er";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following figure shows the error rates we would expect from a test with equal predictive value for all groups, regardless of prevalence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+
 
 <span class="k">def</span> <span class="nf">plot_cpv_model</span><span class="p">(</span><span class="n">pred_er</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot error rates with constant predictive values.</span>
-<span class="sd">    </span>
+
 <span class="sd">    pred_er: DataFrame of predicted error rates</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pred_er</span><span class="p">[</span><span class="s1">&#39;fpr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted FPR&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">)</span>
-    <span class="n">pred_er</span><span class="p">[</span><span class="s1">&#39;fnr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted FNR&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
-    <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Percent&#39;</span><span class="p">,</span>
-             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Error rates, constant predictive value&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cpv_model</span><span class="p">(</span><span class="n">pred_er</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="n">pred_er</span><span class="p">[</span><span class="s2">&quot;fpr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted FPR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+    <span class="n">pred_er</span><span class="p">[</span><span class="s2">&quot;fnr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted FNR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Percent&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error rates, constant predictive value&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a226643962aaba3d197fd0cb5e544b3d99ce93495fa40675e98674e59fad0b0c.png" src="_images/a226643962aaba3d197fd0cb5e544b3d99ce93495fa40675e98674e59fad0b0c.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "import matplotlib.pyplot as plt\nfrom utils import decorate\n\n\ndef plot_cpv_model(pred_er):\n    \"\"\"Plot error rates with constant predictive values.\n\n    pred_er: DataFrame of predicted error rates\n    \"\"\"\n    pred_er[\"fpr\"].plot(label=\"Predicted FPR\", color=\"C2\")\n    pred_er[\"fnr\"].plot(label=\"Predicted FNR\", color=\"C4\")\n    decorate(\n        xlabel=\"Prevalence\",\n        ylabel=\"Percent\",\n        title=\"Error rates, constant predictive value\",\n    )";
+                var nbb_formatted_code = "import matplotlib.pyplot as plt\nfrom utils import decorate\n\n\ndef plot_cpv_model(pred_er):\n    \"\"\"Plot error rates with constant predictive values.\n\n    pred_er: DataFrame of predicted error rates\n    \"\"\"\n    pred_er[\"fpr\"].plot(label=\"Predicted FPR\", color=\"C2\")\n    pred_er[\"fnr\"].plot(label=\"Predicted FNR\", color=\"C4\")\n    decorate(\n        xlabel=\"Prevalence\",\n        ylabel=\"Percent\",\n        title=\"Error rates, constant predictive value\",\n    )";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cpv_model</span><span class="p">(</span><span class="n">pred_er</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/376c62f2c5f86321bcc588eb8c92aadc9177367d703262f5a28ab2b8e416b5f2.png" src="_images/376c62f2c5f86321bcc588eb8c92aadc9177367d703262f5a28ab2b8e416b5f2.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "plot_cpv_model(pred_er)";
+                var nbb_formatted_code = "plot_cpv_model(pred_er)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>As prevalence increases, FPR increases and FNR decreases.  Note the vertical scale: the difference in error rates between a low-prevalence group and a high-prevalence group is dramatic!</p>
 <p>For the COMPAS test, the effect is not as extreme.  The following loop computes the actual error rates for white, black, and all defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">black</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="s2">&quot;race&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;African-American&quot;</span>
 <span class="n">matrix_black</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">black</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "black = cp[\"race\"] == \"African-American\"\nmatrix_black = make_matrix(cp[black])";
+                var nbb_formatted_code = "black = cp[\"race\"] == \"African-American\"\nmatrix_black = make_matrix(cp[black])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">white</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="s2">&quot;race&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Caucasian&quot;</span>
 <span class="n">matrix_white</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">white</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "white = cp[\"race\"] == \"Caucasian\"\nmatrix_white = make_matrix(cp[white])";
+                var nbb_formatted_code = "white = cp[\"race\"] == \"Caucasian\"\nmatrix_white = make_matrix(cp[white])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>When prevalence is lower, the false positive rate is higher and the false negative rate lower.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fpr&#39;</span><span class="p">,</span> <span class="s1">&#39;fnr&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fpr&quot;</span><span class="p">,</span> <span class="s2">&quot;fnr&quot;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="n">matrix_white</span><span class="p">,</span> <span class="n">matrix_all</span><span class="p">,</span> <span class="n">matrix_black</span><span class="p">):</span>
     <span class="n">prev</span> <span class="o">=</span> <span class="n">prevalence</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="n">actual_er</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_rates</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    
+
 <span class="n">actual_er</span>
 </pre></div>
 </div>
@@ -976,7 +1333,22 @@ document.write(`
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "actual_er = pd.DataFrame(columns=[\"fpr\", \"fnr\"])\n\nfor m in (matrix_white, matrix_all, matrix_black):\n    prev = prevalence(m)\n    actual_er.loc[prev] = error_rates(m)\n\nactual_er";
+                var nbb_formatted_code = "actual_er = pd.DataFrame(columns=[\"fpr\", \"fnr\"])\n\nfor m in (matrix_white, matrix_all, matrix_black):\n    prev = prevalence(m)\n    actual_er.loc[prev] = error_rates(m)\n\nactual_er";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following figure shows the actual error rates compared to predictions from the constant predictive value (CPV) model.</p>
 <p>The data points show error rates for white defendants (left), all defendants (middle), and black defendants (right).</p>
@@ -984,19 +1356,32 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cpv_model</span><span class="p">(</span><span class="n">pred_er</span><span class="p">)</span>
 
-<span class="n">actual_er</span><span class="p">[</span><span class="s1">&#39;fpr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS FPR&#39;</span><span class="p">)</span>
+<span class="n">actual_er</span><span class="p">[</span><span class="s2">&quot;fpr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS FPR&quot;</span><span class="p">)</span>
 
-<span class="n">actual_er</span><span class="p">[</span><span class="s1">&#39;fnr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS FNR&#39;</span><span class="p">)</span>
+<span class="n">actual_er</span><span class="p">[</span><span class="s2">&quot;fnr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS FNR&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">decorate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/388f64d6b2ba4cb1fdb996137cf404493f397032431fccde22ea3aa9bcb07beb.png" src="_images/388f64d6b2ba4cb1fdb996137cf404493f397032431fccde22ea3aa9bcb07beb.png" />
-</div>
+<img alt="_images/b3ce259d2142f3e04b293fe6ccb66e2e8399b1bb401e49c50c1df9b4286a572f.png" src="_images/b3ce259d2142f3e04b293fe6ccb66e2e8399b1bb401e49c50c1df9b4286a572f.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "plot_cpv_model(pred_er)\n\nactual_er[\"fpr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C2\", label=\"COMPAS FPR\")\n\nactual_er[\"fnr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C4\", label=\"COMPAS FNR\")\n\ndecorate()";
+                var nbb_formatted_code = "plot_cpv_model(pred_er)\n\nactual_er[\"fpr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C2\", label=\"COMPAS FPR\")\n\nactual_er[\"fnr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C4\", label=\"COMPAS FNR\")\n\ndecorate()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>For the higher-prevalence group:</p>
 <ul class="simple">
@@ -1011,30 +1396,46 @@ document.write(`
 <p>Relative to the CPV model, the COMPAS test is what I’ll call “tempered”, that is, less sensitive to variation in prevalence between groups.</p>
 </section>
 <section id="constant-error-rate-model">
-<h2>Constant error rate model<a class="headerlink" href="#constant-error-rate-model" title="Permalink to this heading">#</a></h2>
+<h2>Constant error rate model<a class="headerlink" href="#constant-error-rate-model" title="Link to this heading">#</a></h2>
 <p>In the previous section we held predictive value constant and computed the effect on error rates.  In this section we’ll go the other way: if we hold error rates constant for all groups, what effect does that have on predictive value?</p>
 <p>The following function takes prevalence and error rates and returns a confusion matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">constant_error_rates</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span><span class="p">,</span> <span class="n">prev</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a confusion matrix with given metrics.</span>
-<span class="sd">    </span>
+
 <span class="sd">    fpr: false positive rate (0 - 100)</span>
 <span class="sd">    fnr: false negative rate (0 - 100)</span>
 <span class="sd">    prev: prevalence (0 - 100)</span>
-<span class="sd">    </span>
+
 <span class="sd">    returns: confusion matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">prev</span> <span class="o">/=</span> <span class="mi">100</span>
     <span class="n">fpr</span> <span class="o">/=</span> <span class="mi">100</span>
     <span class="n">fnr</span> <span class="o">/=</span> <span class="mi">100</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="n">prev</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">fnr</span><span class="p">),</span>  <span class="n">fpr</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">prev</span><span class="p">)],</span>
-         <span class="p">[</span><span class="n">fnr</span><span class="o">*</span><span class="n">prev</span><span class="p">,</span>       <span class="p">(</span><span class="n">fpr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">prev</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]]</span>
-    
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="n">prev</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">fnr</span><span class="p">),</span> <span class="n">fpr</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">prev</span><span class="p">)],</span> <span class="p">[</span><span class="n">fnr</span> <span class="o">*</span> <span class="n">prev</span><span class="p">,</span> <span class="p">(</span><span class="n">fpr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prev</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]]</span>
+
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "def constant_error_rates(fpr, fnr, prev):\n    \"\"\"Make a confusion matrix with given metrics.\n\n    fpr: false positive rate (0 - 100)\n    fnr: false negative rate (0 - 100)\n    prev: prevalence (0 - 100)\n\n    returns: confusion matrix\n    \"\"\"\n    prev /= 100\n    fpr /= 100\n    fnr /= 100\n    a = [[prev * (1 - fnr), fpr * (1 - prev)], [fnr * prev, (fpr - 1) * (prev - 1)]]\n\n    return pd.DataFrame(a)";
+                var nbb_formatted_code = "def constant_error_rates(fpr, fnr, prev):\n    \"\"\"Make a confusion matrix with given metrics.\n\n    fpr: false positive rate (0 - 100)\n    fnr: false negative rate (0 - 100)\n    prev: prevalence (0 - 100)\n\n    returns: confusion matrix\n    \"\"\"\n    prev /= 100\n    fpr /= 100\n    fnr /= 100\n    a = [[prev * (1 - fnr), fpr * (1 - prev)], [fnr * prev, (fpr - 1) * (prev - 1)]]\n\n    return pd.DataFrame(a)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>To test it, we can extract metrics for all defendants:</p>
 <div class="cell docutils container">
@@ -1044,6 +1445,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "fpr, fnr = error_rates(matrix_all)\nprev = prevalence(matrix_all)";
+                var nbb_formatted_code = "fpr, fnr = error_rates(matrix_all)\nprev = prevalence(matrix_all)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>And use them to compute the other metrics:</p>
 <div class="cell docutils container">
@@ -1083,27 +1501,42 @@ document.write(`
   <tbody>
     <tr>
       <th>FPR</th>
-      <td>32.349230</td>
+      <td>31.2</td>
     </tr>
     <tr>
       <th>FNR</th>
-      <td>37.403876</td>
+      <td>38.6</td>
     </tr>
     <tr>
       <th>PPV</th>
-      <td>61.350618</td>
+      <td>62.6</td>
     </tr>
     <tr>
       <th>NPV</th>
-      <td>68.796510</td>
+      <td>67.7</td>
     </tr>
     <tr>
       <th>Prevalence</th>
-      <td>45.065151</td>
+      <td>46.0</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "matrix = constant_error_rates(fpr, fnr, prev)\nmetrics_pred = compute_metrics(matrix)\nmetrics_pred";
+                var nbb_formatted_code = "matrix = constant_error_rates(fpr, fnr, prev)\nmetrics_pred = compute_metrics(matrix)\nmetrics_pred";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>These “predicted metrics” are the same as the actual metrics, except for small errors due to floating-point approximation.</p>
 <div class="cell docutils container">
@@ -1141,27 +1574,42 @@ document.write(`
   <tbody>
     <tr>
       <th>FPR</th>
-      <td>0.000000e+00</td>
+      <td>-1.1</td>
     </tr>
     <tr>
       <th>FNR</th>
-      <td>0.000000e+00</td>
+      <td>1.2</td>
     </tr>
     <tr>
       <th>PPV</th>
-      <td>-7.105427e-15</td>
+      <td>1.2</td>
     </tr>
     <tr>
       <th>NPV</th>
-      <td>1.421085e-14</td>
+      <td>-1.1</td>
     </tr>
     <tr>
       <th>Prevalence</th>
-      <td>0.000000e+00</td>
+      <td>0.9</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "metrics_pred - metrics_all";
+                var nbb_formatted_code = "metrics_pred - metrics_all";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Now we can see how predictive value depends on prevalence (with error rates held constant).</p>
 <div class="cell docutils container">
@@ -1179,7 +1627,7 @@ document.write(`
     <span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span> <span class="o">=</span> <span class="n">error_rates</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">)</span>
     <span class="n">prevalences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
-    <span class="n">pred_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">,</span> <span class="s1">&#39;npv&#39;</span><span class="p">])</span>
+    <span class="n">pred_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">,</span> <span class="s2">&quot;npv&quot;</span><span class="p">])</span>
 
     <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="n">prevalences</span><span class="p">:</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">constant_error_rates</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span><span class="p">,</span> <span class="n">prev</span><span class="p">)</span>
@@ -1189,6 +1637,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "def run_cer_model(cp):\n    \"\"\"Run the constant error rate model.\n\n    cp: DataFrame of COMPAS data\n\n    returns: DataFrame with a row for each prevalence and\n             a column for each metric (PPV, NPV)\n    \"\"\"\n    matrix_all = make_matrix(cp)\n\n    fpr, fnr = error_rates(matrix_all)\n    prevalences = np.linspace(35, 65, 11)\n\n    pred_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\n    for prev in prevalences:\n        m = constant_error_rates(fpr, fnr, prev)\n        pred_pv.loc[prev] = predictive_value(m)\n\n    return pred_pv";
+                var nbb_formatted_code = "def run_cer_model(cp):\n    \"\"\"Run the constant error rate model.\n\n    cp: DataFrame of COMPAS data\n\n    returns: DataFrame with a row for each prevalence and\n             a column for each metric (PPV, NPV)\n    \"\"\"\n    matrix_all = make_matrix(cp)\n\n    fpr, fnr = error_rates(matrix_all)\n    prevalences = np.linspace(35, 65, 11)\n\n    pred_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\n    for prev in prevalences:\n        m = constant_error_rates(fpr, fnr, prev)\n        pred_pv.loc[prev] = predictive_value(m)\n\n    return pred_pv";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1223,100 +1688,149 @@ document.write(`
   <tbody>
     <tr>
       <th>35.0</th>
-      <td>51.026704</td>
-      <td>77.058610</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>38.0</th>
-      <td>54.253815</td>
-      <td>74.689735</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>41.0</th>
-      <td>57.350053</td>
-      <td>72.243048</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>44.0</th>
-      <td>60.323222</td>
-      <td>69.714652</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>47.0</th>
-      <td>63.180516</td>
-      <td>67.100383</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>50.0</th>
-      <td>65.928580</td>
-      <td>64.395791</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>53.0</th>
-      <td>68.573560</td>
-      <td>61.596113</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>56.0</th>
-      <td>71.121148</td>
-      <td>58.696245</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>59.0</th>
-      <td>73.576628</td>
-      <td>55.690711</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>62.0</th>
-      <td>75.944906</td>
-      <td>52.573628</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>65.0</th>
-      <td>78.230545</td>
-      <td>49.338668</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "pred_pv = run_cer_model(cp)\npred_pv";
+                var nbb_formatted_code = "pred_pv = run_cer_model(cp)\npred_pv";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following function plots results from the constant error rate (CER) model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_cer_model</span><span class="p">(</span><span class="n">pred_pv</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot error rates with constant predictive values.</span>
-<span class="sd">    </span>
+
 <span class="sd">    pred_er: DataFrame of predicted error rates</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pred_pv</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted PPV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
-    <span class="n">pred_pv</span><span class="p">[</span><span class="s1">&#39;npv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted NPV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
-    <span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Percent&#39;</span><span class="p">,</span>
-             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Predictive value, constant error rates&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cer_model</span><span class="p">(</span><span class="n">pred_pv</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="n">pred_pv</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted PPV&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">)</span>
+    <span class="n">pred_pv</span><span class="p">[</span><span class="s2">&quot;npv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted NPV&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+    <span class="n">decorate</span><span class="p">(</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Percent&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Predictive value, constant error rates&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c3509703c46411abc4df27ca1d5189d4bb38f2f2589b6ef962b847b94f24c931.png" src="_images/c3509703c46411abc4df27ca1d5189d4bb38f2f2589b6ef962b847b94f24c931.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "def plot_cer_model(pred_pv):\n    \"\"\"Plot error rates with constant predictive values.\n\n    pred_er: DataFrame of predicted error rates\n    \"\"\"\n    pred_pv[\"ppv\"].plot(label=\"Predicted PPV\", color=\"C0\")\n    pred_pv[\"npv\"].plot(label=\"Predicted NPV\", color=\"C1\")\n    decorate(\n        xlabel=\"Prevalence\",\n        ylabel=\"Percent\",\n        title=\"Predictive value, constant error rates\",\n    )";
+                var nbb_formatted_code = "def plot_cer_model(pred_pv):\n    \"\"\"Plot error rates with constant predictive values.\n\n    pred_er: DataFrame of predicted error rates\n    \"\"\"\n    pred_pv[\"ppv\"].plot(label=\"Predicted PPV\", color=\"C0\")\n    pred_pv[\"npv\"].plot(label=\"Predicted NPV\", color=\"C1\")\n    decorate(\n        xlabel=\"Prevalence\",\n        ylabel=\"Percent\",\n        title=\"Predictive value, constant error rates\",\n    )";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cer_model</span><span class="p">(</span><span class="n">pred_pv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5ffa1f922a4bbbe3ed2d35d23c3a2f587dd786fff51a59ccbc74ecb5c24dce7c.png" src="_images/5ffa1f922a4bbbe3ed2d35d23c3a2f587dd786fff51a59ccbc74ecb5c24dce7c.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "plot_cer_model(pred_pv)";
+                var nbb_formatted_code = "plot_cer_model(pred_pv)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>If we hold error rates constant and increase prevalence, PPV increases and NPV decreases.</p>
 <p>For the COMPAS test, the effect is not as extreme.  The following loop computes the actual predictive values for the three groups.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">,</span> <span class="s1">&#39;npv&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">,</span> <span class="s2">&quot;npv&quot;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="n">matrix_white</span><span class="p">,</span> <span class="n">matrix_all</span><span class="p">,</span> <span class="n">matrix_black</span><span class="p">):</span>
     <span class="n">prev</span> <span class="o">=</span> <span class="n">prevalence</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="n">actual_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictive_value</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    
+
 <span class="n">actual_pv</span>
 </pre></div>
 </div>
@@ -1362,7 +1876,22 @@ document.write(`
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "actual_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\nfor m in (matrix_white, matrix_all, matrix_black):\n    prev = prevalence(m)\n    actual_pv.loc[prev] = predictive_value(m)\n\nactual_pv";
+                var nbb_formatted_code = "actual_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\nfor m in (matrix_white, matrix_all, matrix_black):\n    prev = prevalence(m)\n    actual_pv.loc[prev] = predictive_value(m)\n\nactual_pv";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following figure shows the actual predictive values compared to predictions from the constant error rate (CER) model.</p>
 <p>The data points show error rates for white defendants (left), all defendants (middle), and black defendants (right).</p>
@@ -1371,24 +1900,37 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cer_model</span><span class="p">(</span><span class="n">pred_pv</span><span class="p">)</span>
 
-<span class="n">actual_pv</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS PPV&#39;</span><span class="p">)</span>
+<span class="n">actual_pv</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS PPV&quot;</span><span class="p">)</span>
 
-<span class="n">actual_pv</span><span class="p">[</span><span class="s1">&#39;npv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS NPV&#39;</span><span class="p">)</span>
+<span class="n">actual_pv</span><span class="p">[</span><span class="s2">&quot;npv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS NPV&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">decorate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1498949adbf31fe3917a67ba44dbfc3db8ea809a3aaa66c927575fa810ee4684.png" src="_images/1498949adbf31fe3917a67ba44dbfc3db8ea809a3aaa66c927575fa810ee4684.png" />
-</div>
+<img alt="_images/f2683fcfc081f6ccfeaef66ba9562e839e77f92dce263332052edb9452f60e70.png" src="_images/f2683fcfc081f6ccfeaef66ba9562e839e77f92dce263332052edb9452f60e70.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 35;
+                var nbb_unformatted_code = "plot_cer_model(pred_pv)\n\nactual_pv[\"ppv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C0\", label=\"COMPAS PPV\")\n\nactual_pv[\"npv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C1\", label=\"COMPAS NPV\")\n\ndecorate()";
+                var nbb_formatted_code = "plot_cer_model(pred_pv)\n\nactual_pv[\"ppv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C0\", label=\"COMPAS PPV\")\n\nactual_pv[\"npv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C1\", label=\"COMPAS NPV\")\n\ndecorate()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Again, the test is less sensitive to differences in prevalence between groups than we would expect from the constant error rate model.</p>
 </section>
 <section id="constant-predictive-value-model">
-<h2>Constant predictive value model<a class="headerlink" href="#constant-predictive-value-model" title="Permalink to this heading">#</a></h2>
+<h2>Constant predictive value model<a class="headerlink" href="#constant-predictive-value-model" title="Link to this heading">#</a></h2>
 <p>If two groups have difference prevalence, a binary classifier can have the same predictive values (PPV and NPV) for both groups, or the same error rates (FPR and FNR), but not both at the same time.</p>
 <ul class="simple">
 <li><p>If we are given predictive values, we can compute error rates for any prevalence.  I call this is the constant predictive value (CPV) model.</p></li>
@@ -1408,31 +1950,82 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 36;
+                var nbb_unformatted_code = "matrix_all = make_matrix(cp)";
+                var nbb_formatted_code = "matrix_all = make_matrix(cp)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Male&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span>
 <span class="n">matrix_male</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">male</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "male = cp[\"sex\"] == \"Male\"\nmatrix_male = make_matrix(cp[male])";
+                var nbb_formatted_code = "male = cp[\"sex\"] == \"Male\"\nmatrix_male = make_matrix(cp[male])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Female&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Female&quot;</span>
 <span class="n">matrix_female</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">female</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 38;
+                var nbb_unformatted_code = "female = cp[\"sex\"] == \"Female\"\nmatrix_female = make_matrix(cp[female])";
+                var nbb_formatted_code = "female = cp[\"sex\"] == \"Female\"\nmatrix_female = make_matrix(cp[female])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;fpr&#39;</span><span class="p">,</span> <span class="s1">&#39;fnr&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fpr&quot;</span><span class="p">,</span> <span class="s2">&quot;fnr&quot;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="n">matrix_female</span><span class="p">,</span> <span class="n">matrix_all</span><span class="p">,</span> <span class="n">matrix_male</span><span class="p">):</span>
     <span class="n">prev</span> <span class="o">=</span> <span class="n">prevalence</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="n">actual_er</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_rates</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    
+
 <span class="n">actual_er</span>
 </pre></div>
 </div>
@@ -1478,48 +2071,105 @@ document.write(`
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 39;
+                var nbb_unformatted_code = "actual_er = pd.DataFrame(columns=[\"fpr\", \"fnr\"])\n\nfor m in (matrix_female, matrix_all, matrix_male):\n    prev = prevalence(m)\n    actual_er.loc[prev] = error_rates(m)\n\nactual_er";
+                var nbb_formatted_code = "actual_er = pd.DataFrame(columns=[\"fpr\", \"fnr\"])\n\nfor m in (matrix_female, matrix_all, matrix_male):\n    prev = prevalence(m)\n    actual_er.loc[prev] = error_rates(m)\n\nactual_er";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following figure compares predictions from the CPV model to actual error rates for female defendants (on the left), all defendants (in the middle), and male defendants (on the right).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cpv_model</span><span class="p">(</span><span class="n">pred_er</span><span class="p">)</span>
 
-<span class="n">actual_er</span><span class="p">[</span><span class="s1">&#39;fpr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS FPR&#39;</span><span class="p">)</span>
+<span class="n">actual_er</span><span class="p">[</span><span class="s2">&quot;fpr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS FPR&quot;</span><span class="p">)</span>
 
-<span class="n">actual_er</span><span class="p">[</span><span class="s1">&#39;fnr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS FNR&#39;</span><span class="p">)</span>
+<span class="n">actual_er</span><span class="p">[</span><span class="s2">&quot;fnr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS FNR&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">decorate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/47a41a6b3375b511ed18f04a72db80e3474d0de22da1916ea4fe8e81b8c8e09b.png" src="_images/47a41a6b3375b511ed18f04a72db80e3474d0de22da1916ea4fe8e81b8c8e09b.png" />
-</div>
+<img alt="_images/a2efa06ffeea12ed96e423c2aae63f379177cc61bf3729f9018bfa67f543c3db.png" src="_images/a2efa06ffeea12ed96e423c2aae63f379177cc61bf3729f9018bfa67f543c3db.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 40;
+                var nbb_unformatted_code = "plot_cpv_model(pred_er)\n\nactual_er[\"fpr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C2\", label=\"COMPAS FPR\")\n\nactual_er[\"fnr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C4\", label=\"COMPAS FNR\")\n\ndecorate()";
+                var nbb_formatted_code = "plot_cpv_model(pred_er)\n\nactual_er[\"fpr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C2\", label=\"COMPAS FPR\")\n\nactual_er[\"fnr\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C4\", label=\"COMPAS FNR\")\n\ndecorate()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Although male and female defendants have very difference prevalences (rates of recidivism), their error rates are almost the same.</p>
 <p>This is the “natural” behavior we should expect from a test that does not depend on sex.</p>
-<p>If we look again at the definition of FPR and FNR, using this diagram from <a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">Wikipedia</a></p>
-<img width=800, src='https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/confusion_matrix2.png'>
-<p>We see that FNR depends only on people in the positive condition (people who will recidivate) and FPR depends only on people in the negative condition (people who will “survive” without being charged with another crime).</p>
+<p>Let’s look again at the definition of FP rate and FN rate in this table.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><strong>Pred positive (PP)</strong></p></th>
+<th class="head"><p><strong>Pred negative (PN)</strong></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Actual positive (P)</strong></p></td>
+<td><p>True positive (TP)</p></td>
+<td><p>False negative (FN)</p></td>
+<td><p>Sensitivity = TP / P</p></td>
+<td><p>FN rate = FN / P</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Actual negative (N)</strong></p></td>
+<td><p>False positive (FP)</p></td>
+<td><p>True negative (TN)</p></td>
+<td><p>FP rate = FP / N</p></td>
+<td><p>Specificity = TN / N</p></td>
+</tr>
+<tr class="row-even"><td><p>Prevalence = P / (P + N)</p></td>
+<td><p>PPV = TP / PP</p></td>
+<td><p>NPV = TN / PN</p></td>
+<td><p></p></td>
+<td><p>Acc = (TP + TN) / (P + N)</p></td>
+</tr>
+</tbody>
+</table>
+<p>We see that FN rate depends only on people in the positive condition (people who will recidivate) and FP rate depends only on people in the negative condition (people who will “survive” without being charged with another crime).</p>
 <p>Neither error rate depends on how many people are in each condition, so if the test is sex blind, it should have the same error rates for both sexes, regardless of prevalence.</p>
 </section>
 <section id="id1">
-<h2>Constant error rate model<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>Constant error rate model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>The previous section shows the COMPAS has the same error rates for male and female defendants, even though they have substantially difference prevalences.</p>
 <p>So we expected the test to have different predictive values for these groups.  To confirm that I’ll compute the actual predictive values and compare them to the CER model.</p>
 <p>The I’ll use the CER model to compute PPV and NPV for a range of prevalences.</p>
 <p>Here are the actual values for male and female defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">,</span> <span class="s1">&#39;npv&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">actual_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">,</span> <span class="s2">&quot;npv&quot;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="n">matrix_female</span><span class="p">,</span> <span class="n">matrix_all</span><span class="p">,</span> <span class="n">matrix_male</span><span class="p">):</span>
     <span class="n">prev</span> <span class="o">=</span> <span class="n">prevalence</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="n">actual_pv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictive_value</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    
+
 <span class="n">actual_pv</span>
 </pre></div>
 </div>
@@ -1565,27 +2215,58 @@ document.write(`
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 41;
+                var nbb_unformatted_code = "actual_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\nfor m in (matrix_female, matrix_all, matrix_male):\n    prev = prevalence(m)\n    actual_pv.loc[prev] = predictive_value(m)\n\nactual_pv";
+                var nbb_formatted_code = "actual_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\nfor m in (matrix_female, matrix_all, matrix_male):\n    prev = prevalence(m)\n    actual_pv.loc[prev] = predictive_value(m)\n\nactual_pv";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following figure compares the actual values to the CER model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cer_model</span><span class="p">(</span><span class="n">pred_pv</span><span class="p">)</span>
 
-<span class="n">actual_pv</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS PPV&#39;</span><span class="p">)</span>
+<span class="n">actual_pv</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS PPV&quot;</span><span class="p">)</span>
 
-<span class="n">actual_pv</span><span class="p">[</span><span class="s1">&#39;npv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span>
-                      <span class="n">label</span><span class="o">=</span><span class="s1">&#39;COMPAS NPV&#39;</span><span class="p">)</span>
+<span class="n">actual_pv</span><span class="p">[</span><span class="s2">&quot;npv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;COMPAS NPV&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">decorate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e2b50a3285cfa7ac0d166188b45c492b95d5b6c0b6213a8fd1b6455b97b6fde8.png" src="_images/e2b50a3285cfa7ac0d166188b45c492b95d5b6c0b6213a8fd1b6455b97b6fde8.png" />
+<img alt="_images/8161c42fe4fe9d78613c8b97bce415fd94df08aa0e09ed49d64e4005561ec2d9.png" src="_images/8161c42fe4fe9d78613c8b97bce415fd94df08aa0e09ed49d64e4005561ec2d9.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 42;
+                var nbb_unformatted_code = "plot_cer_model(pred_pv)\n\nactual_pv[\"ppv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C0\", label=\"COMPAS PPV\")\n\nactual_pv[\"npv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C1\", label=\"COMPAS NPV\")\n\ndecorate()";
+                var nbb_formatted_code = "plot_cer_model(pred_pv)\n\nactual_pv[\"ppv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C0\", label=\"COMPAS PPV\")\n\nactual_pv[\"npv\"].plot(marker=\"o\", linestyle=\"dotted\", color=\"C1\", label=\"COMPAS NPV\")\n\ndecorate()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
+<p>Recidivism Case Study</p>
+<p>Copyright 2020 Allen B. Downey</p>
+<p>License: <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a></p>
 </section>
 </section>
 
@@ -1614,8 +2295,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  
 <div class="prev-next-area">
 </div>
                 </footer>
@@ -1626,6 +2309,7 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -1633,7 +2317,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recreating-the-confusion-matrix">Recreating the confusion matrix</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-constant-predictive-value-model">The constant predictive value model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-error-rate-model">Constant error rate model</a></li>
@@ -1647,7 +2330,7 @@ document.write(`
             
           </div>
           <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
+            
 <div class="bd-footer-content__inner container">
   
   <div class="footer-item">
@@ -1660,9 +2343,10 @@ By Allen B. Downey
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1677,7 +2361,7 @@ By Allen B. Downey
     
   </div>
   
-</div></div>
+</div>
           </footer>
         
 
@@ -1686,8 +2370,8 @@ By Allen B. Downey
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

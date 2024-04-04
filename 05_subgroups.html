@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Subgroups &#8212; Recidivism Case Study</title>
   
@@ -19,48 +18,45 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '05_subgroups';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -73,7 +69,15 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -108,11 +112,16 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -127,6 +136,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -135,10 +145,22 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Recidivism Case Study</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -151,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification.html">Predicting Crime</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_calibration.html">Algorithmic Fairness</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_fairness.html">Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_fairness.html">Fairness by Gender</a></li>
 </ul>
 
     </div>
@@ -273,20 +295,22 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -314,7 +338,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reference-class-problem">The reference class problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groups">Groups</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intersections">Intersections</a></li>
@@ -328,40 +351,49 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="subgroups">
-<h1>Subgroups<a class="headerlink" href="#subgroups" title="Permalink to this heading">#</a></h1>
-<p>Part of a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">Recidivism Case Study</a></p>
-<p>by <a class="reference external" href="https://allendowney.com">Allen Downey</a></p>
-<p><a class="reference external" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
+<h1>Subgroups<a class="headerlink" href="#subgroups" title="Link to this heading">#</a></h1>
+<p>This is the fifth in a series of notebooks that make up a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">case study on classification and algorithmic fairness</a>.
+This case study is part of the <a class="reference external" href="https://allendowney.github.io/ElementsOfDataScience/"><em>Elements of Data Science</em></a> curriculum.
+<a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/05_subgroups.ipynb">Click here to run this notebook on Colab</a>.</p>
 <section id="data">
-<h2>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h2>
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <p>The authors of “Machine Bias” published their data and analysis in <a class="reference external" href="https://github.com/propublica/compas-analysis">this repository</a>.</p>
 <p>The terms of use for the data <a class="reference external" href="https://www.propublica.org/datastore/terms">are here</a>.  In compliance with those terms, I am not redistributing the data.  The following cell downloads the data file we’ll use directly from their repository.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;compas-scores-two-years.csv&#39;</span><span class="p">):</span>
-    <span class="o">!</span>wget<span class="w"> </span>https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "download(\n    \"https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv\"\n)";
+                var nbb_formatted_code = "download(\n    \"https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv\"\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>The following cell read the data file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;compas-scores-two-years.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">cp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;compas-scores-two-years.csv&quot;</span><span class="p">)</span>
 <span class="n">cp</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -370,25 +402,26 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7214, 53)
 </pre></div>
 </div>
-</div>
-</div>
-</section>
-<section id="code">
-<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
-<p>The functions from the previous notebooks are in a file called <code class="docutils literal notranslate"><span class="pre">utils.py</span></code>; the following cell downloads it if you don’t already have it:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;utils.py&#39;</span><span class="p">):</span>
-    <span class="o">!</span>wget<span class="w"> </span>https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/master/utils.py
-</pre></div>
-</div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "import pandas as pd\n\ncp = pd.read_csv(\"compas-scores-two-years.csv\")\ncp.shape";
+                var nbb_formatted_code = "import pandas as pd\n\ncp = pd.read_csv(\"compas-scores-two-years.csv\")\ncp.shape";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="the-reference-class-problem">
-<h2>The reference class problem<a class="headerlink" href="#the-reference-class-problem" title="Permalink to this heading">#</a></h2>
+<h2>The reference class problem<a class="headerlink" href="#the-reference-class-problem" title="Link to this heading">#</a></h2>
 <p>In the first notebook we replicated the analysis in the ProPublica article and computed various metrics of accuracy for white and black defendants.  We found that the predictive values (PPV and NPV) were similar for the two groups, but the error rates (FPR and FNR) were substantially different.</p>
 <p>In the previous notebook, we ran the same analysis for male and female defendants and found the opposite pattern: the error rates are about the same, but the predictive values are different.</p>
 <p>Neither scenario seems completely fair.  Comparing black and white defendants:</p>
@@ -410,30 +443,29 @@ document.write(`
 <p>To explore the first question, I will compute accuracy metrics for defendants grouped by age, race, and sex, and for the intersections of these groups (explained below).</p>
 </section>
 <section id="groups">
-<h2>Groups<a class="headerlink" href="#groups" title="Permalink to this heading">#</a></h2>
+<h2>Groups<a class="headerlink" href="#groups" title="Link to this heading">#</a></h2>
 <p>The following function takes a DataFrame containing COMPAS data and a list of variables to group by.  It returns a table with one row for each group and one column for each accuracy metric.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
 <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
 
+
 <span class="k">def</span> <span class="nf">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">group_vars</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a table of metrics for each subgroup.</span>
-<span class="sd">    </span>
+
 <span class="sd">    cp: DataFrame of COMPAS data</span>
 <span class="sd">    group_vars: string or list of variable names to group by</span>
-<span class="sd">    </span>
+
 <span class="sd">    returns: DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># count the number of defendants in each group</span>
     <span class="n">grouped</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">group_vars</span><span class="p">)</span>
-    <span class="n">counts</span> <span class="o">=</span> <span class="n">grouped</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">grouped</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
     <span class="c1"># make the table</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FPR&#39;</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">,</span> <span class="s1">&#39;PPV&#39;</span><span class="p">,</span> <span class="s1">&#39;NPV&#39;</span><span class="p">,</span> <span class="s1">&#39;Prevalence&#39;</span><span class="p">]</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
-                         <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> 
-                         <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FPR&quot;</span><span class="p">,</span> <span class="s2">&quot;FNR&quot;</span><span class="p">,</span> <span class="s2">&quot;PPV&quot;</span><span class="p">,</span> <span class="s2">&quot;NPV&quot;</span><span class="p">,</span> <span class="s2">&quot;Prevalence&quot;</span><span class="p">]</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="c1"># fill in the table</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
@@ -441,18 +473,35 @@ document.write(`
             <span class="k">continue</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
         <span class="n">metrics</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Percent&#39;</span><span class="p">]</span>
-    
-    <span class="n">table</span><span class="p">[</span><span class="s1">&#39;Count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;Percent&quot;</span><span class="p">]</span>
+
+    <span class="n">table</span><span class="p">[</span><span class="s2">&quot;Count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span>
     <span class="k">return</span> <span class="n">table</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "from utils import make_matrix\nfrom utils import compute_metrics\n\n\ndef make_table(cp, group_vars):\n    \"\"\"Make a table of metrics for each subgroup.\n\n    cp: DataFrame of COMPAS data\n    group_vars: string or list of variable names to group by\n\n    returns: DataFrame\n    \"\"\"\n    # count the number of defendants in each group\n    grouped = cp.groupby(group_vars)\n    counts = grouped[\"id\"].count()\n\n    # make the table\n    columns = [\"FPR\", \"FNR\", \"PPV\", \"NPV\", \"Prevalence\"]\n    table = pd.DataFrame(index=counts.index, columns=columns, dtype=float)\n\n    # fill in the table\n    for name, group in grouped:\n        if len(group) < 50:\n            continue\n        m = make_matrix(group)\n        metrics = compute_metrics(m)\n        table.loc[name] = metrics[\"Percent\"]\n\n    table[\"Count\"] = counts\n    return table";
+                var nbb_formatted_code = "from utils import make_matrix\nfrom utils import compute_metrics\n\n\ndef make_table(cp, group_vars):\n    \"\"\"Make a table of metrics for each subgroup.\n\n    cp: DataFrame of COMPAS data\n    group_vars: string or list of variable names to group by\n\n    returns: DataFrame\n    \"\"\"\n    # count the number of defendants in each group\n    grouped = cp.groupby(group_vars)\n    counts = grouped[\"id\"].count()\n\n    # make the table\n    columns = [\"FPR\", \"FNR\", \"PPV\", \"NPV\", \"Prevalence\"]\n    table = pd.DataFrame(index=counts.index, columns=columns, dtype=float)\n\n    # fill in the table\n    for name, group in grouped:\n        if len(group) < 50:\n            continue\n        m = make_matrix(group)\n        metrics = compute_metrics(m)\n        table.loc[name] = metrics[\"Percent\"]\n\n    table[\"Count\"] = counts\n    return table";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here’s the table for defendants grouped by race.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s2">&quot;race&quot;</span><span class="p">)</span>
 <span class="n">table1</span>
 </pre></div>
 </div>
@@ -496,11 +545,11 @@ document.write(`
   <tbody>
     <tr>
       <th>African-American</th>
-      <td>44.846797</td>
-      <td>27.985271</td>
-      <td>62.971481</td>
-      <td>65.045992</td>
-      <td>51.433983</td>
+      <td>44.8</td>
+      <td>28.0</td>
+      <td>63.0</td>
+      <td>65.0</td>
+      <td>51.4</td>
       <td>3696</td>
     </tr>
     <tr>
@@ -514,20 +563,20 @@ document.write(`
     </tr>
     <tr>
       <th>Caucasian</th>
-      <td>23.454301</td>
-      <td>47.722567</td>
-      <td>59.133489</td>
-      <td>71.187500</td>
-      <td>39.364303</td>
+      <td>23.5</td>
+      <td>47.7</td>
+      <td>59.1</td>
+      <td>71.2</td>
+      <td>39.4</td>
       <td>2454</td>
     </tr>
     <tr>
       <th>Hispanic</th>
-      <td>21.481481</td>
-      <td>55.603448</td>
-      <td>54.210526</td>
-      <td>71.140940</td>
-      <td>36.420722</td>
+      <td>21.5</td>
+      <td>55.6</td>
+      <td>54.2</td>
+      <td>71.1</td>
+      <td>36.4</td>
       <td>637</td>
     </tr>
     <tr>
@@ -541,16 +590,31 @@ document.write(`
     </tr>
     <tr>
       <th>Other</th>
-      <td>14.754098</td>
-      <td>67.669173</td>
-      <td>54.430380</td>
-      <td>69.798658</td>
-      <td>35.278515</td>
+      <td>14.8</td>
+      <td>67.7</td>
+      <td>54.4</td>
+      <td>69.8</td>
+      <td>35.3</td>
       <td>377</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "table1 = make_table(cp, \"race\")\ntable1";
+                var nbb_formatted_code = "table1 = make_table(cp, \"race\")\ntable1";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Some rows contain <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values because I did not compute metrics for groups with fewer than 50 defendants.</p>
 <p><code class="docutils literal notranslate"><span class="pre">table1</span></code> confirms results from previous analysis and extends them to other groups:</p>
@@ -561,7 +625,7 @@ document.write(`
 <p>The following table shows the breakdown by sex.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">)</span>
 <span class="n">table2</span>
 </pre></div>
 </div>
@@ -605,54 +669,103 @@ document.write(`
   <tbody>
     <tr>
       <th>Female</th>
-      <td>32.107023</td>
-      <td>39.156627</td>
-      <td>51.269036</td>
-      <td>75.746269</td>
-      <td>35.698925</td>
+      <td>32.1</td>
+      <td>39.2</td>
+      <td>51.3</td>
+      <td>75.7</td>
+      <td>35.7</td>
       <td>1395</td>
     </tr>
     <tr>
       <th>Male</th>
-      <td>32.420091</td>
-      <td>37.086814</td>
-      <td>63.536317</td>
-      <td>66.989977</td>
-      <td>47.310534</td>
+      <td>32.4</td>
+      <td>37.1</td>
+      <td>63.5</td>
+      <td>67.0</td>
+      <td>47.3</td>
       <td>5819</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "table2 = make_table(cp, \"sex\")\ntable2";
+                var nbb_formatted_code = "table2 = make_table(cp, \"sex\")\ntable2";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Again, these results are consistent with previous analysis.  Comparing male and female defendants, the error rates are comparable, but the predictive values are substantially different.</p>
 <p>Next we’ll look at the breakdown by age, but first I’ll recode the age categories so their ordering in the table is more logical:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span><span class="p">[</span><span class="s1">&#39;age_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span><span class="p">[</span><span class="s2">&quot;age_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;25 - 45&#39;, &#39;Greater than 45&#39;, &#39;Less than 25&#39;], dtype=&#39;object&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;25 - 45&#39;, &#39;Greater than 45&#39;, &#39;Less than 25&#39;], dtype=&#39;object&#39;, name=&#39;age_cat&#39;)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "cp[\"age_cat\"].value_counts().index";
+                var nbb_formatted_code = "cp[\"age_cat\"].value_counts().index";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Less than 25&#39;</span><span class="p">:</span>   <span class="s1">&#39;1 Younger than 25&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;25 - 45&#39;</span><span class="p">:</span>        <span class="s1">&#39;2 Between 25 - 45&#39;</span><span class="p">,</span> 
-     <span class="s1">&#39;Greater than 45&#39;</span><span class="p">:</span><span class="s1">&#39;3 Older than 45&#39;</span><span class="p">}</span>
-<span class="n">cp</span><span class="p">[</span><span class="s1">&#39;age_cat_recode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="s1">&#39;age_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Less than 25&quot;</span><span class="p">:</span> <span class="s2">&quot;1 Younger than 25&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;25 - 45&quot;</span><span class="p">:</span> <span class="s2">&quot;2 Between 25 - 45&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Greater than 45&quot;</span><span class="p">:</span> <span class="s2">&quot;3 Older than 45&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">cp</span><span class="p">[</span><span class="s2">&quot;age_cat_recode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="s2">&quot;age_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "d = {\n    \"Less than 25\": \"1 Younger than 25\",\n    \"25 - 45\": \"2 Between 25 - 45\",\n    \"Greater than 45\": \"3 Older than 45\",\n}\ncp[\"age_cat_recode\"] = cp[\"age_cat\"].replace(d)";
+                var nbb_formatted_code = "d = {\n    \"Less than 25\": \"1 Younger than 25\",\n    \"25 - 45\": \"2 Between 25 - 45\",\n    \"Greater than 45\": \"3 Older than 45\",\n}\ncp[\"age_cat_recode\"] = cp[\"age_cat\"].replace(d)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here’s the breakdown by age group:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table3</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s1">&#39;age_cat_recode&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table3</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s2">&quot;age_cat_recode&quot;</span><span class="p">)</span>
 <span class="n">table3</span>
 </pre></div>
 </div>
@@ -696,34 +809,49 @@ document.write(`
   <tbody>
     <tr>
       <th>1 Younger than 25</th>
-      <td>54.135338</td>
-      <td>26.041667</td>
-      <td>63.963964</td>
-      <td>57.547170</td>
-      <td>56.507521</td>
+      <td>54.1</td>
+      <td>26.0</td>
+      <td>64.0</td>
+      <td>57.5</td>
+      <td>56.5</td>
       <td>1529</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>33.378378</td>
-      <td>37.374272</td>
-      <td>61.486486</td>
-      <td>67.688787</td>
-      <td>45.972256</td>
+      <td>33.4</td>
+      <td>37.4</td>
+      <td>61.5</td>
+      <td>67.7</td>
+      <td>46.0</td>
       <td>4109</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>16.790353</td>
-      <td>57.228916</td>
-      <td>54.060914</td>
-      <td>75.888325</td>
-      <td>31.598985</td>
+      <td>16.8</td>
+      <td>57.2</td>
+      <td>54.1</td>
+      <td>75.9</td>
+      <td>31.6</td>
       <td>1576</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "table3 = make_table(cp, \"age_cat_recode\")\ntable3";
+                var nbb_formatted_code = "table3 = make_table(cp, \"age_cat_recode\")\ntable3";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>This table shows some patterns we have seen before</p>
 <ul class="simple">
@@ -735,7 +863,7 @@ document.write(`
 <p>I’ll compute these intersections in the next section.</p>
 </section>
 <section id="intersections">
-<h2>Intersections<a class="headerlink" href="#intersections" title="Permalink to this heading">#</a></h2>
+<h2>Intersections<a class="headerlink" href="#intersections" title="Link to this heading">#</a></h2>
 <p>In this section I’ll compute metrics for defendants grouped by</p>
 <ul class="simple">
 <li><p>Race and sex</p></li>
@@ -746,7 +874,7 @@ document.write(`
 <p>Then we’ll plot the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table4</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table4</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;race&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span>
 <span class="n">table4</span>
 </pre></div>
 </div>
@@ -793,20 +921,20 @@ document.write(`
     <tr>
       <th rowspan="2" valign="top">African-American</th>
       <th>Female</th>
-      <td>40.493827</td>
-      <td>29.959514</td>
-      <td>51.335312</td>
-      <td>76.507937</td>
-      <td>37.883436</td>
+      <td>40.5</td>
+      <td>30.0</td>
+      <td>51.3</td>
+      <td>76.5</td>
+      <td>37.9</td>
       <td>652</td>
     </tr>
     <tr>
       <th>Male</th>
-      <td>46.115108</td>
-      <td>27.690447</td>
-      <td>65.106151</td>
-      <td>62.054681</td>
-      <td>54.336399</td>
+      <td>46.1</td>
+      <td>27.7</td>
+      <td>65.1</td>
+      <td>62.1</td>
+      <td>54.3</td>
       <td>3044</td>
     </tr>
     <tr>
@@ -831,39 +959,39 @@ document.write(`
     <tr>
       <th rowspan="2" valign="top">Caucasian</th>
       <th>Female</th>
-      <td>30.163043</td>
-      <td>43.216080</td>
-      <td>50.446429</td>
-      <td>74.927114</td>
-      <td>35.097002</td>
+      <td>30.2</td>
+      <td>43.2</td>
+      <td>50.4</td>
+      <td>74.9</td>
+      <td>35.1</td>
       <td>567</td>
     </tr>
     <tr>
       <th>Male</th>
-      <td>21.250000</td>
-      <td>48.891786</td>
-      <td>62.222222</td>
-      <td>70.167064</td>
-      <td>40.646529</td>
+      <td>21.2</td>
+      <td>48.9</td>
+      <td>62.2</td>
+      <td>70.2</td>
+      <td>40.6</td>
       <td>1887</td>
     </tr>
     <tr>
       <th rowspan="2" valign="top">Hispanic</th>
       <th>Female</th>
-      <td>10.000000</td>
-      <td>72.727273</td>
-      <td>56.250000</td>
-      <td>72.413793</td>
-      <td>32.038835</td>
+      <td>10.0</td>
+      <td>72.7</td>
+      <td>56.2</td>
+      <td>72.4</td>
+      <td>32.0</td>
       <td>103</td>
     </tr>
     <tr>
       <th>Male</th>
-      <td>23.880597</td>
-      <td>52.763819</td>
-      <td>54.022989</td>
-      <td>70.833333</td>
-      <td>37.265918</td>
+      <td>23.9</td>
+      <td>52.8</td>
+      <td>54.0</td>
+      <td>70.8</td>
+      <td>37.3</td>
       <td>534</td>
     </tr>
     <tr>
@@ -888,29 +1016,44 @@ document.write(`
     <tr>
       <th rowspan="2" valign="top">Other</th>
       <th>Female</th>
-      <td>11.538462</td>
-      <td>66.666667</td>
-      <td>45.454545</td>
-      <td>82.142857</td>
-      <td>22.388060</td>
+      <td>11.5</td>
+      <td>66.7</td>
+      <td>45.5</td>
+      <td>82.1</td>
+      <td>22.4</td>
       <td>67</td>
     </tr>
     <tr>
       <th>Male</th>
-      <td>15.625000</td>
-      <td>67.796610</td>
-      <td>55.882353</td>
-      <td>66.942149</td>
-      <td>38.064516</td>
+      <td>15.6</td>
+      <td>67.8</td>
+      <td>55.9</td>
+      <td>66.9</td>
+      <td>38.1</td>
       <td>310</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "table4 = make_table(cp, [\"race\", \"sex\"])\ntable4";
+                var nbb_formatted_code = "table4 = make_table(cp, [\"race\", \"sex\"])\ntable4";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table5</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">,</span> <span class="s1">&#39;age_cat_recode&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table5</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;race&quot;</span><span class="p">,</span> <span class="s2">&quot;age_cat_recode&quot;</span><span class="p">])</span>
 <span class="n">table5</span>
 </pre></div>
 </div>
@@ -957,29 +1100,29 @@ document.write(`
     <tr>
       <th rowspan="3" valign="top">African-American</th>
       <th>1 Younger than 25</th>
-      <td>59.888579</td>
-      <td>23.172906</td>
-      <td>66.718266</td>
-      <td>52.554745</td>
-      <td>60.978261</td>
+      <td>59.9</td>
+      <td>23.2</td>
+      <td>66.7</td>
+      <td>52.6</td>
+      <td>61.0</td>
       <td>920</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>44.095941</td>
-      <td>27.657658</td>
-      <td>62.685402</td>
-      <td>66.374589</td>
-      <td>50.592525</td>
+      <td>44.1</td>
+      <td>27.7</td>
+      <td>62.7</td>
+      <td>66.4</td>
+      <td>50.6</td>
       <td>2194</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>31.818182</td>
-      <td>41.304348</td>
-      <td>54.655870</td>
-      <td>71.641791</td>
-      <td>39.518900</td>
+      <td>31.8</td>
+      <td>41.3</td>
+      <td>54.7</td>
+      <td>71.6</td>
+      <td>39.5</td>
       <td>582</td>
     </tr>
     <tr>
@@ -1013,57 +1156,57 @@ document.write(`
     <tr>
       <th rowspan="3" valign="top">Caucasian</th>
       <th>1 Younger than 25</th>
-      <td>48.743719</td>
-      <td>26.701571</td>
-      <td>59.071730</td>
-      <td>66.666667</td>
-      <td>48.974359</td>
+      <td>48.7</td>
+      <td>26.7</td>
+      <td>59.1</td>
+      <td>66.7</td>
+      <td>49.0</td>
       <td>390</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>26.809651</td>
-      <td>46.996466</td>
-      <td>60.000000</td>
-      <td>67.241379</td>
-      <td>43.140244</td>
+      <td>26.8</td>
+      <td>47.0</td>
+      <td>60.0</td>
+      <td>67.2</td>
+      <td>43.1</td>
       <td>1312</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>9.576427</td>
-      <td>68.899522</td>
-      <td>55.555556</td>
-      <td>77.322835</td>
-      <td>27.792553</td>
+      <td>9.6</td>
+      <td>68.9</td>
+      <td>55.6</td>
+      <td>77.3</td>
+      <td>27.8</td>
       <td>752</td>
     </tr>
     <tr>
       <th rowspan="3" valign="top">Hispanic</th>
       <th>1 Younger than 25</th>
-      <td>47.540984</td>
-      <td>36.363636</td>
-      <td>59.154930</td>
-      <td>57.142857</td>
-      <td>51.968504</td>
+      <td>47.5</td>
+      <td>36.4</td>
+      <td>59.2</td>
+      <td>57.1</td>
+      <td>52.0</td>
       <td>127</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>18.534483</td>
-      <td>59.259259</td>
-      <td>56.122449</td>
-      <td>70.260223</td>
-      <td>36.784741</td>
+      <td>18.5</td>
+      <td>59.3</td>
+      <td>56.1</td>
+      <td>70.3</td>
+      <td>36.8</td>
       <td>367</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>13.392857</td>
-      <td>80.645161</td>
-      <td>28.571429</td>
-      <td>79.508197</td>
-      <td>21.678322</td>
+      <td>13.4</td>
+      <td>80.6</td>
+      <td>28.6</td>
+      <td>79.5</td>
+      <td>21.7</td>
       <td>143</td>
     </tr>
     <tr>
@@ -1097,38 +1240,53 @@ document.write(`
     <tr>
       <th rowspan="3" valign="top">Other</th>
       <th>1 Younger than 25</th>
-      <td>45.238095</td>
-      <td>47.500000</td>
-      <td>52.500000</td>
-      <td>54.761905</td>
-      <td>48.780488</td>
+      <td>45.2</td>
+      <td>47.5</td>
+      <td>52.5</td>
+      <td>54.8</td>
+      <td>48.8</td>
       <td>82</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>10.791367</td>
-      <td>73.239437</td>
-      <td>55.882353</td>
-      <td>70.454545</td>
-      <td>33.809524</td>
+      <td>10.8</td>
+      <td>73.2</td>
+      <td>55.9</td>
+      <td>70.5</td>
+      <td>33.8</td>
       <td>210</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>3.174603</td>
-      <td>86.363636</td>
-      <td>60.000000</td>
-      <td>76.250000</td>
-      <td>25.882353</td>
+      <td>3.2</td>
+      <td>86.4</td>
+      <td>60.0</td>
+      <td>76.2</td>
+      <td>25.9</td>
       <td>85</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "table5 = make_table(cp, [\"race\", \"age_cat_recode\"])\ntable5";
+                var nbb_formatted_code = "table5 = make_table(cp, [\"race\", \"age_cat_recode\"])\ntable5";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table6</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;age_cat&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table6</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;age_cat&quot;</span><span class="p">])</span>
 <span class="n">table6</span>
 </pre></div>
 </div>
@@ -1175,66 +1333,81 @@ document.write(`
     <tr>
       <th rowspan="3" valign="top">Female</th>
       <th>25 - 45</th>
-      <td>29.411765</td>
-      <td>40.764331</td>
-      <td>56.193353</td>
-      <td>73.109244</td>
-      <td>38.909542</td>
+      <td>29.4</td>
+      <td>40.8</td>
+      <td>56.2</td>
+      <td>73.1</td>
+      <td>38.9</td>
       <td>807</td>
     </tr>
     <tr>
       <th>Greater than 45</th>
-      <td>15.283843</td>
-      <td>66.197183</td>
-      <td>40.677966</td>
-      <td>80.497925</td>
-      <td>23.666667</td>
+      <td>15.3</td>
+      <td>66.2</td>
+      <td>40.7</td>
+      <td>80.5</td>
+      <td>23.7</td>
       <td>300</td>
     </tr>
     <tr>
       <th>Less than 25</th>
-      <td>61.714286</td>
-      <td>17.699115</td>
-      <td>46.268657</td>
-      <td>77.011494</td>
-      <td>39.236111</td>
+      <td>61.7</td>
+      <td>17.7</td>
+      <td>46.3</td>
+      <td>77.0</td>
+      <td>39.2</td>
       <td>288</td>
     </tr>
     <tr>
       <th rowspan="3" valign="top">Male</th>
       <th>25 - 45</th>
-      <td>34.510712</td>
-      <td>36.698413</td>
-      <td>62.586315</td>
-      <td>66.179052</td>
-      <td>47.698365</td>
+      <td>34.5</td>
+      <td>36.7</td>
+      <td>62.6</td>
+      <td>66.2</td>
+      <td>47.7</td>
       <td>3302</td>
     </tr>
     <tr>
       <th>Greater than 45</th>
-      <td>17.196702</td>
-      <td>55.737705</td>
-      <td>56.417910</td>
-      <td>74.707758</td>
-      <td>33.463950</td>
+      <td>17.2</td>
+      <td>55.7</td>
+      <td>56.4</td>
+      <td>74.7</td>
+      <td>33.5</td>
       <td>1276</td>
     </tr>
     <tr>
       <th>Less than 25</th>
-      <td>51.428571</td>
-      <td>27.296937</td>
-      <td>68.421053</td>
-      <td>53.724605</td>
-      <td>60.515713</td>
+      <td>51.4</td>
+      <td>27.3</td>
+      <td>68.4</td>
+      <td>53.7</td>
+      <td>60.5</td>
       <td>1241</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "table6 = make_table(cp, [\"sex\", \"age_cat\"])\ntable6";
+                var nbb_formatted_code = "table6 = make_table(cp, [\"sex\", \"age_cat\"])\ntable6";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table7</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;age_cat_recode&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table7</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;race&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;age_cat_recode&quot;</span><span class="p">])</span>
 <span class="n">table7</span>
 </pre></div>
 </div>
@@ -1284,57 +1457,57 @@ document.write(`
       <th rowspan="6" valign="top">African-American</th>
       <th rowspan="3" valign="top">Female</th>
       <th>1 Younger than 25</th>
-      <td>63.440860</td>
-      <td>19.736842</td>
-      <td>50.833333</td>
-      <td>69.387755</td>
-      <td>44.970414</td>
+      <td>63.4</td>
+      <td>19.7</td>
+      <td>50.8</td>
+      <td>69.4</td>
+      <td>45.0</td>
       <td>169</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>36.475410</td>
-      <td>34.437086</td>
-      <td>52.659574</td>
-      <td>74.879227</td>
-      <td>38.227848</td>
+      <td>36.5</td>
+      <td>34.4</td>
+      <td>52.7</td>
+      <td>74.9</td>
+      <td>38.2</td>
       <td>395</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>23.529412</td>
-      <td>35.000000</td>
-      <td>44.827586</td>
-      <td>88.135593</td>
-      <td>22.727273</td>
+      <td>23.5</td>
+      <td>35.0</td>
+      <td>44.8</td>
+      <td>88.1</td>
+      <td>22.7</td>
       <td>88</td>
     </tr>
     <tr>
       <th rowspan="3" valign="top">Male</th>
       <th>1 Younger than 25</th>
-      <td>58.646617</td>
-      <td>23.711340</td>
-      <td>70.342205</td>
-      <td>48.888889</td>
-      <td>64.580559</td>
+      <td>58.6</td>
+      <td>23.7</td>
+      <td>70.3</td>
+      <td>48.9</td>
+      <td>64.6</td>
       <td>751</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>46.309524</td>
-      <td>26.590198</td>
-      <td>64.409881</td>
-      <td>63.881020</td>
-      <td>53.307393</td>
+      <td>46.3</td>
+      <td>26.6</td>
+      <td>64.4</td>
+      <td>63.9</td>
+      <td>53.3</td>
       <td>1799</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>33.802817</td>
-      <td>41.904762</td>
-      <td>55.963303</td>
-      <td>68.115942</td>
-      <td>42.510121</td>
+      <td>33.8</td>
+      <td>41.9</td>
+      <td>56.0</td>
+      <td>68.1</td>
+      <td>42.5</td>
       <td>494</td>
     </tr>
     <tr>
@@ -1389,57 +1562,57 @@ document.write(`
       <th rowspan="6" valign="top">Caucasian</th>
       <th rowspan="3" valign="top">Female</th>
       <th>1 Younger than 25</th>
-      <td>70.000000</td>
-      <td>3.703704</td>
-      <td>38.235294</td>
-      <td>94.736842</td>
-      <td>31.034483</td>
+      <td>70.0</td>
+      <td>3.7</td>
+      <td>38.2</td>
+      <td>94.7</td>
+      <td>31.0</td>
       <td>87</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>29.213483</td>
-      <td>41.221374</td>
-      <td>59.689922</td>
-      <td>70.000000</td>
-      <td>42.394822</td>
+      <td>29.2</td>
+      <td>41.2</td>
+      <td>59.7</td>
+      <td>70.0</td>
+      <td>42.4</td>
       <td>309</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>13.076923</td>
-      <td>75.609756</td>
-      <td>37.037037</td>
-      <td>78.472222</td>
-      <td>23.976608</td>
+      <td>13.1</td>
+      <td>75.6</td>
+      <td>37.0</td>
+      <td>78.5</td>
+      <td>24.0</td>
       <td>171</td>
     </tr>
     <tr>
       <th rowspan="3" valign="top">Male</th>
       <th>1 Younger than 25</th>
-      <td>39.568345</td>
-      <td>30.487805</td>
-      <td>67.455621</td>
-      <td>62.686567</td>
-      <td>54.125413</td>
+      <td>39.6</td>
+      <td>30.5</td>
+      <td>67.5</td>
+      <td>62.7</td>
+      <td>54.1</td>
       <td>303</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>26.056338</td>
-      <td>48.735632</td>
-      <td>60.107817</td>
-      <td>66.455696</td>
-      <td>43.369890</td>
+      <td>26.1</td>
+      <td>48.7</td>
+      <td>60.1</td>
+      <td>66.5</td>
+      <td>43.4</td>
       <td>1003</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>8.474576</td>
-      <td>67.261905</td>
-      <td>61.111111</td>
-      <td>76.985743</td>
-      <td>28.915663</td>
+      <td>8.5</td>
+      <td>67.3</td>
+      <td>61.1</td>
+      <td>77.0</td>
+      <td>28.9</td>
       <td>581</td>
     </tr>
     <tr>
@@ -1455,11 +1628,11 @@ document.write(`
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>7.142857</td>
-      <td>80.952381</td>
-      <td>57.142857</td>
-      <td>69.642857</td>
-      <td>33.333333</td>
+      <td>7.1</td>
+      <td>81.0</td>
+      <td>57.1</td>
+      <td>69.6</td>
+      <td>33.3</td>
       <td>63</td>
     </tr>
     <tr>
@@ -1474,29 +1647,29 @@ document.write(`
     <tr>
       <th rowspan="3" valign="top">Male</th>
       <th>1 Younger than 25</th>
-      <td>52.941176</td>
-      <td>37.288136</td>
-      <td>57.812500</td>
-      <td>52.173913</td>
-      <td>53.636364</td>
+      <td>52.9</td>
+      <td>37.3</td>
+      <td>57.8</td>
+      <td>52.2</td>
+      <td>53.6</td>
       <td>110</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>21.052632</td>
-      <td>55.263158</td>
-      <td>56.043956</td>
-      <td>70.422535</td>
-      <td>37.500000</td>
+      <td>21.1</td>
+      <td>55.3</td>
+      <td>56.0</td>
+      <td>70.4</td>
+      <td>37.5</td>
       <td>304</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>13.829787</td>
-      <td>76.923077</td>
-      <td>31.578947</td>
-      <td>80.198020</td>
-      <td>21.666667</td>
+      <td>13.8</td>
+      <td>76.9</td>
+      <td>31.6</td>
+      <td>80.2</td>
+      <td>21.7</td>
       <td>120</td>
     </tr>
     <tr>
@@ -1579,34 +1752,49 @@ document.write(`
     <tr>
       <th rowspan="3" valign="top">Male</th>
       <th>1 Younger than 25</th>
-      <td>46.666667</td>
-      <td>45.945946</td>
-      <td>58.823529</td>
-      <td>48.484848</td>
-      <td>55.223881</td>
+      <td>46.7</td>
+      <td>45.9</td>
+      <td>58.8</td>
+      <td>48.5</td>
+      <td>55.2</td>
       <td>67</td>
     </tr>
     <tr>
       <th>2 Between 25 - 45</th>
-      <td>12.612613</td>
-      <td>75.806452</td>
-      <td>51.724138</td>
-      <td>67.361111</td>
-      <td>35.838150</td>
+      <td>12.6</td>
+      <td>75.8</td>
+      <td>51.7</td>
+      <td>67.4</td>
+      <td>35.8</td>
       <td>173</td>
     </tr>
     <tr>
       <th>3 Older than 45</th>
-      <td>3.921569</td>
-      <td>84.210526</td>
-      <td>60.000000</td>
-      <td>75.384615</td>
-      <td>27.142857</td>
+      <td>3.9</td>
+      <td>84.2</td>
+      <td>60.0</td>
+      <td>75.4</td>
+      <td>27.1</td>
       <td>70</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "table7 = make_table(cp, [\"race\", \"sex\", \"age_cat_recode\"])\ntable7";
+                var nbb_formatted_code = "table7 = make_table(cp, [\"race\", \"sex\", \"age_cat_recode\"])\ntable7";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>These tables show how much these metrics vary between groups:</p>
 <ul class="simple">
@@ -1625,7 +1813,22 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "tables = [table1, table2, table3, table4, table5, table6, table7]\n\nall_groups = pd.concat(tables)\nlen(all_groups)";
+                var nbb_formatted_code = "tables = [table1, table2, table3, table4, table5, table6, table7]\n\nall_groups = pd.concat(tables)\nlen(all_groups)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1672,151 +1875,257 @@ document.write(`
     </tr>
     <tr>
       <th>mean</th>
-      <td>30.524931</td>
-      <td>47.645710</td>
-      <td>55.612305</td>
-      <td>69.606032</td>
-      <td>40.095913</td>
+      <td>30.520370</td>
+      <td>47.648148</td>
+      <td>55.611111</td>
+      <td>69.603704</td>
+      <td>40.094444</td>
       <td>623.432099</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>17.347922</td>
-      <td>19.923370</td>
-      <td>8.657137</td>
-      <td>9.213267</td>
-      <td>10.989356</td>
+      <td>17.339761</td>
+      <td>19.922603</td>
+      <td>8.655256</td>
+      <td>9.204490</td>
+      <td>10.987015</td>
       <td>1059.278516</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>3.174603</td>
-      <td>3.703704</td>
-      <td>28.571429</td>
-      <td>48.484848</td>
-      <td>21.666667</td>
+      <td>3.200000</td>
+      <td>3.700000</td>
+      <td>28.600000</td>
+      <td>48.500000</td>
+      <td>21.700000</td>
       <td>1.000000</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>15.369132</td>
-      <td>31.475125</td>
-      <td>52.539894</td>
-      <td>66.394866</td>
-      <td>33.365987</td>
+      <td>15.375000</td>
+      <td>31.475000</td>
+      <td>52.550000</td>
+      <td>66.425000</td>
+      <td>33.350000</td>
       <td>15.000000</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>29.312624</td>
-      <td>44.581013</td>
-      <td>56.221677</td>
-      <td>70.213644</td>
-      <td>38.568695</td>
+      <td>29.300000</td>
+      <td>44.550000</td>
+      <td>56.200000</td>
+      <td>70.250000</td>
+      <td>38.550000</td>
       <td>169.000000</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>45.140271</td>
-      <td>66.549296</td>
-      <td>60.860288</td>
-      <td>75.655855</td>
-      <td>48.509957</td>
+      <td>45.100000</td>
+      <td>66.575000</td>
+      <td>60.850000</td>
+      <td>75.625000</td>
+      <td>48.525000</td>
       <td>652.000000</td>
     </tr>
     <tr>
       <th>max</th>
       <td>70.000000</td>
-      <td>86.363636</td>
-      <td>70.342205</td>
-      <td>94.736842</td>
-      <td>64.580559</td>
+      <td>86.400000</td>
+      <td>70.300000</td>
+      <td>94.700000</td>
+      <td>64.600000</td>
       <td>5819.000000</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "all_groups.describe()";
+                var nbb_formatted_code = "all_groups.describe()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="n">metric</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="n">all_groups</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">all_groups</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="n">idx</span><span class="p">])</span>
-    
+
     <span class="n">idx</span> <span class="o">=</span> <span class="n">all_groups</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">all_groups</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="n">idx</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "def min_max_metric(all_groups, metric):\n    \"\"\" \"\"\"\n    idx = all_groups[metric].idxmax()\n    print(idx, all_groups[metric][idx])\n\n    idx = all_groups[metric].idxmin()\n    print(idx, all_groups[metric][idx])";
+                var nbb_formatted_code = "def min_max_metric(all_groups, metric):\n    \"\"\" \"\"\"\n    idx = all_groups[metric].idxmax()\n    print(idx, all_groups[metric][idx])\n\n    idx = all_groups[metric].idxmin()\n    print(idx, all_groups[metric][idx])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here are the groups with maximumn and minimum FPR:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s1">&#39;FPR&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s2">&quot;FPR&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Caucasian&#39;, &#39;Female&#39;, &#39;1 Younger than 25&#39;) 70.0
-(&#39;Other&#39;, &#39;3 Older than 45&#39;) 3.1746031746031744
+(&#39;Other&#39;, &#39;3 Older than 45&#39;) 3.2
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "min_max_metric(all_groups, \"FPR\")";
+                var nbb_formatted_code = "min_max_metric(all_groups, \"FPR\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>And here are the results for the other metrics:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s2">&quot;FNR&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Other&#39;, &#39;3 Older than 45&#39;) 86.36363636363636
-(&#39;Caucasian&#39;, &#39;Female&#39;, &#39;1 Younger than 25&#39;) 3.7037037037037033
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Other&#39;, &#39;3 Older than 45&#39;) 86.4
+(&#39;Caucasian&#39;, &#39;Female&#39;, &#39;1 Younger than 25&#39;) 3.7
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "min_max_metric(all_groups, \"FNR\")";
+                var nbb_formatted_code = "min_max_metric(all_groups, \"FNR\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s1">&#39;PPV&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s2">&quot;PPV&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;African-American&#39;, &#39;Male&#39;, &#39;1 Younger than 25&#39;) 70.34220532319392
-(&#39;Hispanic&#39;, &#39;3 Older than 45&#39;) 28.57142857142857
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;African-American&#39;, &#39;Male&#39;, &#39;1 Younger than 25&#39;) 70.3
+(&#39;Hispanic&#39;, &#39;3 Older than 45&#39;) 28.6
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "min_max_metric(all_groups, \"PPV\")";
+                var nbb_formatted_code = "min_max_metric(all_groups, \"PPV\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s1">&#39;NPV&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s2">&quot;NPV&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Caucasian&#39;, &#39;Female&#39;, &#39;1 Younger than 25&#39;) 94.73684210526315
-(&#39;Other&#39;, &#39;Male&#39;, &#39;1 Younger than 25&#39;) 48.484848484848484
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Caucasian&#39;, &#39;Female&#39;, &#39;1 Younger than 25&#39;) 94.7
+(&#39;Other&#39;, &#39;Male&#39;, &#39;1 Younger than 25&#39;) 48.5
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "min_max_metric(all_groups, \"NPV\")";
+                var nbb_formatted_code = "min_max_metric(all_groups, \"NPV\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s1">&#39;Prevalence&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_max_metric</span><span class="p">(</span><span class="n">all_groups</span><span class="p">,</span> <span class="s2">&quot;Prevalence&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;African-American&#39;, &#39;Male&#39;, &#39;1 Younger than 25&#39;) 64.58055925432757
-(&#39;Hispanic&#39;, &#39;Male&#39;, &#39;3 Older than 45&#39;) 21.666666666666668
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;African-American&#39;, &#39;Male&#39;, &#39;1 Younger than 25&#39;) 64.6
+(&#39;Hispanic&#39;, &#39;3 Older than 45&#39;) 21.7
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "min_max_metric(all_groups, \"Prevalence\")";
+                var nbb_formatted_code = "min_max_metric(all_groups, \"Prevalence\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Looking at these results, I have a few thoughts:</p>
 <ol class="arabic simple">
@@ -1826,7 +2135,7 @@ document.write(`
 </ol>
 </section>
 <section id="reverse-engineering">
-<h2>Reverse engineering<a class="headerlink" href="#reverse-engineering" title="Permalink to this heading">#</a></h2>
+<h2>Reverse engineering<a class="headerlink" href="#reverse-engineering" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">predictive_value</span>
@@ -1838,14 +2147,32 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "from utils import predictive_value\nfrom utils import error_rates\n\nmatrix_all = make_matrix(cp)\nppv, npv = predictive_value(matrix_all)\nfpr, fnr = error_rates(matrix_all)";
+                var nbb_formatted_code = "from utils import predictive_value\nfrom utils import error_rates\n\nmatrix_all = make_matrix(cp)\nppv, npv = predictive_value(matrix_all)\nfpr, fnr = error_rates(matrix_all)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">constant_error_rates</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">constant_error_rates</span>
 
 <span class="n">prevalences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
-<span class="n">pred_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">,</span> <span class="s1">&#39;npv&#39;</span><span class="p">])</span>
+<span class="n">pred_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">,</span> <span class="s2">&quot;npv&quot;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="n">prevalences</span><span class="p">:</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">constant_error_rates</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">fnr</span><span class="p">,</span> <span class="n">prev</span><span class="p">)</span>
@@ -1881,62 +2208,77 @@ document.write(`
   <tbody>
     <tr>
       <th>20.0</th>
-      <td>32.603329</td>
-      <td>87.856159</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>24.5</th>
-      <td>38.571828</td>
-      <td>84.787671</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>29.0</th>
-      <td>44.145209</td>
-      <td>81.577315</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>33.5</th>
-      <td>49.361450</td>
-      <td>78.215019</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>38.0</th>
-      <td>54.253815</td>
-      <td>74.689735</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>42.5</th>
-      <td>58.851558</td>
-      <td>70.989317</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>47.0</th>
-      <td>63.180516</td>
-      <td>67.100383</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>51.5</th>
-      <td>67.263589</td>
-      <td>63.008148</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>56.0</th>
-      <td>71.121148</td>
-      <td>58.696245</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>60.5</th>
-      <td>74.771374</td>
-      <td>54.146498</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
     <tr>
       <th>65.0</th>
-      <td>78.230545</td>
-      <td>49.338668</td>
+      <td>62.596124</td>
+      <td>67.65077</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "import numpy as np\nfrom utils import constant_error_rates\n\nprevalences = np.linspace(20, 65, 11)\n\npred_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\nfor prev in prevalences:\n    m = constant_error_rates(fpr, fnr, prev)\n    pred_pv.loc[prev] = predictive_value(m)\n\npred_pv";
+                var nbb_formatted_code = "import numpy as np\nfrom utils import constant_error_rates\n\nprevalences = np.linspace(20, 65, 11)\n\npred_pv = pd.DataFrame(columns=[\"ppv\", \"npv\"])\n\nfor prev in prevalences:\n    m = constant_error_rates(fpr, fnr, prev)\n    pred_pv.loc[prev] = predictive_value(m)\n\npred_pv";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1944,12 +2286,12 @@ document.write(`
 
 <span class="n">prevalences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
-<span class="n">pred_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;FPR&#39;</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">])</span>
+<span class="n">pred_er</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;FPR&quot;</span><span class="p">,</span> <span class="s2">&quot;FNR&quot;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="n">prevalences</span><span class="p">:</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">constant_predictive_value</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span><span class="p">,</span> <span class="n">prev</span><span class="p">)</span>
     <span class="n">pred_er</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_rates</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    
+
 <span class="n">pred_er</span>
 </pre></div>
 </div>
@@ -1980,62 +2322,77 @@ document.write(`
   <tbody>
     <tr>
       <th>35.0</th>
-      <td>7.488034</td>
-      <td>77.925569</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>37.0</th>
-      <td>11.795671</td>
-      <td>68.118564</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>39.0</th>
-      <td>16.385776</td>
-      <td>59.317406</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>41.0</th>
-      <td>21.287075</td>
-      <td>51.374897</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>43.0</th>
-      <td>26.532324</td>
-      <td>44.171227</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>45.0</th>
-      <td>32.159046</td>
-      <td>37.607882</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>47.0</th>
-      <td>38.210427</td>
-      <td>31.603121</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>49.0</th>
-      <td>44.736425</td>
-      <td>26.088543</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>51.0</th>
-      <td>51.795158</td>
-      <td>21.006482</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>53.0</th>
-      <td>59.454634</td>
-      <td>16.307973</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
     <tr>
       <th>55.0</th>
-      <td>67.794953</td>
-      <td>11.951173</td>
+      <td>31.20349</td>
+      <td>38.649382</td>
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "from utils import constant_predictive_value\n\nprevalences = np.linspace(35, 55, 11)\n\npred_er = pd.DataFrame(columns=[\"FPR\", \"FNR\"])\n\nfor prev in prevalences:\n    m = constant_predictive_value(ppv, npv, prev)\n    pred_er.loc[prev] = error_rates(m)\n\npred_er";
+                var nbb_formatted_code = "from utils import constant_predictive_value\n\nprevalences = np.linspace(35, 55, 11)\n\npred_er = pd.DataFrame(columns=[\"FPR\", \"FNR\"])\n\nfor prev in prevalences:\n    m = constant_predictive_value(ppv, npv, prev)\n    pred_er.loc[prev] = error_rates(m)\n\npred_er";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2043,6 +2400,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "from utils import plot_cpv_model";
+                var nbb_formatted_code = "from utils import plot_cpv_model";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2050,6 +2424,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "from utils import plot_cer_model";
+                var nbb_formatted_code = "from utils import plot_cer_model";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Those are all the possible subgroups for these three variables.</p>
 <p>Now we can see what the results look like.</p>
@@ -2057,84 +2448,147 @@ document.write(`
 <p>Groups with a small number of people are shown with lighter colors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="k">def</span> <span class="nf">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot one data point per row.</span>
-<span class="sd">    </span>
+
 <span class="sd">    table: DataFrame</span>
 <span class="sd">    var: which metric to plot</span>
 <span class="sd">    color: string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">],</span> <span class="n">table</span><span class="p">[</span><span class="n">var</span><span class="p">],</span>
-                 <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">],</span> <span class="n">table</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "import matplotlib.pyplot as plt\n\n\ndef plot_table_var(table, var, color):\n    \"\"\"Plot one data point per row.\n\n    table: DataFrame\n    var: which metric to plot\n    color: string\n    \"\"\"\n    plt.plot(table[\"Prevalence\"], table[var], \"o\", color=color, alpha=0.6)";
+                var nbb_formatted_code = "import matplotlib.pyplot as plt\n\n\ndef plot_table_var(table, var, color):\n    \"\"\"Plot one data point per row.\n\n    table: DataFrame\n    var: which metric to plot\n    color: string\n    \"\"\"\n    plt.plot(table[\"Prevalence\"], table[var], \"o\", color=color, alpha=0.6)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Here’s what the results look like for FPR.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
 
-<span class="n">pred_er</span><span class="p">[</span><span class="s1">&#39;FPR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected FPR, constant PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected FPR, constant ER&#39;</span><span class="p">)</span>
+<span class="n">pred_er</span><span class="p">[</span><span class="s2">&quot;FPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected FPR, constant PV&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected FPR, constant ER&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
-    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;FPR&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">)</span>
-    
-<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">,</span>
-         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;False positive rate&#39;</span><span class="p">,</span>
-         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;False positive rates by subgroup&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s2">&quot;FPR&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;False positive rate&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;False positive rates by subgroup&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e2ae1171a582ba6a1526afcc592971a7669da0f13d2b026d3f6e55dba78d2fcb.png" src="_images/e2ae1171a582ba6a1526afcc592971a7669da0f13d2b026d3f6e55dba78d2fcb.png" />
-</div>
+<img alt="_images/77c8740d1c2540c0ed8d3da4ee0e70de62957bca6ecfe7bb4b63c47f2216910d.png" src="_images/77c8740d1c2540c0ed8d3da4ee0e70de62957bca6ecfe7bb4b63c47f2216910d.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "from utils import decorate\n\npred_er[\"FPR\"].plot(label=\"Expected FPR, constant PV\", color=\"C2\")\nplt.axhline(fpr, linestyle=\"dotted\", color=\"gray\", label=\"Expected FPR, constant ER\")\n\nfor table in tables:\n    plot_table_var(table, \"FPR\", \"C2\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"False positive rate\",\n    title=\"False positive rates by subgroup\",\n)";
+                var nbb_formatted_code = "from utils import decorate\n\npred_er[\"FPR\"].plot(label=\"Expected FPR, constant PV\", color=\"C2\")\nplt.axhline(fpr, linestyle=\"dotted\", color=\"gray\", label=\"Expected FPR, constant ER\")\n\nfor table in tables:\n    plot_table_var(table, \"FPR\", \"C2\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"False positive rate\",\n    title=\"False positive rates by subgroup\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_er</span><span class="p">[</span><span class="s1">&#39;FNR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected FNR, constant PV&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">fnr</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected FNR, constant ER&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_er</span><span class="p">[</span><span class="s2">&quot;FNR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected FNR, constant PV&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">fnr</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected FNR, constant ER&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
-    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;FNR&#39;</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">)</span>
-    
-<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">,</span>
-         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;False negative rate&#39;</span><span class="p">,</span>
-         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;False negative rates by subgroup&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s2">&quot;FNR&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;False negative rate&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;False negative rates by subgroup&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/eb35798a03775d1de565374d8eff58749dd1a2c64c2e0288b868096344539032.png" src="_images/eb35798a03775d1de565374d8eff58749dd1a2c64c2e0288b868096344539032.png" />
-</div>
+<img alt="_images/3a0a963e1d9012cc04e13c760b3a5d6fb2289f66630d8cee4257cb7cb0a1c674.png" src="_images/3a0a963e1d9012cc04e13c760b3a5d6fb2289f66630d8cee4257cb7cb0a1c674.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "pred_er[\"FNR\"].plot(label=\"Expected FNR, constant PV\", color=\"C4\")\nplt.axhline(fnr, linestyle=\"dotted\", color=\"gray\", label=\"Expected FNR, constant ER\")\n\nfor table in tables:\n    plot_table_var(table, \"FNR\", \"C4\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"False negative rate\",\n    title=\"False negative rates by subgroup\",\n)";
+                var nbb_formatted_code = "pred_er[\"FNR\"].plot(label=\"Expected FNR, constant PV\", color=\"C4\")\nplt.axhline(fnr, linestyle=\"dotted\", color=\"gray\", label=\"Expected FNR, constant ER\")\n\nfor table in tables:\n    plot_table_var(table, \"FNR\", \"C4\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"False negative rate\",\n    title=\"False negative rates by subgroup\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In general, groups with higher prevalence have higher false positive rates, but the effect is less extreme than what we would expect from the CPV model.</p>
 <p>Here are the results for positive predictive value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_pv</span><span class="p">[</span><span class="s1">&#39;ppv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected PPV, constant FPR&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected PPV, constant PPV&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_pv</span><span class="p">[</span><span class="s2">&quot;ppv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected PPV, constant FPR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected PPV, constant PPV&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
-    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;PPV&#39;</span><span class="p">,</span> <span class="s1">&#39;C0&#39;</span><span class="p">)</span>
-    
-<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">,</span>
-         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Positive predictive value&#39;</span><span class="p">,</span>
-         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Positive predictive value by subgroup&#39;</span><span class="p">)</span>
+    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s2">&quot;PPV&quot;</span><span class="p">,</span> <span class="s2">&quot;C0&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Positive predictive value&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Positive predictive value by subgroup&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5ff82bb5d0e4214ce2959c7843208146fecd853cab94eba4dee498ba7a059dd8.png" src="_images/5ff82bb5d0e4214ce2959c7843208146fecd853cab94eba4dee498ba7a059dd8.png" />
-</div>
+<img alt="_images/763fc2f97cd6a618f9b2b359f8c9dce428e760904c625e64c41a1b66bab5ac1e.png" src="_images/763fc2f97cd6a618f9b2b359f8c9dce428e760904c625e64c41a1b66bab5ac1e.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "pred_pv[\"ppv\"].plot(label=\"Expected PPV, constant FPR\", color=\"C0\")\nplt.axhline(ppv, linestyle=\"dotted\", color=\"gray\", label=\"Expected PPV, constant PPV\")\n\nfor table in tables:\n    plot_table_var(table, \"PPV\", \"C0\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"Positive predictive value\",\n    title=\"Positive predictive value by subgroup\",\n)";
+                var nbb_formatted_code = "pred_pv[\"ppv\"].plot(label=\"Expected PPV, constant FPR\", color=\"C0\")\nplt.axhline(ppv, linestyle=\"dotted\", color=\"gray\", label=\"Expected PPV, constant PPV\")\n\nfor table in tables:\n    plot_table_var(table, \"PPV\", \"C0\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"Positive predictive value\",\n    title=\"Positive predictive value by subgroup\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Groups with higher prevalence have higher PPV, but the effect is less extreme than we would expect from the CPV model.</p>
 <p>Here are the results for false negative rate.</p>
@@ -2142,26 +2596,43 @@ document.write(`
 <p>Here are the results for negative predictive value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_pv</span><span class="p">[</span><span class="s1">&#39;npv&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected NPV, constant FPR&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">npv</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected NPV, constant NPV&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_pv</span><span class="p">[</span><span class="s2">&quot;npv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected NPV, constant FPR&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">npv</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected NPV, constant NPV&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
-    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s1">&#39;NPV&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">)</span>
-    
-<span class="n">decorate</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Prevalence&#39;</span><span class="p">,</span>
-         <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Negative predictive value&#39;</span><span class="p">,</span>
-         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Negative predictive value by subgroup&#39;</span><span class="p">)</span>
+    <span class="n">plot_table_var</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="s2">&quot;NPV&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">decorate</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Prevalence&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Negative predictive value&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Negative predictive value by subgroup&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/efc4ca9b8d3eafb116dca42afa71ac67023e196d35b5060392f18535ad936c2f.png" src="_images/efc4ca9b8d3eafb116dca42afa71ac67023e196d35b5060392f18535ad936c2f.png" />
-</div>
+<img alt="_images/1d3ecd8a580f63ebd8985fe017ea40ad16428f39f0b3a6294f13f3523d54b375.png" src="_images/1d3ecd8a580f63ebd8985fe017ea40ad16428f39f0b3a6294f13f3523d54b375.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "pred_pv[\"npv\"].plot(label=\"Expected NPV, constant FPR\", color=\"C1\")\nplt.axhline(npv, linestyle=\"dotted\", color=\"gray\", label=\"Expected NPV, constant NPV\")\n\nfor table in tables:\n    plot_table_var(table, \"NPV\", \"C1\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"Negative predictive value\",\n    title=\"Negative predictive value by subgroup\",\n)";
+                var nbb_formatted_code = "pred_pv[\"npv\"].plot(label=\"Expected NPV, constant FPR\", color=\"C1\")\nplt.axhline(npv, linestyle=\"dotted\", color=\"gray\", label=\"Expected NPV, constant NPV\")\n\nfor table in tables:\n    plot_table_var(table, \"NPV\", \"C1\")\n\ndecorate(\n    xlabel=\"Prevalence\",\n    ylabel=\"Negative predictive value\",\n    title=\"Negative predictive value by subgroup\",\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Groups with higher prevalence have lower NPV.  In this case, the effect is almost exactly what we would expect from the CPV model.</p>
+<p>Part of a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">Recidivism Case Study</a></p>
+<p>by <a class="reference external" href="https://allendowney.com">Allen Downey</a></p>
+<p><a class="reference external" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)</a></p>
 </section>
 </section>
 
@@ -2190,8 +2661,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  
 <div class="prev-next-area">
 </div>
                 </footer>
@@ -2202,6 +2675,7 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -2209,7 +2683,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-reference-class-problem">The reference class problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groups">Groups</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intersections">Intersections</a></li>
@@ -2222,7 +2695,7 @@ document.write(`
             
           </div>
           <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
+            
 <div class="bd-footer-content__inner container">
   
   <div class="footer-item">
@@ -2235,9 +2708,10 @@ By Allen B. Downey
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -2252,7 +2726,7 @@ By Allen B. Downey
     
   </div>
   
-</div></div>
+</div>
           </footer>
         
 
@@ -2261,8 +2735,8 @@ By Allen B. Downey
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
