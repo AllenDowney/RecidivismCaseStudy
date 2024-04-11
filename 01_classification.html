@@ -369,7 +369,7 @@ The article explores the use of predictive algorithms in the criminal justice sy
 <li><p>In the next chapter, we’ll review arguments presented in a response article published in the Washington Post.  We’ll compute and interpret calibration curves, and explore the trade-offs between predictive value and error rates.</p></li>
 </ul>
 <ul class="simple">
-<li><p>In the third chapter, I apply the same analysis to evaluate the performance of classification for male and female defendants.</p></li>
+<li><p>In an additional notebook (not in the book), I apply the same analysis to evaluate the performance of classification for male and female defendants.</p></li>
 </ul>
 <section id="machine-bias">
 <h2>Machine Bias<a class="headerlink" href="#machine-bias" title="Link to this heading">#</a></h2>
@@ -402,11 +402,14 @@ Among their findings, they report:</p>
 </ul>
 </div></blockquote>
 <p>This discrepancy suggests that the use of COMPAS in the criminal justice system is racially biased.</p>
-<p>Since the ProPublica article was published, it has been widely discussed in the media, and a number of researchers have published responses.  In order to evaluate the original article and the responses it provoked, there are some technical issues you need to understand.  My goal is to help you analyze the arguments and interpret the statistics they are based on.</p>
+<p>Since the ProPublica article was published, it has been widely discussed in the media, and a number of researchers have published responses.
+In order to evaluate the original article and the responses it provoked, there are some technical issues you need to understand.
+The goal of this case study is to help you analyze the arguments and interpret the statistics they are based on.</p>
 </section>
 <section id="replicating-the-analysis">
 <h2>Replicating the Analysis<a class="headerlink" href="#replicating-the-analysis" title="Link to this heading">#</a></h2>
-<p>The data used in “Machine Bias” is available from <a class="github reference external" href="https://github.com/propublica/compas-analysis">propublica/compas-analysis</a>.</p>
+<p>The data used in “Machine Bias” is available from ProPublica.
+Instructions for downloading it are in the notebook for this chapter.</p>
 <p>We can use Pandas to read the file and make a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -438,9 +441,11 @@ Among their findings, they report:</p>
             }, 500);
             </script></div>
 </div>
-<p>The dataset includes 7214 rows, one for each defendant, and 53 columns.</p>
-<p>The authors of “Machine Bias” describe their analysis in a supplemental article at <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>.  It includes this table, which summarizes many of the results they report:</p>
+<p>The dataset includes one row for each defendant, and 53 columns, including risk scores computed by COMPAS and demographic information like age, sex, and race.</p>
+<p>The authors of “Machine Bias” describe their analysis in a supplemental article called “How We Analyzed the COMPAS Recidivism Algorithm”.
+It includes this table, which summarizes many of the results they report:</p>
 <p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/v1/machine_bias_table.png" /></p>
+<p>The supplemental article is available from <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>.</p>
 <p>The table summarizes results for all defendants and two subgroups: defendants classified as White (“Caucasian” in the original dataset) and Black (“African-American”).
 For each group, the summary includes several metrics, including:</p>
 <ul class="simple">
@@ -452,8 +457,8 @@ For each group, the summary includes several metrics, including:</p>
 <li><p>LR-: negative likelihood ratio</p></li>
 </ul>
 <p>I will explain what these metrics mean and how to compute them, and we’ll replicate the results in this table.
-But first let’s examine the data and compute some recoded variables.
-The following function displays the values in a Series and the number of times each value appears.</p>
+But first let’s examine and clean the data.
+The following function displays the values in a <code class="docutils literal notranslate"><span class="pre">Series</span></code> and the number of times each value appears.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
@@ -525,9 +530,11 @@ Name: count, dtype: int64
             }, 500);
             </script></div>
 </div>
-<p>It’s important to note that COMPAS is not a binary classifier; that is, it does not predict that a defendant will or will not recidivate.  Rather, it gives each defendant a score that is intended to reflect the risk that they will recidivate.</p>
+<p>It’s important to note that COMPAS is not a binary classifier – that is, it does not predict that a defendant will or will not recidivate.
+Rather, it gives each defendant a score that is intended to reflect the risk that they will recidivate.</p>
 <p>In order to evaluate the performance of COMPAS, the authors of the ProPublica article chose a threshold, <code class="docutils literal notranslate"><span class="pre">4</span></code>, and defined decile scores at or below the threshold to be “low risk”, and scores above the threshold to be “high risk”.
-Their choice of the threshold is arbitrary.  Later, we will see what happens with other choices, but we’ll start by replicating the original analysis.</p>
+Their choice of the threshold is arbitrary.
+Later, we’ll see what happens with other choices, but we’ll start by replicating the original analysis.</p>
 <p>We’ll create a Boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code> called <code class="docutils literal notranslate"><span class="pre">high_risk</span></code> that’s <code class="docutils literal notranslate"><span class="pre">True</span></code> for respondents with a decile score greater than 4.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -625,7 +632,7 @@ Name: count, dtype: int64
             }, 500);
             </script></div>
 </div>
-<p>If we make a cross-tabulation of <code class="docutils literal notranslate"><span class="pre">new_charge</span></code> and <code class="docutils literal notranslate"><span class="pre">high_risk</span></code>, the result is a DataFrame that indicates how many defendants are in each of four groups:</p>
+<p>If we make a cross-tabulation of <code class="docutils literal notranslate"><span class="pre">new_charge</span></code> and <code class="docutils literal notranslate"><span class="pre">high_risk</span></code>, the result is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that indicates how many defendants are in each of four groups:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">new_charge</span><span class="p">,</span> <span class="n">high_risk</span><span class="p">)</span>
@@ -692,12 +699,12 @@ Name: count, dtype: int64
 </div>
 <p>This table is called a <strong>confusion matrix</strong> or error matrix.  Reading from left to right and top to bottom, the elements of the matrix show the number of respondents who were:</p>
 <ul class="simple">
-<li><p>Classified as low risk and not charged with a new crime: there were 2681 <strong>true negatives</strong>; that is, cases where the test was negative (not high risk) and the prediction turned out to be correct (no new charge).</p></li>
-<li><p>High risk and not charged: there were 1282 <strong>false positives</strong>, cases where the test was positive and the prediction was incorrect.</p></li>
-<li><p>Low risk and charged: there were 1216 <strong>false negatives</strong>, cases where the test was negative (low risk) and the prediction was incorrect (the defendant was charged with a new crime).</p></li>
-<li><p>High risk and charged: there were 2035 <strong>true positives</strong>, cases where the test was positive and the prediction was correct.</p></li>
+<li><p>Classified as low risk and not charged with a new crime: there were 2681 <strong>true negatives</strong> – that is, cases where the test was negative (not high risk) and the prediction turned out to be correct (no new charge).</p></li>
+<li><p>High risk and not charged: there were 1282 <strong>false positives</strong> – that is, cases where the test was positive and the prediction was incorrect.</p></li>
+<li><p>Low risk and charged: there were 1216 <strong>false negatives</strong> – that is, cases where the test was negative (low risk) and the prediction was incorrect (the defendant was charged with a new crime).</p></li>
+<li><p>High risk and charged: there were 2035 <strong>true positives</strong> – that is, cases where the test was positive and the prediction was correct.</p></li>
 </ul>
-<p>The values in this matrix are consistent with the values in the ProPublica article, so we can confirm that we are reading the data and replicating their analysis correctly.</p>
+<p>The values in this matrix are consistent with the values in the ProPublica article, so we can confirm that we are replicating their analysis correctly.</p>
 <p>Now let’s check the confusion matrices for White and Black defendants.
 Here are the values of <code class="docutils literal notranslate"><span class="pre">race</span></code>:</p>
 <div class="cell docutils container">
@@ -865,7 +872,7 @@ Name: count, dtype: int64
             }, 500);
             </script></div>
 </div>
-<p>And here is the confusion matrix for Black defendants.</p>
+<p>And here’s the confusion matrix for Black defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">new_charge</span><span class="p">[</span><span class="n">black</span><span class="p">],</span> <span class="n">high_risk</span><span class="p">[</span><span class="n">black</span><span class="p">])</span>
@@ -935,11 +942,16 @@ However, before we go on, I want to address an important issue with this dataset
 </section>
 <section id="data-bias">
 <h2>Data Bias<a class="headerlink" href="#data-bias" title="Link to this heading">#</a></h2>
-<p>Systems like COMPAS are trying to predict whether a defendant will <em>commit</em> another crime if released.  But the dataset reports whether a defendant was <em>charged</em> with another crime.</p>
-<p>Not everyone who commits a crime gets charged (not even close).  The probability of getting charged for a particular crime depends on the type of crime and location; the presence of witnesses and their willingness to work with police; the decisions of police about where to patrol, what crimes to investigate, and who to arrest; and decisions of prosecutors about who to charge.</p>
-<p>It is likely that every one of these factors depends on the race of the defendant.  In this dataset, the prevalence of <em>new charges</em> is higher for Black defendants, but that doesn’t necessarily mean that the prevalence of <em>new crimes</em> is higher.</p>
-<p>If the dataset is affected by racial bias in the probability of being charged, prediction algorithms like COMPAS will be biased, too.  In discussions of whether and how these systems should be used in the criminal justice system, this is an important issue.</p>
-<p>However, I am going to put it aside <em>for now</em> in order to focus on understanding the arguments posed in the ProPublica article and the metrics they are based on.  For the rest of this chapter I will take the “recidivism rates” in the dataset at face value; but I will try to be clear about that they mean (and don’t mean).</p>
+<p>Systems like COMPAS are trying to predict whether a defendant will <em>commit</em> another crime if released.
+But the dataset reports whether a defendant was <em>charged</em> with another crime.
+Not everyone who commits a crime gets charged (not even close).
+The probability of getting charged for a particular crime depends on the type of crime and location; the presence of witnesses and their willingness to work with police; the decisions of police about where to patrol, what crimes to investigate, and who to arrest; and decisions of prosecutors about who to charge.</p>
+<p>It is likely that every one of these factors depends on the race of the defendant.
+In this dataset, the prevalence of <em>new charges</em> is higher for Black defendants, but that doesn’t necessarily mean that the prevalence of <em>new crimes</em> is higher.<br />
+If the dataset is affected by racial bias in the probability of being charged, prediction algorithms like COMPAS will be biased, too.
+In discussions of whether and how these systems should be used in the criminal justice system, this is an important issue.</p>
+<p>However, I am going to put it aside <em>for now</em> in order to focus on understanding the arguments posed in the ProPublica article and the metrics they are based on.
+For the rest of this chapter I will take the “recidivism rates” in the dataset at face value; but I will try to be clear about that they mean and don’t mean.</p>
 </section>
 <section id="arranging-the-confusion-matrix">
 <h2>Arranging the confusion matrix<a class="headerlink" href="#arranging-the-confusion-matrix" title="Link to this heading">#</a></h2>
@@ -1155,7 +1167,7 @@ However, before we go on, I want to address an important issue with this dataset
             }, 500);
             </script></div>
 </div>
-<p>Here is the confusion matrix for all defendants.</p>
+<p>For example, here is the confusion matrix for all defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
@@ -1308,8 +1320,8 @@ So we can compute the fraction of true predictions like this:</p>
             }, 500);
             </script></div>
 </div>
-<p>As a way to evaluate a binary classifier, accuracy does not distinguish between true positives and true negatives, or false positives and false negatives.</p>
-<p>But it is often important to make these distinctions, because the benefits of true predictions and true negatives might be different, and the costs of false positives and false negatives might be different.</p>
+<p>As a way to evaluate a binary classifier, accuracy does not distinguish between true positives and true negatives, or false positives and false negatives.
+But it is often important to make these distinctions, because the benefits of true predictions and true negatives might be different, and the costs of false positives and false negatives might be different.</p>
 </section>
 <section id="predictive-value">
 <h2>Predictive Value<a class="headerlink" href="#predictive-value" title="Link to this heading">#</a></h2>

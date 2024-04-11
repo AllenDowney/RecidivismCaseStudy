@@ -447,8 +447,8 @@ This case study is part of the <a class="reference external" href="https://allen
 <p>The following function takes a DataFrame containing COMPAS data and a list of variables to group by.  It returns a table with one row for each group and one column for each accuracy metric.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
+<span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
 
 
 <span class="k">def</span> <span class="nf">make_table</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">group_vars</span><span class="p">):</span>
@@ -2138,8 +2138,8 @@ This case study is part of the <a class="reference external" href="https://allen
 <h2>Reverse engineering<a class="headerlink" href="#reverse-engineering" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">predictive_value</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">error_rates</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">predictive_value</span>
+<span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">error_rates</span>
 
 <span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span> <span class="o">=</span> <span class="n">predictive_value</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">)</span>
@@ -2168,7 +2168,7 @@ This case study is part of the <a class="reference external" href="https://allen
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">constant_error_rates</span>
+<span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">constant_error_rates</span>
 
 <span class="n">prevalences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
@@ -2282,7 +2282,7 @@ This case study is part of the <a class="reference external" href="https://allen
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">constant_predictive_value</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">constant_predictive_value</span>
 
 <span class="n">prevalences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
@@ -2396,7 +2396,7 @@ This case study is part of the <a class="reference external" href="https://allen
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">plot_cpv_model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">plot_cpv_model</span>
 </pre></div>
 </div>
 </div>
@@ -2420,7 +2420,7 @@ This case study is part of the <a class="reference external" href="https://allen
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">plot_cer_model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">plot_cer_model</span>
 </pre></div>
 </div>
 </div>
@@ -2483,7 +2483,7 @@ This case study is part of the <a class="reference external" href="https://allen
 <p>Here’s what the results look like for FPR.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">decorate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">decorate</span>
 
 <span class="n">pred_er</span><span class="p">[</span><span class="s2">&quot;FPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected FPR, constant PV&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expected FPR, constant ER&quot;</span><span class="p">)</span>

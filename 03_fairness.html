@@ -336,8 +336,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-bias">Data bias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#male-and-female-defendants">Male and female defendants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-for-male-and-female-defendants">Calibration for male and female defendants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-it-take">What would it take?</a></li>
@@ -372,36 +370,6 @@ In response, the Washington Post article shows that COMPAS has the same predicti
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/01_classification.ipynb">In the first notebook</a> I replicated the analysis from the ProPublica article.</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/02_calibration.ipynb">In the second notebook</a> I replicated the analysis from the WaPo article.</p>
 <p>In this notebook I apply the same analysis to evaluate the performance of COMPAS for male and female defendants.</p>
-<section id="data">
-<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
-<p>The authors of “Machine Bias” published their data and analysis in <a class="reference external" href="https://github.com/propublica/compas-analysis">this repository</a>.
-The terms of use for the data <a class="reference external" href="https://www.propublica.org/datastore/terms">are here</a>.  In compliance with those terms, I am not redistributing the data.  The following cell downloads the data file we’ll use directly from their repository.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download</span><span class="p">(</span>
-    <span class="s2">&quot;https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "download(\n    \"https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv\"\n)";
-                var nbb_formatted_code = "download(\n    \"https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv\"\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p>The following cell reads the data file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -433,16 +401,12 @@ The terms of use for the data <a class="reference external" href="https://www.pr
             }, 500);
             </script></div>
 </div>
-</section>
-<section id="data-bias">
-<h2>Data bias<a class="headerlink" href="#data-bias" title="Link to this heading">#</a></h2>
 <p>[<strong>Note:</strong> I wrote about data bias in the previous notebook, but I am repeating it here in case someone reads this notebook without reading the previous one.]</p>
 <p>Systems like COMPAS are trying to predict whether a defendant will <em>commit</em> another crime if released.  But the dataset reports whether a defendant was <em>charged</em> with another crime.</p>
 <p>Not everyone who commits a crime gets charged (not even close).  The probability of getting charged for a particular crime depends on the type of crime and location; the presence of witnesses and their willingness to work with police; the decisions of police about where to patrol, what crimes to investigate, and who to arrest; and decisions of prosecutors about who to charge.</p>
 <p>It is likely that every one of these factors depends on the race of the defendant.  In this dataset, the prevalence of <em>new charges</em> is higher for black defendants, but that doesn’t necessarily mean that the prevalence of <em>new crimes</em> is higher.</p>
 <p>If the dataset is affected by racial bias in the probability of being charged, prediction algorithms like COMPAS will be biased, too.  In discussions of whether and how these systems should be used in the criminal justice system, this is an important issue.</p>
 <p>However, I am going to put it aside <em>for now</em> in order to focus on understanding the arguments posed in the ProPublica article and the metrics they are based on.  For the rest of this notebook I will take the “recidivism rates” in the dataset at face value; but I will try to be clear about that they mean (and don’t mean).</p>
-</section>
 <section id="male-and-female-defendants">
 <h2>Male and female defendants<a class="headerlink" href="#male-and-female-defendants" title="Link to this heading">#</a></h2>
 <p>The authors of the ProPublica article published a supplementary article,
@@ -512,7 +476,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>Here are the confusion matrices for male and female defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">make_matrix</span>
 
 <span class="n">matrix_male</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">male</span><span class="p">])</span>
 <span class="n">matrix_male</span>
@@ -645,7 +609,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>And here are the metrics:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">compute_metrics</span>
 
 <span class="n">metrics_male</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">matrix_male</span><span class="p">,</span> <span class="s2">&quot;Male defendants&quot;</span><span class="p">)</span>
 <span class="n">metrics_male</span>
@@ -806,7 +770,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">calibration_curve</span><span class="p">,</span> <span class="n">decorate</span>
+<span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">calibration_curve</span><span class="p">,</span> <span class="n">decorate</span>
 
 <span class="n">cal_all</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">cal_all</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;All defendants&quot;</span><span class="p">)</span>
@@ -863,7 +827,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>Here are the resulting tables for all defendants, male defendants, and female defendants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">sweep_threshold</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">sweep_threshold</span>
 
 <span class="n">table_all</span> <span class="o">=</span> <span class="n">sweep_threshold</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 </pre></div>
@@ -938,7 +902,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>As we did in the previous notebook, we can find the threshold that would make predictive value the same for both groups.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">predictive_value</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">predictive_value</span>
 
 <span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">ppv</span><span class="p">,</span> <span class="n">npv</span> <span class="o">=</span> <span class="n">predictive_value</span><span class="p">(</span><span class="n">matrix_all</span><span class="p">)</span>
@@ -965,7 +929,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">crossing</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">crossing</span>
 
 <span class="n">crossing</span><span class="p">(</span><span class="n">table_male</span><span class="p">[</span><span class="s2">&quot;PPV&quot;</span><span class="p">],</span> <span class="n">ppv</span><span class="p">)</span>
 </pre></div>
@@ -1079,7 +1043,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>At those levels, the false positive rates would be very different:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">interpolate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">interpolate</span>
 
 <span class="n">interpolate</span><span class="p">(</span><span class="n">table_male</span><span class="p">[</span><span class="s2">&quot;FPR&quot;</span><span class="p">],</span> <span class="mf">3.4</span><span class="p">)</span>
 </pre></div>
@@ -1196,7 +1160,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>The following figure shows ROC curves for male and female defendants:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">plot_roc</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">plot_roc</span>
 
 <span class="n">plot_roc</span><span class="p">(</span><span class="n">table_male</span><span class="p">)</span>
 <span class="n">plot_roc</span><span class="p">(</span><span class="n">table_female</span><span class="p">)</span>
@@ -1230,7 +1194,7 @@ The terms of use for the data <a class="reference external" href="https://www.pr
 <p>The concordance (AUC) for all respondents is about 70%.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">compute_auc</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">compute_auc</span>
 
 <span class="n">compute_auc</span><span class="p">(</span><span class="n">table_all</span><span class="p">)</span>
 </pre></div>
@@ -1385,8 +1349,6 @@ The terms of use for the data <a class="reference external" href="https://www.pr
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-bias">Data bias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#male-and-female-defendants">Male and female defendants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-for-male-and-female-defendants">Calibration for male and female defendants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-it-take">What would it take?</a></li>
