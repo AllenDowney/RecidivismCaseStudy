@@ -440,13 +440,6 @@ In this chapter, we’ll explore the second definition, which is called “calib
 </div>
 </div>
 <p>The following figure shows this calibration curve for all defendants and for White and Black defendants separately.</p>
-<div class="cell tag_remove-print docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">decorate</span><span class="p">,</span> <span class="n">make_matrix</span><span class="p">,</span> <span class="n">compute_metrics</span><span class="p">,</span> <span class="n">error_rates</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cal_all</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
@@ -472,14 +465,14 @@ In this chapter, we’ll explore the second definition, which is called “calib
 <img alt="_images/7ab0c6eb4ce7624408ab97a0d19bffbf2e8a42f2145db5423b15863739915329.png" src="_images/7ab0c6eb4ce7624408ab97a0d19bffbf2e8a42f2145db5423b15863739915329.png" />
 </div>
 </div>
-<p>This figure shows that people with higher risk scores are more likely to be charged with a new crime within two years.  In that sense COMPAS works as intended.</p>
-<p>Furthermore, the test is equally <strong>calibrated</strong> for Black and White defendants; that is, in each risk group, the rate of recidivism is about the same for both groups.</p>
+<p>This figure shows that people with higher risk scores are more likely to be charged with a new crime within two years.  In that sense COMPAS works as intended.
+Furthermore, the test is equally <strong>calibrated</strong> for Black and White defendants – that is, in each risk group, the rate of recidivism is about the same for both groups.</p>
 <p>The WaPo article explains why this is important:</p>
 <blockquote>
 <div><p>A risk score of seven for Black defendants should mean the same thing as a score of seven for White defendants. Imagine if that were not so, and we systematically assigned Whites higher risk scores than equally risky Black defendants with the goal of mitigating ProPublica’s criticism. We would consider that a violation of the fundamental tenet of equal treatment.</p>
 </div></blockquote>
-<p>So we want a test that has the same calibration for all groups, and we want a test that has the same error rates for all groups.  But there’s the problem: it is mathematically impossible to be fair by both definitions at the same time.</p>
-<p>To see why, let’s go back to the confusion matrix.</p>
+<p>So we want a test that has the same calibration for all groups, and we want a test that has the same error rates for all groups.  But there’s the problem: it is mathematically impossible to be fair by both definitions at the same time.
+To see why, let’s go back to the confusion matrix.</p>
 </section>
 <section id="matrices-and-metrics">
 <h2>Matrices and Metrics<a class="headerlink" href="#matrices-and-metrics" title="Link to this heading">#</a></h2>
@@ -716,8 +709,9 @@ We’ll see why in the next section.</p>
 </section>
 <section id="what-would-it-take">
 <h2>What Would It Take?<a class="headerlink" href="#what-would-it-take" title="Link to this heading">#</a></h2>
-<p>Suppose we want to fix COMPAS so that predictive values are the same for Black and White defendants.  We could do that by using different thresholds for the two groups.
-In this section, we’ll figure out what it would take to re-calibrate COMPAS; then we’ll see what effect that would have on predictive values.</p>
+<p>Suppose we want to fix COMPAS so that error rates are the same for Black and White defendants.
+We could do that by using different thresholds for the two groups.
+In this section, we’ll figure out what it would take to re-calibrate COMPAS – then we’ll see what effect that would have on predictive values.</p>
 <p>The following function loops through possible thresholds, makes the confusion matrix with each threshold, and computes accuracy metrics.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -876,36 +870,17 @@ In this section, we’ll figure out what it would take to re-calibrate COMPAS; t
 </div>
 </div>
 </div>
-<p>We’ll use the following function to interpolate columns in the table; that is, for a given threshold I can compute the corresponding metric.</p>
+<p>To calibrate the test, we’ll use the following function, which estimates the threshold where a column from the table passes through a given metric.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
 
-
-<span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate a function at a value.</span>
-
-<span class="sd">    series: Series</span>
-<span class="sd">    value: number</span>
-<span class="sd">    options: passed to interp1d (default is linear interp)</span>
-
-<span class="sd">    returns: number</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">interp</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">interp</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following function goes the other way: it estimates the threshold where a column passes through a given metric.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crossing</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find where a function crosses a value.</span>
+<span class="k">def</span> <span class="nf">crossing</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find where a Series crosses a value.</span>
 
 <span class="sd">    series: Series</span>
 <span class="sd">    value: number</span>
-<span class="sd">    options: passed to interp1d (default is linear interp)</span>
+<span class="sd">    options: passed to interp1d (default is linear interpolation)</span>
 
 <span class="sd">    returns: number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -915,7 +890,7 @@ In this section, we’ll figure out what it would take to re-calibrate COMPAS; t
 </div>
 </div>
 </div>
-<p>We can use <code class="docutils literal notranslate"><span class="pre">crossing</span></code> to calibrate the test for White defendants; that is, we can compute the threshold that would make the error rates for White defendants the same as for the general population.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">crossing</span></code> to find the threshold that makes the error rates for White defendants the same as for the general population.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
@@ -974,9 +949,27 @@ Now let’s do the same computation for Black defendants.</p>
 </div>
 </div>
 </div>
-<p>To get the same error rates for Black and White defendants, we would need different thresholds: about 5.1 compared to 3.2.
-At those levels, the predictive values are substantially different.
-Here’s PPV with different thresholds for each group:</p>
+<p>To get the same error rates for Black and White defendants, we need different thresholds: about 5.1 compared to 3.2.</p>
+<p>Now let’s see what the predictive values are if we use different thresholds for different groups.
+We’ll use the following function to interpolate columns in the table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate a function at a value.</span>
+
+<span class="sd">    series: Series</span>
+<span class="sd">    value: number</span>
+<span class="sd">    options: passed to interp1d (default is linear interpolation)</span>
+
+<span class="sd">    returns: number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">interp</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">series</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">interp</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the positive predictive value for White defendants with threshold 3.2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interpolate</span><span class="p">(</span><span class="n">table_white</span><span class="p">[</span><span class="s2">&quot;PPV&quot;</span><span class="p">],</span> <span class="mf">3.2</span><span class="p">)</span>
@@ -989,6 +982,7 @@ Here’s PPV with different thresholds for each group:</p>
 </div>
 </div>
 </div>
+<p>And here’s the positive predictive value for Black defendants with threshold 5.1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interpolate</span><span class="p">(</span><span class="n">table_black</span><span class="p">[</span><span class="s2">&quot;PPV&quot;</span><span class="p">],</span> <span class="mf">5.1</span><span class="p">)</span>
@@ -1048,12 +1042,12 @@ In the next section, we’ll take the argument one step farther by introducing o
 </section>
 <section id="roc-curve">
 <h2>ROC Curve<a class="headerlink" href="#roc-curve" title="Link to this heading">#</a></h2>
-<p>In the previous section we plotted various metrics as as function of threshold.  Another common and useful way to visualize these results is to plot sensitivity versus false positive rate (FPR).  For historical reasons, the result is called a <strong>receiver operating characteristic (ROC) curve</strong>.</p>
-<p>The following function plots the ROC curve:</p>
+<p>In the previous section we plotted various metrics as as function of threshold.  A common and useful way to visualize these results is to plot sensitivity versus false positive rate (FPR).
+For historical reasons, the result is called a <strong>receiver operating characteristic (ROC) curve</strong>.
+The following function plots the ROC curve:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
 
 <span class="k">def</span> <span class="nf">plot_roc</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the ROC curve.</span>
@@ -1081,8 +1075,8 @@ In the next section, we’ll take the argument one step farther by introducing o
 <img alt="_images/bb5b7a5b42b7f79a6987077702d67a63ee2b468ab05bc77a0171d4b1803b363c.png" src="_images/bb5b7a5b42b7f79a6987077702d67a63ee2b468ab05bc77a0171d4b1803b363c.png" />
 </div>
 </div>
-<p>The green line is the ROC curve.  The gray dotted line shows the identity line for comparison.</p>
-<p>An ideal test would have high sensitivity for all values of FPR, but in reality there is almost always a trade-off:</p>
+<p>The green line is the ROC curve.  The gray dotted line shows the identity line for comparison.
+An ideal test would have high sensitivity for all values of FPR, but in reality there is almost always a trade-off:</p>
 <ul class="simple">
 <li><p>When FPR is low, sensitivity is low.</p></li>
 <li><p>In order to get more sensitivity, we have to accept a higher FPR.</p></li>
@@ -1106,7 +1100,8 @@ It also shows that the test has nearly the same “concordance” for both group
 <section id="concordance">
 <h2>Concordance<a class="headerlink" href="#concordance" title="Link to this heading">#</a></h2>
 <p>The authors of the ProPublica article published a supplementary article,
-“How We Analyzed the COMPAS Recidivism Algorithm”, which describes their analysis in more detail (see <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>).</p>
+“How We Analyzed the COMPAS Recidivism Algorithm”, which describes their analysis in more detail.</p>
+<p>You can read the supplementary article at <a class="reference external" href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>.</p>
 <p>As another metric of accuracy, they estimate <strong>concordance</strong>, which they describe like this:</p>
 <blockquote>
 <div><p>Overall, [COMPAS has] a concordance score of 63.6 percent.  That means for any randomly selected pair of defendants in the sample, the COMPAS system can accurately rank their recidivism risk 63.6 percent of the time (e.g. if one person of the pair recidivates, that pair will count as a successful match if that person also had a higher score). In its study, Northpointe reported a slightly higher concordance: 68 percent.</p>
@@ -1116,11 +1111,10 @@ It also shows that the test has nearly the same “concordance” for both group
 <div><p>[These estimates] are lower than what Northpointe describes as a threshold for reliability. “A rule of thumb according to several recent articles is that [concordances] of .70 or above typically indicate satisfactory predictive accuracy, and measures between .60 and .70 suggest low to moderate predictive accuracy,” the company says in its study.</p>
 </div></blockquote>
 <p>There are several ways to compute concordance, but one of the simplest is to compute the area under the ROC curve, which is why concordance is also called the <strong>area under the curve</strong> or AUC.
-Since we’ve already computed the ROC, we can use Simpson’s rule to estimate the area under the curve (see <a class="reference external" href="https://en.wikipedia.org/wiki/Simpsons_rule">https://en.wikipedia.org/wiki/Simpsons_rule</a>).</p>
+Since we’ve already computed the ROC, we can use the SciPy function <code class="docutils literal notranslate"><span class="pre">simpson</span></code> to estimate the area under the curve by numerical integration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simpson</span>
-
 
 <span class="k">def</span> <span class="nf">compute_auc</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the area under the ROC curve.&quot;&quot;&quot;</span>
@@ -1199,7 +1193,7 @@ As long as we have to make decisions about bail, sentencing, and parole, we will
 <p>I discussed the problem of data bias in the previous chapter. In this example, we used data about additional <em>charges</em> as a measure of additional <em>crimes</em>. But not everyone who commits a crime gets charged. If one group is more likely than another to be charged with a crime, the algorithm will be unfair, no matter how it is calibrated.</p>
 <p>Of course we should use unbiased data if we can, but if that’s not possible, sometimes we can do as well if we <em>know</em> the data is biased, in what directions, and by how much.
 So one thing we can do to make algorithms more fair is to quantify biases in the data we use and compensate for them.</p>
-<p>Another thing we can do is make systems like COMPAS more transparent; that is, we should know how they work, what factors they take into account, and what they ignore.
+<p>Another thing we can do is make systems like COMPAS more transparent – that is, we should know how they work, what factors they take into account, and what they ignore.
 Algorithms intended to serve the public interest should be the subject of public discussion, not the trade secrets of a private company.</p>
 <p>The use of algorithms in criminal justice, and in many other domains that profoundly affect people’s lives, is relatively new.
 It raises difficult questions about fairness that we have only begun to recognize.</p>

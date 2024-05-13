@@ -362,20 +362,42 @@ document.write(`
 <p>This is the first in a series of notebooks that make up a <a class="reference external" href="https://allendowney.github.io/RecidivismCaseStudy/">case study on classification and algorithmic fairness</a>.
 This case study is part of the <a class="reference external" href="https://allendowney.github.io/ElementsOfDataScience/"><em>Elements of Data Science</em></a> curriculum.
 <a class="reference external" href="https://colab.research.google.com/github/AllenDowney/RecidivismCaseStudy/blob/v1/01_classification.ipynb">Click here to run this notebook on Colab</a>.</p>
-<p>This chapter and the next make up a case study related to “Machine Bias”, an article published by ProPublica in 2016 (see <a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>).
+<p>This chapter and the next make up a case study related to “Machine Bias”, an article published by ProPublica in 2016.
 The article explores the use of predictive algorithms in the criminal justice system.</p>
 <ul class="simple">
-<li><p>In this chapter, we’ll replicate the analysis described in the article and compute statistics that evaluate these algorithms, including accuracy, predictive value, false positive rate, and false negative rate.</p></li>
+<li><p>In this chapter, we’ll replicate the analysis described in the article and compute statistics that evaluate these algorithms, including accuracy, predictive value, end error rates.</p></li>
 <li><p>In the next chapter, we’ll review arguments presented in a response article published in the Washington Post.  We’ll compute and interpret calibration curves, and explore the trade-offs between predictive value and error rates.</p></li>
 </ul>
 <ul class="simple">
 <li><p>In an additional notebook (not in the book), I apply the same analysis to evaluate the performance of classification for male and female defendants.</p></li>
 </ul>
+<p>You can read the ProPublica article at <a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+        <span class="n">local</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">local</span><span class="p">)</span>
+        
+<span class="n">download</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/AllenDowney/RecidivismCaseStudy/v1/rcs_utils.py&quot;</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">rcs_utils</span> <span class="kn">import</span> <span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="machine-bias">
 <h2>Machine Bias<a class="headerlink" href="#machine-bias" title="Link to this heading">#</a></h2>
 <p>We’ll start by replicating the analysis reported in
 “Machine Bias”, by Julia Angwin, Jeff Larson, Surya Mattu and Lauren Kirchner, and published by ProPublica in May 2016.</p>
-<p>This article is about a statistical tool called COMPAS which is used in some criminal justice systems to inform decisions about which defendants should be released on bail before trial, how long convicted defendants should be imprisoned, and whether prisoners should be released on probation.
+<p>This article is about a statistical tool called COMPAS which is used in some criminal justice systems to inform decisions about which defendants should be released on bail before trial, how long convicted defendants should be imprisoned, and whether prisoners should be released on parole.
 COMPAS uses information about defendants to generate a “risk score” which is intended to quantify the risk that the defendant would commit another crime if released.</p>
 <p>Read more about COMPAS at <a class="reference external" href="https://en.wikipedia.org/wiki/COMPAS_(software)">https://en.wikipedia.org/wiki/COMPAS_(software)</a>.</p>
 <p>See the ProPublica analysis of the data at <a class="reference external" href="https://github.com/propublica/compas-analysis/blob/master/Compas%20Analysis.ipynb">https://github.com/propublica/compas-analysis/blob/master/Compas Analysis.ipynb</a>.</p>
@@ -386,16 +408,15 @@ COMPAS uses information about defendants to generate a “risk score” which is
 <p>In the notebook that contains their analysis, they explain in more detail:</p>
 <blockquote>
 <div><p>We filtered the underlying data from Broward county to include only those rows representing people who had either recidivated in two years, or had at least two years outside of a correctional facility.</p>
-<p>[…]</p>
-<p>Next, we sought to determine if a person had been charged with a new crime subsequent to the crime for which they were COMPAS screened. We did not count traffic tickets and some municipal ordinance violations as recidivism. We did not count as recidivists people who were arrested for failing to appear at their court hearings, or people who were later charged with a crime that occurred prior to their COMPAS screening.</p>
+<p>[…] Next, we sought to determine if a person had been charged with a new crime subsequent to the crime for which they were COMPAS screened. We did not count traffic tickets and some municipal ordinance violations as recidivism. We did not count as recidivists people who were arrested for failing to appear at their court hearings, or people who were later charged with a crime that occurred prior to their COMPAS screening.</p>
 </div></blockquote>
 <p>If you are not familiar with the word “recidivism”, it usually means a tendency to relapse into criminal behavior.
 In this context, a person is a “recidivist” if they are charged with another crime within two years of release.  However, note that there is a big difference between <em>committing</em> another crime and being <em>charged</em> with another crime.  We will come back to this issue.</p>
 <p>The authors of the ProPublica article use this data to evaluate how well COMPAS predicts the risk that a defendant will be charged with another crime within two years of their release.
 Among their findings, they report:</p>
 <blockquote>
-<div><p>… the algorithm was somewhat more accurate than a coin flip. Of those deemed likely to re-offend, 61 percent were arrested for any subsequent crimes within two years.</p>
-<p>… In forecasting who would re-offend, the algorithm made mistakes with Black and White defendants at roughly the same rate but in very different ways.</p>
+<div><p>[…] the algorithm was somewhat more accurate than a coin flip. Of those deemed likely to re-offend, 61 percent were arrested for any subsequent crimes within two years.</p>
+<p>[…] In forecasting who would re-offend, the algorithm made mistakes with Black and White defendants at roughly the same rate but in very different ways.</p>
 <ul class="simple">
 <li><p>The formula was particularly likely to falsely flag Black defendants as future criminals, wrongly labeling them this way at almost twice the rate as White defendants.</p></li>
 <li><p>White defendants were mislabeled as low risk more often than Black defendants.</p></li>
@@ -424,22 +445,7 @@ Instructions for downloading it are in the notebook for this chapter.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7214, 53)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "import pandas as pd\n\ncp = pd.read_csv(\"compas-scores-two-years.csv\")\ncp.shape";
-                var nbb_formatted_code = "import pandas as pd\n\ncp = pd.read_csv(\"compas-scores-two-years.csv\")\ncp.shape";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>The dataset includes one row for each defendant, and 53 columns, including risk scores computed by COMPAS and demographic information like age, sex, and race.</p>
 <p>The authors of “Machine Bias” describe their analysis in a supplemental article called “How We Analyzed the COMPAS Recidivism Algorithm”.
@@ -457,39 +463,7 @@ For each group, the summary includes several metrics, including:</p>
 <li><p>LR-: negative likelihood ratio</p></li>
 </ul>
 <p>I will explain what these metrics mean and how to compute them, and we’ll replicate the results in this table.
-But first let’s examine and clean the data.
-The following function displays the values in a <code class="docutils literal notranslate"><span class="pre">Series</span></code> and the number of times each value appears.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Count the values and sort.</span>
-
-<span class="sd">    series: pd.Series</span>
-
-<span class="sd">    returns: series mapping from values to frequencies</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "def values(series):\n    \"\"\"Count the values and sort.\n\n    series: pd.Series\n\n    returns: series mapping from values to frequencies\n    \"\"\"\n    return series.value_counts(dropna=False).sort_index()";
-                var nbb_formatted_code = "def values(series):\n    \"\"\"Count the values and sort.\n\n    series: pd.Series\n\n    returns: series mapping from values to frequencies\n    \"\"\"\n    return series.value_counts(dropna=False).sort_index()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
+But first let’s examine and clean the data.</p>
 <p>Here are the values of <code class="docutils literal notranslate"><span class="pre">decile_score</span></code>, which is the output of the COMPAS algorithm.
 <code class="docutils literal notranslate"><span class="pre">1</span></code> is the lowest risk category; <code class="docutils literal notranslate"><span class="pre">10</span></code> is the highest.</p>
 <div class="cell docutils container">
@@ -513,22 +487,7 @@ The following function displays the values in a <code class="docutils literal no
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "values(cp[\"decile_score\"])";
-                var nbb_formatted_code = "values(cp[\"decile_score\"])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>It’s important to note that COMPAS is not a binary classifier – that is, it does not predict that a defendant will or will not recidivate.
 Rather, it gives each defendant a score that is intended to reflect the risk that they will recidivate.</p>
@@ -551,22 +510,7 @@ True     3317
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "high_risk = cp[\"decile_score\"] > 4\nhigh_risk.name = \"HighRisk\"\nvalues(high_risk)";
-                var nbb_formatted_code = "high_risk = cp[\"decile_score\"] > 4\nhigh_risk.name = \"HighRisk\"\nvalues(high_risk)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>The column <code class="docutils literal notranslate"><span class="pre">two_year_recid</span></code> indicates whether a defendant was charged with another crime during a two year period after the original charge when they were not in a correctional facility.</p>
 <div class="cell docutils container">
@@ -582,22 +526,7 @@ Name: count, dtype: int64
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "values(cp[\"two_year_recid\"])";
-                var nbb_formatted_code = "values(cp[\"two_year_recid\"])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Let’s create another <code class="docutils literal notranslate"><span class="pre">Series</span></code>, called <code class="docutils literal notranslate"><span class="pre">new_charge</span></code>, that is <code class="docutils literal notranslate"><span class="pre">True</span></code> for defendants who were charged with another crime within two years.</p>
 <div class="cell docutils container">
@@ -615,22 +544,7 @@ True     3251
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "new_charge = cp[\"two_year_recid\"] == 1\nnew_charge.name = \"NewCharge\"\nvalues(new_charge)";
-                var nbb_formatted_code = "new_charge = cp[\"two_year_recid\"] == 1\nnew_charge.name = \"NewCharge\"\nvalues(new_charge)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>If we make a cross-tabulation of <code class="docutils literal notranslate"><span class="pre">new_charge</span></code> and <code class="docutils literal notranslate"><span class="pre">high_risk</span></code>, the result is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> that indicates how many defendants are in each of four groups:</p>
 <div class="cell docutils container">
@@ -680,22 +594,7 @@ Name: count, dtype: int64
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "pd.crosstab(new_charge, high_risk)";
-                var nbb_formatted_code = "pd.crosstab(new_charge, high_risk)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>This table is called a <strong>confusion matrix</strong> or error matrix.  Reading from left to right and top to bottom, the elements of the matrix show the number of respondents who were:</p>
 <ul class="simple">
@@ -724,22 +623,7 @@ Other                377
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "values(cp[\"race\"])";
-                var nbb_formatted_code = "values(cp[\"race\"])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Here’s a Boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code> that’s true for White defendants.</p>
 <div class="cell docutils container">
@@ -757,22 +641,7 @@ True     2454
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "white = cp[\"race\"] == \"Caucasian\"\nwhite.name = \"white\"\nvalues(white)";
-                var nbb_formatted_code = "white = cp[\"race\"] == \"Caucasian\"\nwhite.name = \"white\"\nvalues(white)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>And here’s the confusion matrix for White defendants.</p>
 <div class="cell docutils container">
@@ -822,22 +691,7 @@ Name: count, dtype: int64
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "pd.crosstab(new_charge[white], high_risk[white])";
-                var nbb_formatted_code = "pd.crosstab(new_charge[white], high_risk[white])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">black</span></code> is a Boolean Series that is <code class="docutils literal notranslate"><span class="pre">True</span></code> for Black defendants.</p>
 <div class="cell docutils container">
@@ -855,22 +709,7 @@ True     3696
 Name: count, dtype: int64
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "black = cp[\"race\"] == \"African-American\"\nblack.name = \"black\"\nvalues(black)";
-                var nbb_formatted_code = "black = cp[\"race\"] == \"African-American\"\nblack.name = \"black\"\nvalues(black)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>And here’s the confusion matrix for Black defendants.</p>
 <div class="cell docutils container">
@@ -920,22 +759,7 @@ Name: count, dtype: int64
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "pd.crosstab(new_charge[black], high_risk[black])";
-                var nbb_formatted_code = "pd.crosstab(new_charge[black], high_risk[black])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>All of these results are consistent with the ProPublica article.
 However, before we go on, I want to address an important issue with this dataset: data bias.</p>
@@ -947,17 +771,16 @@ But the dataset reports whether a defendant was <em>charged</em> with another cr
 Not everyone who commits a crime gets charged (not even close).
 The probability of getting charged for a particular crime depends on the type of crime and location; the presence of witnesses and their willingness to work with police; the decisions of police about where to patrol, what crimes to investigate, and who to arrest; and decisions of prosecutors about who to charge.</p>
 <p>It is likely that every one of these factors depends on the race of the defendant.
-In this dataset, the prevalence of <em>new charges</em> is higher for Black defendants, but that doesn’t necessarily mean that the prevalence of <em>new crimes</em> is higher.<br />
+In this dataset, the prevalence of <em>new charges</em> is higher for Black defendants, but that doesn’t necessarily mean that the prevalence of <em>new crimes</em> is higher.
 If the dataset is affected by racial bias in the probability of being charged, prediction algorithms like COMPAS will be biased, too.
 In discussions of whether and how these systems should be used in the criminal justice system, this is an important issue.</p>
 <p>However, I am going to put it aside <em>for now</em> in order to focus on understanding the arguments posed in the ProPublica article and the metrics they are based on.
-For the rest of this chapter I will take the “recidivism rates” in the dataset at face value; but I will try to be clear about that they mean and don’t mean.</p>
+For the rest of this chapter I will take the “recidivism rates” in the dataset at face value – but I will try to be clear about what they mean and don’t mean.</p>
 </section>
 <section id="arranging-the-confusion-matrix">
 <h2>Arranging the confusion matrix<a class="headerlink" href="#arranging-the-confusion-matrix" title="Link to this heading">#</a></h2>
-<p>In the previous section I arranged the confusion matrix to be consistent with the ProPublica article, to make it easy to check for consistency.</p>
-<p>In general, there are many ways to arrange a confusion matrix: you can put the predictions along the columns and the actual conditions along the rows, or the other way around, and you can sort the rows and columns in either order.</p>
-<p>There is no universal standard arrangement, but the most common one looks like this:</p>
+<p>In the previous section I arranged the confusion matrix to be consistent with the ProPublica article, to make it easy to check for consistency.
+But it is more common to arrange the matrix like this:</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
@@ -986,8 +809,8 @@ For the rest of this chapter I will take the “recidivism rates” in the datas
 <ul class="simple">
 <li><p>“Predicted positive” means the defendant is classified as high risk.</p></li>
 <li><p>“Predicted negative” means low risk.</p></li>
-<li><p>“Actual positive” means the defendant was charged with a new crime (recidivated).</p></li>
-<li><p>“Actual negative” means they were not charged (survived).</p></li>
+<li><p>“Actual positive” means the defendant was charged with a new crime.</p></li>
+<li><p>“Actual negative” means they were not charged with a new crime during the follow-up period.</p></li>
 </ul>
 <p>The following function makes a confusion matrix with this arrangement:</p>
 <div class="cell tag_remove-print docutils container">
@@ -1017,158 +840,10 @@ For the rest of this chapter I will take the “recidivism rates” in the datas
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "import numpy as np\n\n\ndef make_matrix(cp, threshold=4):\n    \"\"\"Make a confusion matrix.\n\n    cp: DataFrame\n    threshold: default is 4\n\n    returns: DataFrame containing the confusion matrix\n    \"\"\"\n    a = np.where(cp[\"decile_score\"] > threshold, \"Pred Positive\", \"Pred Negative\")\n    high_risk = pd.Series(a, name=\"\")\n\n    a = np.where(cp[\"two_year_recid\"] == 1, \"Positive\", \"Negative\")\n    new_charge = pd.Series(a, name=\"Actual\")\n\n    matrix = pd.crosstab(new_charge, high_risk)\n    matrix.sort_index(axis=0, ascending=False, inplace=True)\n    matrix.sort_index(axis=1, ascending=False, inplace=True)\n\n    return matrix";
-                var nbb_formatted_code = "import numpy as np\n\n\ndef make_matrix(cp, threshold=4):\n    \"\"\"Make a confusion matrix.\n\n    cp: DataFrame\n    threshold: default is 4\n\n    returns: DataFrame containing the confusion matrix\n    \"\"\"\n    a = np.where(cp[\"decile_score\"] > threshold, \"Pred Positive\", \"Pred Negative\")\n    high_risk = pd.Series(a, name=\"\")\n\n    a = np.where(cp[\"two_year_recid\"] == 1, \"Positive\", \"Negative\")\n    new_charge = pd.Series(a, name=\"Actual\")\n\n    matrix = pd.crosstab(new_charge, high_risk)\n    matrix.sort_index(axis=0, ascending=False, inplace=True)\n    matrix.sort_index(axis=1, ascending=False, inplace=True)\n\n    return matrix";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Going forward, we’ll present confusion matrices in this format.</p>
-<p>Here are the confusion matrices for White and Black defendants.</p>
-<div class="cell tag_remove-print docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_white</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">white</span><span class="p">])</span>
-<span class="n">matrix_white</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Pred Positive</th>
-      <th>Pred Negative</th>
-    </tr>
-    <tr>
-      <th>Actual</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Positive</th>
-      <td>505</td>
-      <td>461</td>
-    </tr>
-    <tr>
-      <th>Negative</th>
-      <td>349</td>
-      <td>1139</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "matrix_white = make_matrix(cp[white])\nmatrix_white";
-                var nbb_formatted_code = "matrix_white = make_matrix(cp[white])\nmatrix_white";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
-<div class="cell tag_remove-print docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_black</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">[</span><span class="n">black</span><span class="p">])</span>
-<span class="n">matrix_black</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Pred Positive</th>
-      <th>Pred Negative</th>
-    </tr>
-    <tr>
-      <th>Actual</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Positive</th>
-      <td>1369</td>
-      <td>532</td>
-    </tr>
-    <tr>
-      <th>Negative</th>
-      <td>805</td>
-      <td>990</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "matrix_black = make_matrix(cp[black])\nmatrix_black";
-                var nbb_formatted_code = "matrix_black = make_matrix(cp[black])\nmatrix_black";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
-</div>
 <p>For example, here is the confusion matrix for all defendants.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-print docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_all</span> <span class="o">=</span> <span class="n">make_matrix</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
 <span class="n">matrix_all</span>
@@ -1216,22 +891,7 @@ For the rest of this chapter I will take the “recidivism rates” in the datas
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 19;
-                var nbb_unformatted_code = "matrix_all = make_matrix(cp)\nmatrix_all";
-                var nbb_formatted_code = "matrix_all = make_matrix(cp)\nmatrix_all";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 </section>
 <section id="accuracy">
@@ -1245,23 +905,6 @@ To compute accuracy, it is convenient to extract from the confusion matrix the n
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "tp, fn, fp, tn = matrix_all.to_numpy().flatten()";
-                var nbb_formatted_code = "tp, fn, fp, tn = matrix_all.to_numpy().flatten()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>The number of true predictions is <code class="docutils literal notranslate"><span class="pre">tp</span> <span class="pre">+</span> <span class="pre">tn</span></code>.
 The number of false predictions is <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">+</span> <span class="pre">fn</span></code>.
@@ -1274,23 +917,6 @@ So we can compute the fraction of true predictions like this:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "def percent(x, y):\n    \"\"\"Compute the percentage `x/(x+y)*100`.\"\"\"\n    return x / (x + y) * 100";
-                var nbb_formatted_code = "def percent(x, y):\n    \"\"\"Compute the percentage `x/(x+y)*100`.\"\"\"\n    return x / (x + y) * 100";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1303,22 +929,7 @@ So we can compute the fraction of true predictions like this:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65.37288605489326
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 22;
-                var nbb_unformatted_code = "accuracy = percent(tp + tn, fp + fn)\naccuracy";
-                var nbb_formatted_code = "accuracy = percent(tp + tn, fp + fn)\naccuracy";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>As a way to evaluate a binary classifier, accuracy does not distinguish between true positives and true negatives, or false positives and false negatives.
 But it is often important to make these distinctions, because the benefits of true predictions and true negatives might be different, and the costs of false positives and false negatives might be different.</p>
@@ -1346,23 +957,6 @@ But it is often important to make these distinctions, because the benefits of tr
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 23;
-                var nbb_unformatted_code = "def predictive_value(m):\n    \"\"\"Compute positive and negative predictive value.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    ppv = percent(tp, fp)\n    npv = percent(tn, fn)\n    return ppv, npv";
-                var nbb_formatted_code = "def predictive_value(m):\n    \"\"\"Compute positive and negative predictive value.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    ppv = percent(tp, fp)\n    npv = percent(tn, fn)\n    return ppv, npv";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Here are the predictive values for all defendants.</p>
 <div class="cell docutils container">
@@ -1376,22 +970,7 @@ But it is often important to make these distinctions, because the benefits of tr
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(61.350618028338864, 68.79651013600206)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "ppv, npv = predictive_value(matrix_all)\nppv, npv";
-                var nbb_formatted_code = "ppv, npv = predictive_value(matrix_all)\nppv, npv";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Among all defendants, a positive test is correct about 61% of the time; a negative test result is correct about 69% of the time.</p>
 </section>
@@ -1420,23 +999,6 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 25;
-                var nbb_unformatted_code = "def sens_spec(m):\n    \"\"\"Compute sensitivity and specificity.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    sens = percent(tp, fn)\n    spec = percent(tn, fp)\n    return sens, spec";
-                var nbb_formatted_code = "def sens_spec(m):\n    \"\"\"Compute sensitivity and specificity.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    sens = percent(tp, fn)\n    spec = percent(tn, fp)\n    return sens, spec";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Here are sensitivity and specificity for all defendants.</p>
 <div class="cell docutils container">
@@ -1450,24 +1012,9 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(62.59612426945556, 67.65076961897553)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 26;
-                var nbb_unformatted_code = "sens, spec = sens_spec(matrix_all)\nsens, spec";
-                var nbb_formatted_code = "sens, spec = sens_spec(matrix_all)\nsens, spec";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
-<p>If we evaluate COMPAS as a binary classifier, it is a little more specific than sensitive:</p>
+</div>
+<p>If we evaluate COMPAS as a binary classifier:</p>
 <ul class="simple">
 <li><p>About 63% of the recidivists were classified as high risk.</p></li>
 <li><p>About 68% of the non-recidivists were classified as low risk.</p></li>
@@ -1475,31 +1022,22 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 <p>It can be hard to keep all of these metrics straight, especially when you are learning about them for the first time.  The following table might help:</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p><strong>Pred positive (PP)</strong></p></th>
-<th class="head"><p><strong>Pred negative (PN)</strong></p></th>
-<th class="head"><p></p></th>
-<th class="head"><p></p></th>
+<tr class="row-odd"><th class="head text-left"><p>Metric</p></th>
+<th class="head text-left"><p>Definition</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>Actual positive (P)</strong></p></td>
-<td><p>True positive (TP)</p></td>
-<td><p>False negative (FN)</p></td>
-<td><p>Sensitivity = TP / P</p></td>
-<td><p>FN rate = FN / P</p></td>
+<tr class="row-even"><td class="text-left"><p>PPV</p></td>
+<td class="text-left"><p>TP / (TP + FP)</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Actual negative (N)</strong></p></td>
-<td><p>False positive (FP)</p></td>
-<td><p>True negative (TN)</p></td>
-<td><p>FP rate = FP / N</p></td>
-<td><p>Specificity = TN / N</p></td>
+<tr class="row-odd"><td class="text-left"><p>Sensitivity</p></td>
+<td class="text-left"><p>TP / (TP + FN)</p></td>
 </tr>
-<tr class="row-even"><td><p>Prevalence = P / (P + N)</p></td>
-<td><p>PPV = TP / PP</p></td>
-<td><p>NPV = TN / PN</p></td>
-<td><p></p></td>
-<td><p>Acc = (TP + TN) / (P + N)</p></td>
+<tr class="row-even"><td class="text-left"><p>NPV</p></td>
+<td class="text-left"><p>TN / (TN + FN)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Specificity</p></td>
+<td class="text-left"><p>TN / (TN + FP)</p></td>
 </tr>
 </tbody>
 </table>
@@ -1541,23 +1079,6 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 27;
-                var nbb_unformatted_code = "def error_rates(m):\n    \"\"\"Compute false positive and false negative rate.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    fpr = percent(fp, tn)\n    fnr = percent(fn, tp)\n    return fpr, fnr";
-                var nbb_formatted_code = "def error_rates(m):\n    \"\"\"Compute false positive and false negative rate.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    fpr = percent(fp, tn)\n    fnr = percent(fn, tp)\n    return fpr, fnr";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Here are the error rates for all defendants.</p>
 <div class="cell docutils container">
@@ -1571,22 +1092,7 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32.349230381024476, 37.40387573054445)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 28;
-                var nbb_unformatted_code = "fpr, fnr = error_rates(matrix_all)\nfpr, fnr";
-                var nbb_formatted_code = "fpr, fnr = error_rates(matrix_all)\nfpr, fnr";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>FPR is the complement of specificity, which means they have to add up to 100%</p>
 <div class="cell docutils container">
@@ -1599,22 +1105,7 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100.0
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 29;
-                var nbb_unformatted_code = "fpr + spec";
-                var nbb_formatted_code = "fpr + spec";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>And FNR is the complement of sensitivity.</p>
 <div class="cell docutils container">
@@ -1627,22 +1118,7 @@ In this example, sensitivity is the fraction of recidivists who were correctly c
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100.0
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 30;
-                var nbb_unformatted_code = "fnr + sens";
-                var nbb_formatted_code = "fnr + sens";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>So FPR and FNR are just another way of reporting sensitivity and specificity.
 In general, I prefer sensitivity and specificity over FPN and FNR because</p>
@@ -1650,7 +1126,8 @@ In general, I prefer sensitivity and specificity over FPN and FNR because</p>
 <li><p>I think the positive framing is easier to interpret than the negative framing, and</p></li>
 <li><p>I find it easier to remember what “sensitivity” and “specificity” mean.</p></li>
 </ul>
-<p>I think “false positive rate” and “false negative rate” are more problematic.  For example, “false positive rate” could just as easily mean either</p>
+<p>I find “false positive rate” and “false negative rate” harder to remember.
+For example, “false positive rate” could just as easily mean either</p>
 <ol class="arabic simple">
 <li><p>The fraction of positive tests that are incorrect, or</p></li>
 <li><p>The fraction of negative conditions that are misclassified.</p></li>
@@ -1658,7 +1135,7 @@ In general, I prefer sensitivity and specificity over FPN and FNR because</p>
 <p>It is only a convention that the first is called the “false discovery rate” and the second is called “false positive rate”.  I suspect I am not the only one that gets them confused.</p>
 <p>So, here’s my recommendation: if you have the choice, generally use PPV, NPV, sensitivity and specificity, and avoid the other metrics.
 However, since the ProPublica article uses FPR and FNR, I will too.
-They also report LR+ and LR-, but those are combinations of other metrics and not relevant to the current discussion, so I will ignore them.</p>
+They also report LR+ and LR-, but those are combinations of other metrics and not relevant to the current discussion, so we will ignore them.</p>
 <p>However, there is one other metric that I think is relevant and not included in the ProPublica tables: <strong>prevalence</strong>, which is the fraction of all cases where the condition is positive.  In the example, it’s the fraction of defendants who recidivate.
 The following function computes prevalence:</p>
 <div class="cell docutils container">
@@ -1674,23 +1151,6 @@ The following function computes prevalence:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 31;
-                var nbb_unformatted_code = "def prevalence(m):\n    \"\"\"Compute prevalence.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    prevalence = percent(tp + fn, tn + fp)\n    return prevalence";
-                var nbb_formatted_code = "def prevalence(m):\n    \"\"\"Compute prevalence.\n\n    m: confusion matrix\n    \"\"\"\n    tp, fn, fp, tn = m.to_numpy().flatten()\n    prevalence = percent(tp + fn, tn + fp)\n    return prevalence";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Here’s the prevalence for all defendants:</p>
 <div class="cell docutils container">
@@ -1704,22 +1164,7 @@ The following function computes prevalence:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45.06515109509287
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 32;
-                var nbb_unformatted_code = "prev = prevalence(matrix_all)\nprev";
-                var nbb_formatted_code = "prev = prevalence(matrix_all)\nprev";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>About 45% of the defendants in this dataset were charged with another crime within two years of their release.</p>
 </section>
@@ -1747,23 +1192,6 @@ The following function computes prevalence:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 33;
-                var nbb_unformatted_code = "def compute_metrics(m, name=\"\"):\n    \"\"\"Compute all metrics.\n\n    m: confusion matrix\n\n    returns: DataFrame\n    \"\"\"\n    fpr, fnr = error_rates(m)\n    ppv, npv = predictive_value(m)\n    prev = prevalence(m)\n\n    index = [\"FP rate\", \"FN rate\", \"PPV\", \"NPV\", \"Prevalence\"]\n    df = pd.DataFrame(index=index, columns=[\"Percent\"])\n    df.Percent = fpr, fnr, ppv, npv, prev\n    df.index.name = name\n    return df.round(1)";
-                var nbb_formatted_code = "def compute_metrics(m, name=\"\"):\n    \"\"\"Compute all metrics.\n\n    m: confusion matrix\n\n    returns: DataFrame\n    \"\"\"\n    fpr, fnr = error_rates(m)\n    ppv, npv = predictive_value(m)\n    prev = prevalence(m)\n\n    index = [\"FP rate\", \"FN rate\", \"PPV\", \"NPV\", \"Prevalence\"]\n    df = pd.DataFrame(index=index, columns=[\"Percent\"])\n    df.Percent = fpr, fnr, ppv, npv, prev\n    df.index.name = name\n    return df.round(1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Here are the metrics for all defendants.</p>
 <div class="cell docutils container">
@@ -1821,22 +1249,7 @@ The following function computes prevalence:</p>
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 34;
-                var nbb_unformatted_code = "compute_metrics(matrix_all, \"All defendants\")";
-                var nbb_formatted_code = "compute_metrics(matrix_all, \"All defendants\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>Comparing these results to the table from ProPublica, it looks like our analysis agrees with theirs.</p>
 <p><img alt="" src="https://raw.githubusercontent.com/AllenDowney/ElementsOfDataScience/v1/machine_bias_table.png" /></p>
@@ -1896,22 +1309,7 @@ The following function computes prevalence:</p>
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 35;
-                var nbb_unformatted_code = "compute_metrics(matrix_black, \"Black defendants\")";
-                var nbb_formatted_code = "compute_metrics(matrix_black, \"Black defendants\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>And for White defendants.</p>
 <div class="cell docutils container">
@@ -1969,22 +1367,7 @@ The following function computes prevalence:</p>
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 36;
-                var nbb_unformatted_code = "compute_metrics(matrix_white, \"White defendants\")";
-                var nbb_formatted_code = "compute_metrics(matrix_white, \"White defendants\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>All of these results are consistent with those reported in the article, including the headline results:</p>
 <ol class="arabic simple">
@@ -2001,22 +1384,7 @@ The following function computes prevalence:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(44.84679665738162, 27.985270910047344)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 37;
-                var nbb_unformatted_code = "error_rates(matrix_black)";
-                var nbb_formatted_code = "error_rates(matrix_black)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2028,31 +1396,17 @@ The following function computes prevalence:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(23.45430107526882, 47.72256728778468)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 38;
-                var nbb_unformatted_code = "error_rates(matrix_white)";
-                var nbb_formatted_code = "error_rates(matrix_white)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>In other words:</p>
 <ul class="simple">
-<li><p>Of all people who <em>will not</em> recidivate, Black defendants are more likely to be be classified as high risk and (if these classifications influence sentencing decisions) more likely to be sent to prison.</p></li>
+<li><p>Of all people who <em>will not</em> recidivate, Black defendants are more likely to be be classified as high risk and – if these classifications influence sentencing decisions – more likely to be sent to prison.</p></li>
 <li><p>Of all people who <em>will</em> recidivate, White defendants are more likely to be classified as low risk, and more likely to be released.</p></li>
 </ul>
 <p>This seems clearly unfair.</p>
-<p>However, it turns out that “fair” is complicated.  After the ProPublica article, the Washington Post published a response by Sam Corbett-Davies, Emma Pierson, Avi Feller and Sharad Goel: “A computer program used for bail and sentencing decisions was labeled biased against blacks. It’s actually not that clear,” at <a class="reference external" href="https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas">https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas</a>.</p>
+<p>However, it turns out that “fair” is complicated.  After the ProPublica article, the Washington Post published a response by Sam Corbett-Davies, Emma Pierson, Avi Feller and Sharad Goel: “A computer program used for bail and sentencing decisions was labeled biased against blacks. It’s actually not that clear.”</p>
 <p>I encourage you to read that article, and then read the next chapter, where I will unpack their arguments and replicate their analysis.</p>
+<p>You can read the Washington Post article at <a class="reference external" href="https://web.archive.org/web/20161017154019/https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/">https://web.archive.org/web/20161017154019/https://www.washingtonpost.com/news/monkey-cage/wp/2016/10/17/can-an-algorithm-be-racist-our-analysis-is-more-cautious-than-propublicas/</a>.</p>
 </section>
 </section>
 
