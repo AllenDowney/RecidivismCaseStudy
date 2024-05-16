@@ -20,14 +20,14 @@ plt.rcParams['figure.dpi'] = 75
 plt.rcParams['figure.figsize'] = [6, 3.5]
 
 
-def values(series):
+def values(series, dropna=False):
     """Count the values and sort.
 
     series: pd.Series
 
     returns: series mapping from values to frequencies
     """
-    return series.value_counts(dropna=False).sort_index()
+    return series.value_counts(dropna=dropna).sort_index()
 
 
 def make_matrix(cp, threshold=4):
