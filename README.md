@@ -1,5 +1,9 @@
 # Recidivism Case Study
 
+
+This is one of [my workshops and tutorials](https://allendowney.github.io/#workshops).
+
+
 This case study is about classification and algorithmic fairness.
 It is based on two articles that were published in 2016:
 
