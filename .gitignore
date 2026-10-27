@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# build output and runtime downloads
+jb/_build/
+jb/*.ipynb
+compas-scores-two-years.csv

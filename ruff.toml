@@ -1,0 +1,11 @@
+# Code style for the notebooks: `make format`. Same settings as
+# ElementsOfDataScience, where chapters 16 and 17 come from 01_classification
+# and 02_calibration: 60 columns fit a code block in the book's PDF.
+# Strings and comments aren't wrapped; `make format` lists any still too long.
+
+# Only the notebooks. utils.py and rcs_utils.py are downloaded by URL.
+include = ["0*.ipynb"]
+line-length = 60
+
+[format]
+quote-style = "preserve"

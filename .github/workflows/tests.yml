@@ -2,10 +2,10 @@ name: tests
 
 on:
   push:
-    branches: [master, v1]
+    branches: [v1]
   pull_request:
   schedule:
-    # Run every month
+    # Run on the first of every month
     - cron: "0 0 1 * *"
   workflow_dispatch:
 
@@ -14,18 +14,23 @@ jobs:
     name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
     strategy:
+      # Report every leg; one broken notebook should not hide the others.
+      fail-fast: false
       matrix:
-        # don't run on macos-latest; it can't install pytables
-        os: [ubuntu-latest, windows-latest]
-        python-version: ["3.10"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.13"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
 
       - name: Install dependencies
         run: |

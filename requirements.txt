@@ -1,9 +1,8 @@
 jupyter
-numpy
 matplotlib
-plotly
-seaborn
+numpy
+pandas
+scikit-learn
 scipy
 statsmodels
 sympy
-tables

@@ -1,23 +1,28 @@
+# Environment for running the Recidivism Case Study notebooks locally.
+# Create it with:
+#     mamba env create -f environment.yml     (or conda env create ...)
+#     conda activate RecidivismCaseStudy
+#
+# requirements.txt lists the same dependencies for pip, and is what CI
+# installs; keep the two in step.
+
 name: RecidivismCaseStudy
 
+channels:
+  - conda-forge
+
 dependencies:
-<<<<<<< HEAD
-  - python
-=======
-  - python>=3.6
->>>>>>> ba8045c93772e3fe876d3fbdef25114e94523b5a
+  - python=3.13
   - jupyter
-  - numpy
   - matplotlib
+  - numpy
   - pandas
+  - scikit-learn    # 07_diy
   - scipy
-<<<<<<< HEAD
-  - scikit-learn
-  - pip
-=======
-  - sympy
+  - statsmodels
+  - sympy           # 04_matrix
 
-
-
-
->>>>>>> ba8045c93772e3fe876d3fbdef25114e94523b5a
+  # for make tests and make format
+  - pytest
+  - nbmake
+  - ruff

@@ -1,10 +1,18 @@
 PROJECT_NAME = RecidivismCaseStudy
-PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
+## mamba solves this environment much faster than conda; use conda if that is
+## what you have
+CONDA = mamba
+
+.PHONY: tests format
+
 create_environment:
-	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
+	$(CONDA) env create -f environment.yml
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
+
+update_environment:
+	$(CONDA) env update -f environment.yml --prune
 
 delete_environment:
 	conda env remove --name $(PROJECT_NAME)
@@ -17,14 +25,11 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-lint:
-	flake8 code
-	black --check --config pyproject.toml code
-
+## Format the notebooks (ruff.toml), then list lines still over the limit
+## (strings and comments, which the formatter doesn't wrap).
 format:
-	black --config pyproject.toml code
+	ruff format
+	ruff check --select E501 --output-format concise || true
 
 tests:
-	# don't run notebook 7 because scikit-learn
-	# is not in requirements.txt
-	pytest --nbmake 0[1-6]*.ipynb
+	pytest --nbmake 0*.ipynb
