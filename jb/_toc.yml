@@ -1,4 +1,5 @@
-file: index
+format: jb-article
+root: index
 sections:
 - file: 01_classification
 - file: 02_calibration
